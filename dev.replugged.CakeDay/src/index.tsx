@@ -3,7 +3,7 @@
 /* eslint-disable new-cap */
 /* eslint-disable no-invalid-this */
 /* eslint-disable require-await */
-import { Injector, Logger, webpack, components, settings, common } from "replugged";
+import { Injector, Logger, common, components, settings, webpack } from "replugged";
 const { ContextMenu: { MenuItem } } = components;
 
 const { React } = common;
@@ -11,7 +11,7 @@ const DataConfig = await settings.init("CakeDay");
 const inject = new Injector();
 const logger = Logger.plugin("CakeDay");
 const ModalList = webpack.getModule((x) => x?.exports?.ConfirmModal);
-let birthdaySet: string = "";
+let birthdaySet: string = ""; // global. yeah...
 
 class CakeDay {
   savedBirthdays = DataConfig.get('birthdays') || {};
@@ -64,17 +64,18 @@ class CakeDay {
 
   isValidBirthday(birthday) {
     const pattern = /^(0[1-9]|1[0-2])\/(0[1-9]|[12][0-9]|3[01])$|^(0[1-9]|[12][0-9]|3[01])\/(0[1-9]|1[0-2])$/;
+    // hehe. regex go BRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRR
     return pattern.test(birthday);
   }
 
-  showCustomToast(message, type) {
+  showCustomToast(message, type) { // is this exported?
     const showToast = webpack.getModule((x) => x?.exports?.showToast).showToast;
     const { createToast } = webpack.getModule((x) => x?.exports?.createToast);
     showToast(createToast(message, type));
   }
 
   BirthdayModal(user) {
-    webpack.getModule((x) => x?.exports?.openModal).openModal((props) => (
+    webpack.getModule((x) => x?.exports?.openModal).openModal((props) => ( // yeah yeah ik. its exported but i dont care. couldnt figure it out.
       common.React.createElement(
         "div",
         {},
@@ -107,7 +108,7 @@ export async function start() {
   CakeDayInstance.start();
 }
 
-export function Settings(): React.ReactElement {
+export function Settings(): React.ReactElement { // I haven't tested this. Replugged has a breadcrumb error.
   const rows = [];
   for (const userId in this.savedBirthdays) {
     if (this.savedBirthdays.hasOwnProperty(userId)) {
