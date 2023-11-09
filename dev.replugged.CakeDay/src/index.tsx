@@ -1,3 +1,4 @@
+/* eslint-disable no-return-assign */
 /* eslint-disable prefer-template */
 /* eslint-disable prefer-destructuring */
 /* eslint-disable new-cap */
@@ -5,13 +6,20 @@
 /* eslint-disable require-await */
 import { Injector, Logger, common, components, settings, webpack } from "replugged";
 const { ContextMenu: { MenuItem } } = components;
+const { React, modal } = common;
 
-const { React } = common;
 const DataConfig = await settings.init("CakeDay");
+
 const inject = new Injector();
 const logger = Logger.plugin("CakeDay");
 const ModalList = webpack.getModule((x) => x?.exports?.ConfirmModal);
-let birthdaySet: string = ""; // global. yeah...
+const { colorBrand } = webpack.getByProps('colorBrand');
+const FriendRow = webpack.getBySource("isActiveRow:!1");
+const { colorDanger } = webpack.getByProps("colorDanger", "colorPremium");
+
+
+let CakeDayInstance = null;
+let birthdaySet = ""; // Global variable
 
 class CakeDay {
   savedBirthdays = DataConfig.get('birthdays') || {};
@@ -54,12 +62,25 @@ class CakeDay {
     });
 
     inject.utils.addMenuItem('user-context', (data) => (
-      <MenuItem
+      <><MenuItem
         id="add-birthday"
         label="Set Birthday"
         action={() => this.BirthdayModal(data.user)}
-      />
+      /><MenuItem
+          id="remove-birthday"
+          label="Clear Birthday"
+          className={colorDanger}
+          action={() => this.clearBirthday(data.user)}
+        /></>
     ));
+  }
+
+  clearBirthday(user) {
+    if (user.id in this.savedBirthdays) {
+      delete this.savedBirthdays[user.id];
+      DataConfig.set('birthdays', this.savedBirthdays);
+      this.showCustomToast('Cleared Birthday', 1);
+    }
   }
 
   isValidBirthday(birthday) {
@@ -74,77 +95,63 @@ class CakeDay {
     showToast(createToast(message, type));
   }
 
-  BirthdayModal(user) {
-    webpack.getModule((x) => x?.exports?.openModal).openModal((props) => ( // yeah yeah ik. its exported but i dont care. couldnt figure it out.
-      common.React.createElement(
-        "div",
-        {},
-        common.React.createElement(ModalList.ConfirmModal, Object.assign({
-          header: `Set ${user.username}'s birthday`,
-          confirmButtonColor: webpack.getByProps('colorBrand').colorBrand,
-          confirmText: "Confirm",
-          cancelText: 'Clear',
-          onConfirm: () => {
+  BirthdayModal(_user) {
+    const user = _user
+    modal.openModal((props) => (
+      <div>
+        <ModalList.ConfirmModal
+          {...props}
+          header={`Set ${user.username}'s birthday`}
+          confirmButtonColor={colorBrand}
+          confirmText="Confirm"
+          cancelText="Clear"
+          onConfirm={() => {
             if (this.isValidBirthday(birthdaySet)) {
               this.showCustomToast('Set Birthday!', 1);
               this.savedBirthdays[user.id] = birthdaySet;
               DataConfig.set('birthdays', this.savedBirthdays);
-              logger.log("Config: " + DataConfig.get('birthdays'))
+              logger.log("Config: " + DataConfig.get('birthdays'));
             } else {
               this.showCustomToast('Not a valid birthday!', 2);
             }
-          },
-          ...props,
-        }),
-          common.React.createElement("div", {}, common.React.createElement(ModalList.TextInput, { placeholder: "Enter date.", onChange: (v) => { birthdaySet = v } }))
-        )
-      )
+          }}
+        >
+          <div>
+            <ModalList.TextInput
+              placeholder="Enter date."
+              onChange={(v: string) => birthdaySet = v}
+            />
+          </div>
+        </ModalList.ConfirmModal>
+      </div>
     ));
   }
+
 }
 
 export async function start() {
-  const CakeDayInstance = new CakeDay();
+  CakeDayInstance = new CakeDay();
   CakeDayInstance.start();
 }
 
-export function Settings(): React.ReactElement { // I haven't tested this. Replugged has a breadcrumb error.
-  const rows = [];
-  for (const userId in this.savedBirthdays) {
-    if (this.savedBirthdays.hasOwnProperty(userId)) {
-      const birthday = this.savedBirthdays[userId];
-      const user = webpack.getByStoreName('UserStore').getUser(userId)
+export function Settings(): React.ReactElement {
+  const savedBirthdays = CakeDayInstance.savedBirthdays;
+
+  const userRows = [];
+  for (const userId in savedBirthdays) {
+    if (savedBirthdays.hasOwnProperty(userId)) {
+      const birthday = savedBirthdays[userId];
+      const user = webpack.getByStoreName('UserStore').getUser(userId);
       if (user) {
-        const profileLink = React.createElement(
-          "img",
-          {
-            className: "cake-day-profile",
-            src: `https://cdn.discordapp.com/avatars/${user.id}/${user.avatar}.png`,
-            alt: user.username,
-          }
-        );
-        rows.push(
-          React.createElement(
-            "tr",
-            { key: userId, "data-user-id": userId },
-            React.createElement("td", null, profileLink),
-            React.createElement("td", null, user.username),
-            React.createElement("td", null, birthday),
-            React.createElement(
-              "td",
-              null,
-              React.createElement(
-                "button",
-                {
-                  onClick: () => {
-                    this.clearBirthday(user);
-                  },
-                  className: "clear-birthday-button bd-button button-ejjZWC lookFilled-1H2Jvj colorBrand-2M3O3N sizeMedium-2oH5mg grow-2T4nbg"
-                },
-                "Clear Birthday"
-              )
-            )
-          )
+        userRows.push(
+          <div key={userId} className="user-row">
+            <FriendRow
+              user={user}
+              activities={[]}
+              type={1}
+              status="dnd"
+            />
+          </div>
         );
       }
     }
@@ -152,17 +159,7 @@ export function Settings(): React.ReactElement { // I haven't tested this. Replu
 
   return (
     <div className="cake-day-settings">
-      <table className="cake-day-table">
-        <thead>
-          <tr>
-            <th>Profile Picture</th>
-            <th>Name</th>
-            <th>Date</th>
-            <th></th>
-          </tr>
-        </thead>
-        <tbody>{rows}</tbody>
-      </table>
+      {userRows}
     </div>
   );
 }
