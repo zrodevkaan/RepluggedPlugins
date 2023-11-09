@@ -1,7 +1,7 @@
 {
-  "name": "BetterDiscordLayer",
+  "name": "Stuff",
   "version": "1.0.0",
-  "description": "A BetterDiscord Compatibility layer for those people who just like BetterDiscord, or just want BetterDiscord plugins on replugged. (Or if you fangirl over DevilBro plugins)",
+  "description": "Stuff",
   "engines": {
     "node": ">=18.0.0",
     "pnpm": ">=8.0.0"

@@ -1,9 +1,3 @@
-/* eslint-disable no-return-assign */
-/* eslint-disable prefer-template */
-/* eslint-disable prefer-destructuring */
-/* eslint-disable new-cap */
-/* eslint-disable no-invalid-this */
-/* eslint-disable require-await */
 import { Injector, Logger, common, components, settings, webpack } from "replugged";
 const { ContextMenu: { MenuItem } } = components;
 const { React, modal } = common;
@@ -12,7 +6,7 @@ const DataConfig = await settings.init("CakeDay");
 
 const inject = new Injector();
 const logger = Logger.plugin("CakeDay");
-const ModalList = webpack.getModule((x) => x?.exports?.ConfirmModal);
+const ModalList = webpack.getByProps('ConfirmModal')
 const { colorBrand } = webpack.getByProps('colorBrand');
 const FriendRow = webpack.getBySource("isActiveRow:!1");
 const { colorDanger } = webpack.getByProps("colorDanger", "colorPremium");
@@ -25,7 +19,7 @@ class CakeDay {
   savedBirthdays = DataConfig.get('birthdays') || {};
 
   start() {
-    const Tooltip = webpack.getModule((x) => x?.exports?.Tooltip)?.Tooltip || components.Tooltip;
+    const Tooltip = webpack.getModule((x) => x?.exports?.Tooltip)?.Tooltip;
     const Tree = webpack.getBySource(".roleDot", { raw: true });
 
     inject.after(Tree?.exports, "default", (OwO, props) => {
@@ -110,7 +104,7 @@ class CakeDay {
               this.showCustomToast('Set Birthday!', 1);
               this.savedBirthdays[user.id] = birthdaySet;
               DataConfig.set('birthdays', this.savedBirthdays);
-              logger.log("Config: " + DataConfig.get('birthdays'));
+              logger.log("Config: ", DataConfig.get('birthdays'));
             } else {
               this.showCustomToast('Not a valid birthday!', 2);
             }

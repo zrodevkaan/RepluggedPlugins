@@ -1,6 +1,5 @@
-/* eslint-disable prefer-destructuring */
-/* eslint-disable @typescript-eslint-no-unused-vars */
-import { Injector, Logger, common, components, settings, webpack } from "replugged";
+
+import { Injector, common, webpack } from "replugged";
 
 const { React } = common;
 const inject = new Injector();
@@ -10,7 +9,6 @@ const ConnectedUserAccount = webpack.getByProps('ConnectedUserAccount').Connecte
 
 export async function start(): Promise<void> {
   inject.after(ProfileContext, 'default', (a, b, c) => {
-    console.log(a, b);
     const Connections = webpack.getByStoreName("UserProfileStore").getUserProfile(a[0].user.id)?.connectedAccounts;
     if (Connections) {
       const Dropdown = a?.[0]?.children?.[1]?.props?.children?.[3]?.props?.children?.[0]?.type;
