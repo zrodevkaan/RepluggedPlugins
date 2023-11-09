@@ -104,7 +104,7 @@ class CakeDay {
           header={`Set ${user.username}'s birthday`}
           confirmButtonColor={colorBrand}
           confirmText="Confirm"
-          cancelText="Clear"
+          cancelText="Cancel"
           onConfirm={() => {
             if (this.isValidBirthday(birthdaySet)) {
               this.showCustomToast('Set Birthday!', 1);
@@ -140,11 +140,13 @@ export function Settings(): React.ReactElement {
   const userRows = [];
   for (const userId in savedBirthdays) {
     if (savedBirthdays.hasOwnProperty(userId)) {
-      const birthday = savedBirthdays[userId];
       const user = webpack.getByStoreName('UserStore').getUser(userId);
+      const birthday = savedBirthdays[userId];
+
       if (user) {
         userRows.push(
           <div key={userId} className="user-row">
+            <span style={{ color: 'white', marginLeft: '20px' }}>Birthday: {birthday}</span>
             <FriendRow
               user={user}
               activities={[]}

@@ -1,5 +1,5 @@
 {
-  "id": "dev.replugged.CakeDay",
+  "id": "dev.kaan.CakeDay",
   "name": "CakeDay",
   "description": "Allowing us to set birthdays – because we're basically the human equivalent of goldfish when it comes to remembering special dates.",
   "author": {
@@ -10,11 +10,11 @@
   "version": "1.0.0",
   "updater": {
     "type": "github",
-    "id": "replugged-org/plugin-template"
+    "id": "ImAFrogOwO/RepluggedPlugins/tree/main/dev.replugged.CakeDay"
   },
   "license": "MIT",
   "type": "replugged-plugin",
   "renderer": "src/index.tsx",
-  "source": "https://github.com/replugged-org/plugin-template",
-  "image": ["https://i.imgur.com/14CNs3a.png?CHANGE-THIS-URL"]
+  "identifier": "dev.kaan.CakeDay",
+  "image": ["https://cdn.discordapp.com/attachments/1167438847072796753/1171966188025286697/image.png?size=1280"]
 }

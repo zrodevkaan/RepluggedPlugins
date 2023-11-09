@@ -11,35 +11,8 @@
   background-size: 16px;
 }
 
-.cake-day-table {
-  width: 100%;
-  border-collapse: collapse;
-}
-
-.cake-day-table th,
-.cake-day-table td {
-  border: none;
-  padding: 8px;
-  text-align: left;
-  color: white;
-  vertical-align: middle;
-}
-
-.cake-day-table th {
-  font-weight: bold;
-}
-
-.cake-day-profile a {
-  display: inline-block;
-  text-decoration: none;
-}
-
-.cake-day-profile img {
-  max-width: 48px;
-  border-radius: 25px;
-}
-
-.clear-birthday-button {
-  text-align: center;
-  vertical-align: middle;
+.user-birthday {
+  font-size: 14px;
+  color: #fff;
+  margin-top: 4px;
 }

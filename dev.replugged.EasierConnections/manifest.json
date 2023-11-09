@@ -1,7 +1,7 @@
 {
   "id": "dev.replugged.EasierConnections",
   "name": "EasierConnections",
-  "description": "Sometihng later ig.",
+  "description": "Displays a dropdown next to Mutual Servers and Friends on a DM channel with the users connections.",
   "author": {
     "name": "imafrogowo",
     "discordID": "",
@@ -10,11 +10,11 @@
   "version": "1.0.0",
   "updater": {
     "type": "github",
-    "id": "replugged-org/plugin-template"
+    "id": "ImAFrogOwO/RepluggedPlugins/tree/main/dev.replugged.EasierConnections"
   },
   "license": "MIT",
   "type": "replugged-plugin",
   "renderer": "src/index.tsx",
-  "source": "https://github.com/replugged-org/plugin-template",
-  "image": ["https://i.imgur.com/14CNs3a.png?CHANGE-THIS-URL"]
+  "identifier": "dev.replugged.EasierConnections",
+  "image": ["https://cdn.discordapp.com/attachments/1168734369339429034/1171972214854262824/image.png?size=1280"]
 }

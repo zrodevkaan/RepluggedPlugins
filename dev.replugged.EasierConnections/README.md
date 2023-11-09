@@ -1,4 +1,2 @@
-# BetterReplugged
-- Allows BetterDiscord plugins on Replugged
-
-# Not FINISHED
+# EasierConnections
+- Displays a dropdown next to Mutual Servers and Friends on a DM channel with the users connections.
