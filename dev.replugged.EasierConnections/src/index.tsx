@@ -1,6 +1,6 @@
-/* eslint-disable require-await */
 /* eslint-disable prefer-destructuring */
-import { Injector, common, webpack } from "replugged";
+/* eslint-disable @typescript-eslint-no-unused-vars */
+import { Injector, Logger, common, components, settings, webpack } from "replugged";
 
 const { React } = common;
 const inject = new Injector();
@@ -10,22 +10,23 @@ const ConnectedUserAccount = webpack.getByProps('ConnectedUserAccount').Connecte
 
 export async function start(): Promise<void> {
   inject.after(ProfileContext, 'default', (a, b, c) => {
+    console.log(a, b);
     const Connections = webpack.getByStoreName("UserProfileStore").getUserProfile(a[0].user.id)?.connectedAccounts;
     if (Connections) {
       const Dropdown = a?.[0]?.children?.[1]?.props?.children?.[3]?.props?.children?.[0]?.type;
       if (Dropdown) {
         const options = Object.keys(Connections).map(key => ({
-          label: key, // Set the label to the connection key
-          value: Connections[key], // Set the value to the connection data (if needed not sure xD)
+          label: key,
+          value: Connections[key],
         }));
 
-        if (options.length > 0) { // Check if there are connections. 
+        if (options.length > 0) {
           const buttons = options.map((option, index) => (
             <ConnectedUserAccount
               connectedAccount={option.value}
-              theme='dark'
-              userId={null} // Replace with the actual userId + this isnt needed but funny
-              key={index} // Commenting this cause no one is gonna have fun figuring out how this works
+              theme='dark' // no more light users
+              userId={null} // Isn't needed, but funny.
+              key={index}
             >
               {option.label}
             </ConnectedUserAccount>
