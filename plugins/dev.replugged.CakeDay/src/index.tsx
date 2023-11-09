@@ -1,6 +1,7 @@
 import { Injector, Logger, common, components, settings, webpack } from "replugged";
 const { ContextMenu: { MenuItem } } = components;
 const { React, modal } = common;
+import './styles.css';
 
 const DataConfig = await settings.init("CakeDay");
 
