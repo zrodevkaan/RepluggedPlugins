@@ -16,16 +16,16 @@ export async function start(): Promise<void> {
       if (Dropdown) {
         const options = Object.keys(Connections).map(key => ({
           label: key, // Set the label to the connection key
-          value: Connections[key], // Set the value to the connection data (if needed)
+          value: Connections[key], // Set the value to the connection data (if needed not sure xD)
         }));
 
-        if (options.length > 0) { // Check if there are connections
+        if (options.length > 0) { // Check if there are connections. 
           const buttons = options.map((option, index) => (
             <ConnectedUserAccount
               connectedAccount={option.value}
-              theme='dark' // Replace with the actual theme
-              userId={null} // Replace with the actual userId
-              key={index}
+              theme='dark'
+              userId={null} // Replace with the actual userId + this isnt needed but funny
+              key={index} // Commenting this cause no one is gonna have fun figuring out how this works
             >
               {option.label}
             </ConnectedUserAccount>
