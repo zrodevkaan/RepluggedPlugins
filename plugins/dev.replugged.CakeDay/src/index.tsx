@@ -1,23 +1,20 @@
 import { Injector, Logger, common, components, settings, webpack } from "replugged";
-const { ContextMenu: { MenuItem } } = components;
-const { React, modal } = common;
-import './styles.css';
+const { ContextMenu: { MenuItem, ItemColors } } = components;
+const { React, modal, toast } = common;
+import "./styles.css";
 
 const DataConfig = await settings.init("CakeDay");
 
 const inject = new Injector();
 const logger = Logger.plugin("CakeDay");
-const ModalList = webpack.getByProps('ConfirmModal')
-const { colorBrand } = webpack.getByProps('colorBrand');
+const ModalList = webpack.getByProps("ConfirmModal");
 const FriendRow = webpack.getBySource("isActiveRow:!1");
-const { colorDanger } = webpack.getByProps("colorDanger", "colorPremium");
-
 
 let CakeDayInstance = null;
 let birthdaySet = ""; // Global variable
 
 class CakeDay {
-  savedBirthdays = DataConfig.get('birthdays') || {};
+  savedBirthdays = DataConfig.get("birthdays") || {};
 
   start() {
     const Tooltip = webpack.getModule((x) => x?.exports?.Tooltip)?.Tooltip;
@@ -33,8 +30,10 @@ class CakeDay {
 
         const [Month, Day] = [parseInt(MonthStr, 10), parseInt(DayStr, 10)];
 
-        if ((Today.getMonth() + 1 === Month && Today.getDate() === Day) ||
-          (Today.getDate() === Month && Today.getMonth() + 1 === Day)) {
+        if (
+          (Today.getMonth() + 1 === Month && Today.getDate() === Day) ||
+          (Today.getDate() === Month && Today.getMonth() + 1 === Day)
+        ) {
           Decorations?.push(
             <Tooltip text="It's my birthday!">
               {(data) => (
@@ -44,10 +43,9 @@ class CakeDay {
                   onClick={() => this.BirthdayModal(Author)}
                 />
               )}
-            </Tooltip>
+            </Tooltip>,
           );
         }
-
       }
 
       const TargetChild = props.props?.children[3]?.props;
@@ -56,72 +54,67 @@ class CakeDay {
       }
     });
 
-    inject.utils.addMenuItem('user-context', (data) => (
-      <><MenuItem
-        id="add-birthday"
-        label="Set Birthday"
-        action={() => this.BirthdayModal(data.user)}
-      /><MenuItem
+    inject.utils.addMenuItem("user-context", (data) => (
+      <>
+        <MenuItem
+          id="add-birthday"
+          label="Set Birthday"
+          action={() => this.BirthdayModal(data.user)}
+        />
+        <MenuItem
           id="remove-birthday"
           label="Clear Birthday"
-          className={colorDanger}
           action={() => this.clearBirthday(data.user)}
-        /></>
+        />
+      </>
     ));
   }
 
   clearBirthday(user) {
     if (user.id in this.savedBirthdays) {
       delete this.savedBirthdays[user.id];
-      DataConfig.set('birthdays', this.savedBirthdays);
-      this.showCustomToast('Cleared Birthday', 1);
+      DataConfig.set("birthdays", this.savedBirthdays);
+      toast.toast("Cleared Birthday", toast.Kind.SUCCESS);
     }
   }
 
   isValidBirthday(birthday) {
-    const pattern = /^(0[1-9]|1[0-2])\/(0[1-9]|[12][0-9]|3[01])$|^(0[1-9]|[12][0-9]|3[01])\/(0[1-9]|1[0-2])$/;
+    const pattern =
+      /^(0[1-9]|1[0-2])\/(0[1-9]|[12][0-9]|3[01])$|^(0[1-9]|[12][0-9]|3[01])\/(0[1-9]|1[0-2])$/;
     // hehe. regex go BRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRR
     return pattern.test(birthday);
   }
 
-  showCustomToast(message, type) { // is this exported?
-    const showToast = webpack.getModule((x) => x?.exports?.showToast).showToast;
-    const { createToast } = webpack.getModule((x) => x?.exports?.createToast);
-    showToast(createToast(message, type));
-  }
-
   BirthdayModal(_user) {
-    const user = _user
+    const user = _user;
     modal.openModal((props) => (
       <div>
         <ModalList.ConfirmModal
           {...props}
           header={`Set ${user.username}'s birthday`}
-          confirmButtonColor={colorBrand}
+          confirmButtonColor={ItemColors.BRAND}
           confirmText="Confirm"
           cancelText="Cancel"
           onConfirm={() => {
             if (this.isValidBirthday(birthdaySet)) {
-              this.showCustomToast('Set Birthday!', 1);
+              toast.toast("Set Birthday!", toast.Kind.SUCCESS);
               this.savedBirthdays[user.id] = birthdaySet;
-              DataConfig.set('birthdays', this.savedBirthdays);
-              logger.log("Config: ", DataConfig.get('birthdays'));
+              DataConfig.set("birthdays", this.savedBirthdays);
+              logger.log("Config: ", DataConfig.get("birthdays"));
             } else {
-              this.showCustomToast('Not a valid birthday!', 2);
+              toast.toast("Not a valid birthday!", toast.Kind.FAILURE);
             }
-          }}
-        >
+          }}>
           <div>
             <ModalList.TextInput
               placeholder="Enter date."
-              onChange={(v: string) => birthdaySet = v}
+              onChange={(v: string) => (birthdaySet = v)}
             />
           </div>
         </ModalList.ConfirmModal>
       </div>
     ));
   }
-
 }
 
 export async function start() {
@@ -135,30 +128,21 @@ export function Settings(): React.ReactElement {
   const userRows = [];
   for (const userId in savedBirthdays) {
     if (savedBirthdays.hasOwnProperty(userId)) {
-      const user = webpack.getByStoreName('UserStore').getUser(userId);
+      const user = webpack.getByStoreName("UserStore").getUser(userId);
       const birthday = savedBirthdays[userId];
 
       if (user) {
         userRows.push(
           <div key={userId} className="user-row">
-            <span style={{ color: 'white', marginLeft: '20px' }}>Birthday: {birthday}</span>
-            <FriendRow
-              user={user}
-              activities={[]}
-              type={1}
-              status="dnd"
-            />
-          </div>
+            <span style={{ color: "white", marginLeft: "20px" }}>Birthday: {birthday}</span>
+            <FriendRow user={user} activities={[]} type={1} status="dnd" />
+          </div>,
         );
       }
     }
   }
 
-  return (
-    <div className="cake-day-settings">
-      {userRows}
-    </div>
-  );
+  return <div className="cake-day-settings">{userRows}</div>;
 }
 
 export function stop() {

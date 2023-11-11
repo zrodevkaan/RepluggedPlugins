@@ -3,8 +3,7 @@ export default {
   replacements: [
     {
       match: /=\w+\.memo\(\w+=>{let{colorRoleId:/,
-      replace: (suffix: string): string =>
-        `=window[Symbol.for("dev.replugged.CakeDay")]${suffix}`,
+      replace: (suffix: string): string => `=window[Symbol.for("dev.replugged.CakeDay")]${suffix}`,
     },
   ],
-}
+};
