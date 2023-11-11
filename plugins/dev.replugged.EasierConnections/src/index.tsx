@@ -12,8 +12,9 @@ export async function start(): Promise<void> {
     const Connections = UserProfileStore.getUserProfile(a[0].user.id)
       ?.connectedAccounts;
     if (Connections) {
-      const Dropdown = util.findInTree(a, x => x?.type && x?.props && x?.props?.className?.includes('mutualGuildsList'), { walkable: ['props', 'children'] }).type
+      const Dropdown = a?.[0]?.children?.[1]?.props?.children?.[3]?.props?.children?.[0]?.type;
       if (Dropdown) {
+        console.log(a, b, c, Dropdown)
         const options = Object.keys(Connections).map((key) => ({
           label: key,
           value: Connections[key],
@@ -40,9 +41,11 @@ export async function start(): Promise<void> {
             </Dropdown>
           );
           const Tree = util.findInTree(a, x => x?.className?.includes?.('Panel'), { walkable: ['props', 'children'] })
-          Tree.children?.push(
-            dropdownContent,
-          );
+          if (Tree) {
+            Tree?.children?.push(
+              dropdownContent,
+            );
+          }
         }
       }
     }
