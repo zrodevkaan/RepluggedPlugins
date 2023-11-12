@@ -14,7 +14,6 @@ export async function start(): Promise<void> {
     if (Connections) {
       const Dropdown = a?.[0]?.children?.[1]?.props?.children?.[3]?.props?.children?.[0]?.type;
       if (Dropdown) {
-        console.log(a, b, c, Dropdown)
         const options = Object.keys(Connections).map((key) => ({
           label: key,
           value: Connections[key],
