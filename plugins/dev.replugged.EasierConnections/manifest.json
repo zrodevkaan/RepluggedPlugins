@@ -7,15 +7,14 @@
     "discordID": "",
     "github": "ImAFrogOwO"
   },
-  "version": "1.0.0",
+  "version": "1.0.1",
   "updater": {
-    "type": "github",
+    "type": "store",
     "id": "ImAFrogOwO/RepluggedPlugins/tree/main/dev.replugged.EasierConnections"
   },
   "license": "MIT",
   "type": "replugged-plugin",
   "renderer": "src/index.tsx",
-  "identifier": "dev.replugged.EasierConnections",
   "image": [
     "https://i.imgur.com/uHP6ahp.png"
   ]
