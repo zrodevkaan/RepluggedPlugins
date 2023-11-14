@@ -16,5 +16,7 @@
   "type": "replugged-plugin",
   "renderer": "src/index.tsx",
   "identifier": "dev.replugged.EasierConnections",
-  "image": ["https://i.imgur.com/uHP6ahp.png"]
+  "image": [
+    "https://i.imgur.com/uHP6ahp.png"
+  ]
 }
