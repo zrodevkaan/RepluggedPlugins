@@ -7,7 +7,7 @@
     "discordID": "",
     "github": "ImAFrogOwO"
   },
-  "version": "1.0.1",
+  "version": "1.0.2",
   "updater": {
     "type": "github",
     "id": "ImAFrogOwO/RepluggedPlugins/tree/main/dev.replugged.CakeDay"
