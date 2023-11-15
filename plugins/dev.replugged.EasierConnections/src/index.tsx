@@ -8,7 +8,7 @@ const UserProfileStore = webpack.getByStoreName("UserProfileStore");
 const ConnectedUserAccount = webpack.getByProps("ConnectedUserAccount").ConnectedUserAccount;
 
 export async function start(): Promise<void> {
-  inject.after(ProfileContext, "default", (a, b, c) => {
+  inject.before(ProfileContext, "default", (a, b, c) => {
     const Connections = UserProfileStore.getUserProfile(a[0].user.id)?.connectedAccounts;
     if (Connections) {
       const Dropdown = a?.[0]?.children?.[1]?.props?.children?.[3]?.props?.children?.[0]?.type;
@@ -31,16 +31,13 @@ export async function start(): Promise<void> {
 
           const dropdownContent = (
             <Dropdown
-              header={`${
-                options.length > 1 && options.length !== 0
-                  ? `${options.length} Connections`
-                  : "1 Connection"
-              }`}>
+              header={`${options.length} Connection${options.length > 1 ? "s" : ""}`}> 
               <div>{buttons}</div>
             </Dropdown>
           );
           const Tree = util.findInTree(a, (x) => x?.className?.includes?.("Panel"), {
-            walkable: ["props", "children"],
+            maxRecursion: Infinity, // cursed xD
+            walkable: ["props", "children"]
           });
           if (Tree) {
             Tree?.children?.push(dropdownContent);
