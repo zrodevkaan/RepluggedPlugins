@@ -10,7 +10,7 @@
   "version": "1.0.1",
   "updater": {
     "type": "store",
-    "id": "ImAFrogOwO/RepluggedPlugins/tree/main/dev.replugged.EasierConnections"
+    "id": "dev.kaan.EasierConnections"
   },
   "license": "MIT",
   "type": "replugged-plugin",
