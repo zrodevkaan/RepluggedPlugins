@@ -15,7 +15,7 @@ import "./styles.css";
 import { ContextMenuTypes } from "replugged/types";
 
 const SettingConfig = await settings.init("CakeDay");
-
+const BLUE = webpack.getByProps('colorBrand').colorBrand
 const inject = new Injector();
 const logger = Logger.plugin("CakeDay");
 const ModalList: object = webpack.getByProps("ConfirmModal");
@@ -126,7 +126,7 @@ class CakeDay {
       <ModalList.ConfirmModal
         {...props}
         header={`Set ${user.username}'s birthday`}
-        confirmButtonColor={ItemColors.BRAND}
+        confirmButtonColor={BLUE}
         confirmText="Confirm"
         cancelText="Cancel"
         onConfirm={() => {
