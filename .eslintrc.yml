@@ -56,6 +56,6 @@ overrides:
     rules:
       no-var: off
 
-  - files: "src/**/*.ts"
+  - files: "plugins/**/src/**/*.ts"
     parserOptions:
       project: tsconfig.json
