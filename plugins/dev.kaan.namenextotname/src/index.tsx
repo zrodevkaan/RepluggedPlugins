@@ -1,4 +1,4 @@
-import { Injector, common, webpack, util } from "replugged";
+import { Injector, common, util, webpack } from "replugged";
 
 const {
   React,
