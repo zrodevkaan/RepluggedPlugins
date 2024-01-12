@@ -17,16 +17,19 @@ const { copy } = (
 const NameWithRole = await webpack.waitForModule<{ H: (something: string) => unknown }>(
   webpack.filters.byProps("NameWithRole"),
 );
+
 const inject = new Injector();
 
 export async function start() {
-  inject.after(NameWithRole, "H", (a: any[]) => {
+  inject.after(NameWithRole, "H", (a: any) => {
     const nameHolder = a[0]?.children;
     const className: string = a[0]?.className;
 
     if (className?.includes("header")) {
       const childrenArray = nameHolder[2]?.props?.children?.props?.children as Array<any>;
-      const actualUsername = util.findInTree(a, (x) => x?.username);
+      const filterFunction: (tree: Record<string, unknown>) => boolean = (x) =>
+        Boolean(x?.username);
+      const actualUsername = util.findInTree(a, filterFunction);
 
       if (actualUsername) {
         const { username, discriminator } = actualUsername;

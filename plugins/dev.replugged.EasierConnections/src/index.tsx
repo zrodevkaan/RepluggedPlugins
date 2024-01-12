@@ -1,19 +1,46 @@
 import { Injector, common, util, webpack } from "replugged";
 
+interface UserProfileStoreType {
+  getUserProfile: (userId: string) => any;
+}
+interface ConnectedUserAccountStuffBruh {
+  ConnectedUserAccount: any;
+}
+interface UserProfile {
+  user: {
+    id: string;
+  };
+}
+interface ThereHasToBeABetterWayToDoThis {
+  className?: string;
+}
+interface TreeNode {
+  children?: {
+    push: (item: any) => void;
+  };
+}
+
 const { React } = common;
 const inject = new Injector();
 
-const ProfileContext = webpack.getByProps("UserProfileContext");
-const UserProfileStore = webpack.getByStoreName("UserProfileStore");
-const { ConnectedUserAccount } = webpack.getByProps("ConnectedUserAccount");
+const ProfileContext = await webpack.waitForModule<{ default: (something: string) => unknown }>(
+  webpack.filters.byProps("UserProfileContext"),
+);
+const UserProfileStore = webpack.getByStoreName(
+  "UserProfileStore",
+) as unknown as UserProfileStoreType;
+
+const { ConnectedUserAccount } = webpack.getByProps(
+  "ConnectedUserAccount",
+) as ConnectedUserAccountStuffBruh;
 
 export async function start(): Promise<void> {
-  inject.before(ProfileContext, "default", (a, b, c) => {
+  inject.before(ProfileContext, "default", (a: UserProfile[]) => {
     const Connections = UserProfileStore.getUserProfile(a[0].user.id)?.connectedAccounts;
     if (Connections) {
       const Dropdown = util.findInTree(
-        a?.[0],
-        (x) => x?.className?.includes("profilePanelConnections"),
+        a?.[0] as unknown as Record<string, unknown>,
+        (x: ThereHasToBeABetterWayToDoThis) => x?.className?.includes("profilePanelConnections"),
       )?.children?.[0]?.type; // a?.[0]?.children?.[1]?.props?.children?.[3]?.props?.children?.[0]?.type; Outdated since... whenever..
       if (Dropdown) {
         const options = Object.keys(Connections).map((key) => ({
@@ -36,10 +63,14 @@ export async function start(): Promise<void> {
               <div>{buttons}</div>
             </Dropdown>
           );
-          const Tree = util.findInTree(a, (x) => x?.className?.includes?.("Panel"), {
-            maxRecursion: Infinity, // cursed xD
-            walkable: ["props", "children"],
-          });
+          const Tree: TreeNode = util.findInTree(
+            a?.[0] as unknown as Record<string, unknown>,
+            (x: ThereHasToBeABetterWayToDoThis) => x?.className?.includes?.("Panel"),
+            {
+              maxRecursion: Infinity, // cursed xD
+              walkable: ["props", "children"],
+            },
+          );
           if (Tree) {
             Tree?.children?.push(dropdownContent);
           }

@@ -1,7 +1,7 @@
-import { Injector, Logger, common, components, settings, webpack, util } from "replugged";
+import { Injector, Logger, common, components, settings, util, webpack } from "replugged";
 
 const {
-  ContextMenu: { MenuItem, ItemColors },
+  ContextMenu: { MenuItem },
 } = components;
 const {
   React,
@@ -11,16 +11,32 @@ const {
     toast,
   },
 } = common;
+
+interface WebpackProps {
+  colorBrand: string;
+}
+interface UserData {
+  username: string;
+  id: string;
+}
+type TreeFilter = (tree: Record<string, unknown>) => boolean;
+interface UserStore {
+  getUser: (string: string) => {};
+}
+interface UserType {
+  id: string;
+}
+
 import "./styles.css";
 import { ContextMenuTypes } from "replugged/types";
 
 const SettingConfig = await settings.init("CakeDay");
-const BLUE = webpack.getByProps("colorBrand").colorBrand;
+const BLUE = (webpack.getByProps("colorBrand") as WebpackProps).colorBrand;
 const inject = new Injector();
 const logger = Logger.plugin("CakeDay");
-const ModalList: object = webpack.getByProps("ConfirmModal");
-const FriendRow: object = webpack.getBySource("isActiveRow:!1");
-const PresenceStore: object = webpack.getByStoreName("PresenceStore");
+const ModalList: any = webpack.getByProps("ConfirmModal"); // CAN YOU STOP NOW. THANKS <3
+const FriendRow: any = webpack.getBySource("isActiveRow:!1");
+const PresenceStore: any = webpack.getByStoreName("PresenceStore");
 
 let CakeDayInstance = null;
 let birthdaySet = ""; // Global variable
@@ -28,27 +44,32 @@ let birthdaySet = ""; // Global variable
 class CakeDay {
   savedBirthdays = SettingConfig.get("birthdays") || {};
 
-  checkBirthday(Author: { id: string }) {
+  checkBirthday(Author: { id: string }): boolean {
     const Today = new Date();
     if (this.savedBirthdays[Author?.id]) {
-      const [MonthStr, DayStr] = this.savedBirthdays[Author?.id]?.split("/");
+      const [MonthStr, DayStr] = (this.savedBirthdays[Author?.id] ?? "").split("/");
       const [Month, Day] = [parseInt(MonthStr, 10), parseInt(DayStr, 10)];
 
       return (
         (Today.getMonth() + 1 === Month && Today.getDate() === Day) ||
-        (Today.getDate() === Month && Today.getMonth() + 1 === Day)
+        (Today.getMonth() + 1 === Day && Today.getDate() === Month)
       );
     }
+
+    return false;
   }
 
   start() {
     const Tree = webpack.getBySource(".roleDot", { raw: true });
-    const NamePatch = webpack.getModule((x) => x?.exports?.CloseButton);
     const ProfileNamePatch = webpack.getBySource(`B(Q.section`, { raw: true })?.exports;
 
-    inject.after(ProfileNamePatch, "default", (args: object, b, c) => {
-      const UserTagCheck: string = util.findInTree(args, (x) => x?.copyMetaData === "User Tag");
-      const Author: object = util.findInTree(args, (x) => x?.user)?.user;
+    inject.after(ProfileNamePatch, "default", (args: object, b) => {
+      const UserTagCheck: any = util.findInTree(
+        args as Record<string, unknown>,
+        (x) => x?.copyMetaData === "User Tag",
+      );
+      const filterFunction: TreeFilter = (x: Record<string, unknown>) => Boolean(x?.user);
+      const Author: any = util.findInTree(args as Record<string, unknown>, filterFunction)?.user;
       if (!UserTagCheck) return;
       if (!this.checkBirthday(Author)) return;
       b?.props?.children?.props?.children?.[0]?.props?.children?.props?.children?.unshift(
@@ -57,7 +78,7 @@ class CakeDay {
             <button
               {...data}
               className="discord-cake-day-message-cake"
-              onClick={() => this.BirthdayModal(Author)}
+              onClick={() => this.birthdayModal(Author)}
             />
           )}
         </ModalList.Tooltip>,
@@ -75,7 +96,7 @@ class CakeDay {
               <button
                 {...data}
                 className="discord-cake-day-message-cake"
-                onClick={() => this.BirthdayModal(Author)}
+                onClick={() => this.birthdayModal(Author)}
               />
             )}
           </ModalList.Tooltip>,
@@ -93,18 +114,18 @@ class CakeDay {
         <MenuItem
           id="add-birthday"
           label="Set Birthday"
-          action={() => this.BirthdayModal(data.user)}
+          action={() => this.birthdayModal(data.user as UserData)}
         />
         <MenuItem
           id="remove-birthday"
           label="Clear Birthday"
-          action={() => this.ClearBirthday(data.user)}
+          action={() => this.clearBirthday(data.user as UserData)}
         />
       </>
     ));
   }
 
-  ClearBirthday(user: { username: string; id: string }) {
+  clearBirthday(user: { username: string; id: string }) {
     if (!(user.id in this.savedBirthdays)) {
       return;
     }
@@ -120,7 +141,7 @@ class CakeDay {
     return pattern.test(birthday);
   }
 
-  BirthdayModal(_user: { username: string; id: string }) {
+  birthdayModal(_user: { username: string; id: string }) {
     const user = _user;
     modal.openModal((props) => (
       <ModalList.ConfirmModal
@@ -141,7 +162,9 @@ class CakeDay {
         }}>
         <ModalList.TextInput
           placeholder="Enter date. (e.g.. MM/DD || DD/MM)"
-          onChange={(v: string) => (birthdaySet = v)}
+          onChange={(v: string) => {
+            birthdaySet = v;
+          }}
         />
       </ModalList.ConfirmModal>
     ));
@@ -153,13 +176,15 @@ export async function start() {
   CakeDayInstance.start();
 }
 
-export function Settings(): React.ReactElement {
-  const savedBirthdays = CakeDayInstance.savedBirthdays;
+export function Settings() {
+  const { savedBirthdays } = CakeDayInstance;
 
   const userRows = [];
   for (const userId in savedBirthdays) {
     if (savedBirthdays.hasOwnProperty(userId)) {
-      const user = webpack.getByStoreName("UserStore").getUser(userId);
+      const user = (webpack.getByStoreName("UserStore") as unknown as UserStore).getUser(
+        userId,
+      ) as UserType;
       const birthday = savedBirthdays[userId];
 
       if (user) {
