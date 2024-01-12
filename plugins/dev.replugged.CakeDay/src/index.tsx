@@ -74,7 +74,7 @@ class CakeDay {
       if (!this.checkBirthday(Author)) return;
       b?.props?.children?.props?.children?.[0]?.props?.children?.props?.children?.unshift(
         <ModalList.Tooltip text="It's my birthday!">
-          {(data) => (
+          {(data: any) => (
             <button
               {...data}
               className="discord-cake-day-message-cake"
@@ -92,7 +92,7 @@ class CakeDay {
       if (this.checkBirthday(Author)) {
         Decorations?.push(
           <ModalList.Tooltip text="It's my birthday!">
-            {(data) => (
+            {(data: any) => (
               <button
                 {...data}
                 className="discord-cake-day-message-cake"
