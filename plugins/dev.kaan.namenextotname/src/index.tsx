@@ -8,8 +8,8 @@ const {
   },
 } = common;
 
-const { copy } = webpack.getByProps("copy");
-const NameWithRole = webpack.getByProps("NameWithRole");
+const copy = await webpack.waitForModule<{ copy: (text: string) => unknown }>(webpack.filters.byProps("copy"));
+const NameWithRole = await webpack.waitForModule<{ NameWithRole: (something: any) => unknown }>(webpack.filters.byProps("NameWithRole"));
 const inject = new Injector();
 
 export async function start() {
