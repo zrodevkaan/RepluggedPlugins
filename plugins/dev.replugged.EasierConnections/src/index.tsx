@@ -30,14 +30,13 @@ export async function start(): Promise<void> {
           ));
 
           const dropdownContent = (
-            <Dropdown
-              header={`${options.length} Connection${options.length > 1 ? "s" : ""}`}> 
+            <Dropdown header={`${options.length} Connection${options.length > 1 ? "s" : ""}`}>
               <div>{buttons}</div>
             </Dropdown>
           );
           const Tree = util.findInTree(a, (x) => x?.className?.includes?.("Panel"), {
             maxRecursion: Infinity, // cursed xD
-            walkable: ["props", "children"]
+            walkable: ["props", "children"],
           });
           if (Tree) {
             Tree?.children?.push(dropdownContent);

@@ -8,8 +8,12 @@ const {
   },
 } = common;
 
-const copy = await webpack.waitForModule<{ copy: (text: string) => unknown }>(webpack.filters.byProps("copy"));
-const NameWithRole = await webpack.waitForModule<{ NameWithRole: (something: any) => unknown }>(webpack.filters.byProps("NameWithRole"));
+const copy = await webpack.waitForModule<{ copy: (text: string) => unknown }>(
+  webpack.filters.byProps("copy"),
+);
+const NameWithRole = await webpack.waitForModule<{ NameWithRole: (something: any) => unknown }>(
+  webpack.filters.byProps("NameWithRole"),
+);
 const inject = new Injector();
 
 export async function start() {
@@ -18,14 +22,18 @@ export async function start() {
     const className: string = a[0]?.className;
 
     if (className?.includes("header")) {
-      const childrenArray = (nameHolder[2]?.props?.children?.props?.children as Array<any>);
-      const actualUsername = util.findInTree(a, x => x?.username);
+      const childrenArray = nameHolder[2]?.props?.children?.props?.children as Array<any>;
+      const actualUsername = util.findInTree(a, (x) => x?.username);
 
       if (actualUsername) {
         const { username, discriminator } = actualUsername;
-        const displayDiscriminator = discriminator && discriminator !== "0" ? `#${discriminator}` : '';
+        const displayDiscriminator =
+          discriminator && discriminator !== "0" ? `#${discriminator}` : "";
         const displayName = (
-          <text onClick={() => startCopy((username as string))}>{` @${username}${displayDiscriminator}`}</text>
+          <text
+            onClick={() =>
+              startCopy(username as string)
+            }>{` @${username}${displayDiscriminator}`}</text>
         );
 
         childrenArray?.splice(2, 0, displayName);

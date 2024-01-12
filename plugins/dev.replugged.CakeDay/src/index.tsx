@@ -15,7 +15,7 @@ import "./styles.css";
 import { ContextMenuTypes } from "replugged/types";
 
 const SettingConfig = await settings.init("CakeDay");
-const BLUE = webpack.getByProps('colorBrand').colorBrand
+const BLUE = webpack.getByProps("colorBrand").colorBrand;
 const inject = new Injector();
 const logger = Logger.plugin("CakeDay");
 const ModalList: object = webpack.getByProps("ConfirmModal");
@@ -44,7 +44,7 @@ class CakeDay {
   start() {
     const Tree = webpack.getBySource(".roleDot", { raw: true });
     const NamePatch = webpack.getModule((x) => x?.exports?.CloseButton);
-    const ProfileNamePatch = webpack.getBySource(`B(Q.section`, {raw: true})?.exports
+    const ProfileNamePatch = webpack.getBySource(`B(Q.section`, { raw: true })?.exports;
 
     inject.after(ProfileNamePatch, "default", (args: object, b, c) => {
       const UserTagCheck: string = util.findInTree(args, (x) => x?.copyMetaData === "User Tag");
