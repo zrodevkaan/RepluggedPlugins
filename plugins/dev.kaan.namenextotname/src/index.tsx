@@ -47,7 +47,7 @@ export async function start() {
       if (actualUsername) {
         const { username, discriminator } = actualUsername;
         const displayDiscriminator =
-          discriminator && discriminator !== "0" ? `#${discriminator}` : "";
+          discriminator && discriminator !== "0" ? `${discriminator}` : "";
         const displayName = (
           <DisplayName
             username={username}
