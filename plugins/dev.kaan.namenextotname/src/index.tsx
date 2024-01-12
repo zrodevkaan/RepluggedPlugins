@@ -8,9 +8,10 @@ const {
   },
 } = common;
 
-const copy = await webpack.waitForModule<{ default: { copy: (text: string) => {} } }>(
+const { copy } = (await webpack.waitForModule<{ default: { copy: (yes: string) => unknown } }>(
   webpack.filters.byProps("copy"),
-);
+)).default;
+
 const NameWithRole = await webpack.waitForModule<{ H: (something: string) => unknown }>(
   webpack.filters.byProps("NameWithRole"),
 );
@@ -42,7 +43,7 @@ export async function start() {
   });
 
   function startCopy(text: string) {
-    copy?.default?.copy(text);
+    copy(text);
     toast("Copied username to clipboard!", SUCCESS);
   }
 }
