@@ -20,6 +20,18 @@ const NameWithRole = await webpack.waitForModule<{ H: (something: string) => unk
 
 const inject = new Injector();
 
+const DisplayName = ({ username, discriminator, startCopy }) => {
+  const displayDiscriminator =
+    discriminator && discriminator !== "0" ? `#${discriminator}` : "";
+
+  return (
+    <text
+      style={{ userSelect: 'none' }}
+      onClick={() => startCopy(username)}
+    >{` @${username}${displayDiscriminator}`}</text>
+  );
+};
+
 export async function start() {
   inject.after(NameWithRole, "H", (a: any) => {
     const nameHolder = a[0]?.children;
@@ -36,10 +48,11 @@ export async function start() {
         const displayDiscriminator =
           discriminator && discriminator !== "0" ? `#${discriminator}` : "";
         const displayName = (
-          <text
-            onClick={() =>
-              startCopy(username as string)
-            }>{` @${username}${displayDiscriminator}`}</text>
+          <DisplayName
+            username={username}
+            discriminator={displayDiscriminator}
+            startCopy={startCopy}
+          />
         );
 
         childrenArray?.splice(2, 0, displayName);
