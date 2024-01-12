@@ -21,6 +21,9 @@ const NameWithRole = await webpack.waitForModule<{ H: (something: string) => unk
 const inject = new Injector();
 
 const DisplayName = ({ username, discriminator, startCopy }) => {
+  // this now exists.
+  // please make it easier on yourself with your next plugin.
+  // exporting this stuff and MAKING it organized.
   const displayDiscriminator =
     discriminator && discriminator !== "0" ? `#${discriminator}` : "";
 
