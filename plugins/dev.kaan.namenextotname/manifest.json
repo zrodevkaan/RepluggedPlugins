@@ -1,0 +1,20 @@
+{
+  "id": "dev.kaan.identitytag",
+  "name": "Identity Tag",
+  "description": "shows a name next to a users display/fake name.",
+  "author": {
+    "name": "kaan",
+    "discordID": "",
+    "github": "zrodevkaan"
+  },
+  "version": "1.0.2",
+  "updater": {
+    "type": "store",
+    "id": "dev.kaan.identitytag"
+  },
+  "license": "MIT",
+  "type": "replugged-plugin",
+  "renderer": "src/index.tsx",
+  "identifier": "dev.kaan.identitytag",
+  "image": ["https://imgur.com/a/iUtc4aV"]
+}
