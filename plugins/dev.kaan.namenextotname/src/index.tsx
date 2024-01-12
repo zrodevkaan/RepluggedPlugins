@@ -8,10 +8,10 @@ const {
   },
 } = common;
 
-const copy = await webpack.waitForModule<{ copy: (text: string) => unknown }>(
+const copy = await webpack.waitForModule<{ default: { copy: (text: string) => {} } }>(
   webpack.filters.byProps("copy"),
 );
-const NameWithRole = await webpack.waitForModule<{ NameWithRole: (something: any) => unknown }>(
+const NameWithRole = await webpack.waitForModule<{ H: (something: string) => unknown }>(
   webpack.filters.byProps("NameWithRole"),
 );
 const inject = new Injector();
@@ -42,7 +42,7 @@ export async function start() {
   });
 
   function startCopy(text: string) {
-    copy(text);
+    copy?.default?.copy(text);
     toast("Copied username to clipboard!", SUCCESS);
   }
 }
