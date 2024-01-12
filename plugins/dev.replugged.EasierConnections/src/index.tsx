@@ -10,12 +10,9 @@ const { ConnectedUserAccount } = webpack.getByProps("ConnectedUserAccount");
 export async function start(): Promise<void> {
   inject.before(ProfileContext, "default", (a, b, c) => {
     const Connections = UserProfileStore.getUserProfile(a[0].user.id)?.connectedAccounts;
-    console.log(Connections)
     if (Connections) {
       const Dropdown = util.findInTree(a?.[0], x => x?.className?.includes("profilePanelConnections"))?.children?.[0]?.type // a?.[0]?.children?.[1]?.props?.children?.[3]?.props?.children?.[0]?.type; Outdated since... whenever..
-      console.log(a?.[0])
       if (Dropdown) {
-        console.log(Dropdown)
         const options = Object.keys(Connections).map((key) => ({
           label: key,
           value: Connections[key],
