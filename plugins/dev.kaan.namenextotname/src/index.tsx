@@ -8,9 +8,11 @@ const {
   },
 } = common;
 
-const { copy } = (await webpack.waitForModule<{ default: { copy: (yes: string) => unknown } }>(
-  webpack.filters.byProps("copy"),
-)).default;
+const { copy } = (
+  await webpack.waitForModule<{ default: { copy: (yes: string) => unknown } }>(
+    webpack.filters.byProps("copy"),
+  )
+).default;
 
 const NameWithRole = await webpack.waitForModule<{ H: (something: string) => unknown }>(
   webpack.filters.byProps("NameWithRole"),
