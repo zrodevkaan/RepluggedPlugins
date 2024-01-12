@@ -39,7 +39,7 @@ export async function start(): Promise<void> {
     const Connections = UserProfileStore.getUserProfile(a[0].user.id)?.connectedAccounts;
     if (Connections) {
       const Dropdown = util.findInTree(
-        (a?.[0] as object) as Record<string, unknown>,
+        a?.[0] as object as Record<string, unknown>,
         (x: ThereHasToBeABetterWayToDoThis) => x?.className?.includes("profilePanelConnections"),
       )?.children?.[0]?.type; // a?.[0]?.children?.[1]?.props?.children?.[3]?.props?.children?.[0]?.type; Outdated since... whenever..
       if (Dropdown) {
@@ -67,7 +67,7 @@ export async function start(): Promise<void> {
             a?.[0] as unknown as Record<string, unknown>,
             (x: ThereHasToBeABetterWayToDoThis) => x?.className?.includes?.("Panel"),
             {
-              maxRecursion: Infinity, // ifninty 
+              maxRecursion: Infinity, // ifninty
               walkable: ["props", "children"],
             },
           );

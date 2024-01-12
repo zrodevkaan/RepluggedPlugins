@@ -24,14 +24,12 @@ const DisplayName = ({ username, discriminator, startCopy }) => {
   // this now exists.
   // please make it easier on yourself with your next plugin.
   // exporting this stuff and MAKING it organized.
-  const displayDiscriminator =
-    discriminator && discriminator !== "0" ? `#${discriminator}` : "";
+  const displayDiscriminator = discriminator && discriminator !== "0" ? `#${discriminator}` : "";
 
   return (
     <text
-      style={{ userSelect: 'none' }}
-      onClick={() => startCopy(username)}
-    >{` @${username}${displayDiscriminator}`}</text>
+      style={{ userSelect: "none" }}
+      onClick={() => startCopy(username)}>{` @${username}${displayDiscriminator}`}</text>
   );
 };
 
