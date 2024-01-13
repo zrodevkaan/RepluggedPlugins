@@ -7,7 +7,7 @@
     "discordID": "",
     "github": "ImAFrogOwO"
   },
-  "version": "1.0.2",
+  "version": "1.0.3",
   "updater": {
     "type": "github",
     "id": "ImAFrogOwO/RepluggedPlugins/tree/main/dev.replugged.CakeDay"
@@ -16,5 +16,7 @@
   "type": "replugged-plugin",
   "renderer": "src/index.tsx",
   "identifier": "dev.kaan.CakeDay",
-  "image": ["https://i.imgur.com/97u6gKD.png"]
+  "image": [
+    "https://i.imgur.com/97u6gKD.png"
+  ]
 }
