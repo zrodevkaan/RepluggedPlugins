@@ -1,0 +1,20 @@
+{
+  "id": "dev.kaan.voicechattovoice",
+  "name": "VoiceChatToVoice",
+  "description": "It's all about inclusivity. It gives a voice to those who may not typically speak for various reasons. Your comfort and expression matter, as this creates a warm space for connection with friends.",
+  "author": {
+    "name": "kaan",
+    "discordID": "",
+    "github": "zrodevkaan"
+  },
+  "version": "1.1.0",
+  "updater": {
+    "type": "store",
+    "id": "dev.kaan.voicechattovoice"
+  },
+  "license": "MIT",
+  "type": "replugged-plugin",
+  "renderer": "src/index.tsx",
+  "source": "https://github.com/zrodevkaan/RepluggedPlugins/tree/main/plugins/dev.kaan.VoiceChatToVoice",
+  "image": [""]
+}
