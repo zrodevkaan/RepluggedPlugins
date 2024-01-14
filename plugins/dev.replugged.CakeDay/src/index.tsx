@@ -19,7 +19,7 @@ interface UserData {
   username: string;
   id: string;
 }
-type TreeFilter = (tree: Record<string, unknown>) => boolean;
+
 interface UserStore {
   getUser: (string: string) => {};
 }
@@ -60,10 +60,10 @@ class CakeDay {
   }
 
   start() {
-    const Tree = webpack.getBySource(".roleDot", { raw: true });
-    const ProfileNamePatch = webpack.getBySource(`B(Q.section`, { raw: true })?.exports;
+    const Tree: { default: () => string } = webpack.getByProps("UsernameDecorationTypes"); // webpack.getBySource(".roleDot", { raw: true });
+    // const ProfileNamePatch = webpack.getByProps("CopiableField")
 
-    inject.after(ProfileNamePatch, "default", (args: object, b) => {
+    /*inject.after(ProfileNamePatch, "CopiableField", (args: object, b) => {
       const UserTagCheck: any = util.findInTree(
         args as Record<string, unknown>,
         (x) => x?.copyMetaData === "User Tag",
@@ -72,6 +72,7 @@ class CakeDay {
       const Author: any = util.findInTree(args as Record<string, unknown>, filterFunction)?.user;
       if (!UserTagCheck) return;
       if (!this.checkBirthday(Author)) return;
+      console.log(b)
       b?.props?.children?.props?.children?.[0]?.props?.children?.props?.children?.unshift(
         <ModalList.Tooltip text="It's my birthday!">
           {(data: any) => (
@@ -83,12 +84,12 @@ class CakeDay {
           )}
         </ModalList.Tooltip>,
       );
-    });
+    });*/
 
-    inject.after(Tree?.exports, "default", (OwO: object, props) => {
+    inject.after(Tree, "default", (OwO: object, props: { props }) => {
       const Author = OwO[0]?.message?.author;
-      const Decorations = props?.props?.children[3]?.props?.children;
-
+      const ChildrenOf6 = util.findInTree(props, (x) => Boolean(x?.children));
+      const Decorations = ChildrenOf6.children[3]?.props?.children; // how do I do this based off findInTree ??
       if (this.checkBirthday(Author)) {
         Decorations?.push(
           <ModalList.Tooltip text="It's my birthday!">
