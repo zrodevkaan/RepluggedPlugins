@@ -1,0 +1,15 @@
+div:has(> .identityTag) {
+  display: inline-block;
+  margin: 1px 0 0 4px !important;
+}
+.identityTag div [class*="copyIcon"] {
+  display: none;
+}
+div[class*="repliedMessage_"] div:has(> .identityTag),
+div[class*="threadMessageAccessory_"] div:has(> .identityTag),
+div[class*="repliedMessage_"] .identityTag-Username,
+div[class*="threadMessageAccessory_"] .identityTag-Username {
+  font-size: "inherit";
+  color: var(--text-muted) !important;
+  margin: 0 5px 1px 0 !important;
+}
