@@ -1,84 +1,54 @@
-import { Injector, common, components, settings, util, webpack } from "replugged";
-
-const {
-  React,
-  toast: {
-    Kind: { SUCCESS },
-    toast,
-  },
-} = common;
-
+import { Injector, settings, util, webpack } from "replugged";
+import { React } from "replugged/common";
+import { SwitchItem, Text } from "replugged/components";
+import "./styles.css"
 export interface SettingsType {
   roleColor?: boolean;
 }
 
 const owo = await settings.init<SettingsType>("dev.kaan.identitytag");
 
-const { SwitchItem } = components;
+const UsernameDecoration = webpack.getByProps<{ default: any; UsernameDecorationTypes: {} }>("UsernameDecorationTypes");
 
-const { copy } = (
-  await webpack.waitForModule<{ default: { copy: (yes: string) => unknown } }>(
-    webpack.filters.byProps("copy"),
-  )
-).default;
-
-const NameWithRole = await webpack.waitForModule<{ H: (something: string) => unknown }>(
-  webpack.filters.byProps("NameWithRole"),
-);
-
+const { CopiableField } = webpack.getByProps<{ CopiableField: any }>("CopiableField");
 const inject = new Injector();
 
-const DisplayName = ({ username, discriminator, startCopy, color }) => {
-  // this now exists.
-  // please make it easier on yourself with your next plugin.
-  // exporting this stuff and MAKING it organized.
-  const displayDiscriminator = discriminator && discriminator !== "0" ? `#${discriminator}` : "";
+const DisplayName = React.memo(({ username, color }) => {
   return (
-    // Why did ppl question `text`. It does the same thing as span >:(
-    <text
-      style={{ userSelect: "none", color }}
-      onClick={() => startCopy(username)}>{` @${username}${displayDiscriminator}`}</text>
+
+    <CopiableField
+      className="identityTag"
+      copyMetaData="User Tag"
+      copyValue={username.replace("@", "")}
+      disableCopy={false}
+      showCopyIcon={true}>
+      <Text.Normal color={color} className="identityTag-Username">{username}</Text.Normal>
+    </CopiableField>
   );
-};
+});
 
 // I like async, lint doesn't. I dont care :3
 export async function start() {
-  inject.after(NameWithRole, "H", (a: any) => {
-    const nameHolder = a[0]?.children;
-    const className: string = a[0]?.className;
+  inject.after(UsernameDecoration, "default", ([props]: [props: any], res) => {
 
-    if (className?.includes("header")) {
-      const childrenArray = nameHolder[2]?.props?.children?.props?.children as Array<any>;
-      const filterFunction: (tree: Record<string, unknown>) => boolean = (x) =>
-        Boolean(x?.username);
-      const textColorMaybeOwO: (tree: Record<string, unknown>) => boolean = (x) =>
-        Boolean(x?.colorString); // albrt suggested this so sure.
+    const usernameIndex = res?.props?.children?.findIndex(c => c?.props?.onRequestClose?.toString()?.toLowerCase()?.includes("usernameprofile"));
+    const user = props?.message?.author;
+    const updatedColorCauseUpdated = owo.get("roleColor", false)
+      ? props?.author?.colorString
+      : "";
+    if (user) {
+      const discriminator = user.discriminator && user.discriminator != "0";
+      const displayName = (
+        <DisplayName
+          username={discriminator ? `${user.username}#${user.discriminator}` : `@${user.username}`}
+          color={updatedColorCauseUpdated}
+        />
+      );
 
-      const actualUsername = util.findInTree(a, filterFunction);
-      const actualTextColor = util.findInTree(a, textColorMaybeOwO);
-      const updatedColorCauseUpdated = owo.get("roleColor", false)
-        ? actualTextColor?.colorString
-        : "";
-      if (actualUsername) {
-        const { username, discriminator } = actualUsername;
-        const displayName = (
-          <DisplayName
-            username={username}
-            discriminator={discriminator}
-            startCopy={startCopy}
-            color={updatedColorCauseUpdated}
-          />
-        );
-
-        childrenArray?.splice(2, 0, displayName);
-      }
+      res?.props?.children?.splice(usernameIndex + 1, 0, displayName);
     }
-  });
 
-  function startCopy(text: string) {
-    copy(text);
-    toast("Copied username to clipboard!", SUCCESS);
-  }
+  });
 }
 
 export function Settings() {
