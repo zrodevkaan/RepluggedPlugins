@@ -38,7 +38,7 @@ export function start() {
       ? props?.author?.colorString
       : "";
     if (user) {
-      const discriminator = user.discriminator && user.discriminator != "0";
+      const discriminator = user.discriminator && user.discriminator !== "0";
       const displayName = (
         <DisplayName
           username={discriminator ? `${user.username}#${user.discriminator}` : `@${user.username}`}
