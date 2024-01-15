@@ -16,5 +16,5 @@
   "type": "replugged-plugin",
   "renderer": "src/index.tsx",
   "source": "https://github.com/zrodevkaan/RepluggedPlugins/tree/main/plugins/dev.kaan.VoiceChatToVoice",
-  "image": ["https://google.com"]
+  "image": ["https://i.imgur.com/NJzAt49.png"]
 }
