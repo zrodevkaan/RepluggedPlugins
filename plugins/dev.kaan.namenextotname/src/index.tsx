@@ -13,6 +13,7 @@ const UsernameDecoration = webpack.getByProps<{ default: any; UsernameDecoration
 const { CopiableField } = webpack.getByProps<{ CopiableField: any }>("CopiableField");
 const inject = new Injector();
 
+
 const DisplayName = React.memo(({ username, color }) => {
   return (
 
@@ -28,7 +29,7 @@ const DisplayName = React.memo(({ username, color }) => {
 });
 
 // I like async, lint doesn't. I dont care :3
-export async function start() {
+export function start() {
   inject.after(UsernameDecoration, "default", ([props]: [props: any], res) => {
 
     const usernameIndex = res?.props?.children?.findIndex(c => c?.props?.onRequestClose?.toString()?.toLowerCase()?.includes("usernameprofile"));
@@ -66,6 +67,6 @@ export function Settings() {
   );
 }
 
-export async function stop() {
+export function stop() {
   inject.uninjectAll();
 }

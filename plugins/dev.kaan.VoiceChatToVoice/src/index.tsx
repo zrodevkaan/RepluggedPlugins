@@ -30,7 +30,6 @@ function messageLoggerxD(a: any) {
   const whitelistedChannels = (owo.get("whitelistChannels") as Array<string[]>) || [];
   const shouldTTSSayUsername = owo.get("tts", false);
   if (!VoiceChannelStuff.getVoiceChannelId()) return;
-  console.log(UserStore.getCurrentUser().username, username);
   if (UserStore.getCurrentUser().username === username) return;
   // this was made for my friend, dark who doesn't speak much but is very important to me.
   if (whitelistedChannels.includes(a.channelId)) {
