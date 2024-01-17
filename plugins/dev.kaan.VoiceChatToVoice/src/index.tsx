@@ -12,6 +12,7 @@ const VoiceChannelStuff: { getVoiceChannelId: () => string } =
   webpack.getByProps("getVoiceChannelId");
 const Flux: { subscribe: (owo, owo2) => void; unsubscribe: (owo, owo2) => void } =
   common.fluxDispatcher;
+const GuildStore: any = webpack.getByStoreName("SelectedGuildStore");
 const UserStore: any = webpack.getByStoreName("UserStore");
 const { SwitchItem } = components;
 interface UserDataType {
@@ -29,9 +30,11 @@ function messageLoggerxD(a: any) {
   const { globalName, username } = a.message.author;
   const whitelistedChannels = (owo.get("whitelistChannels") as Array<string[]>) || [];
   const shouldTTSSayUsername = owo.get("tts", false);
+  const currenGuild = GuildStore.getGuildId();
   if (!VoiceChannelStuff.getVoiceChannelId()) return;
   if (UserStore.getCurrentUser().username === username) return;
   // this was made for my friend, dark who doesn't speak much but is very important to me.
+  console.log(whitelistedChannels);
   if (whitelistedChannels.includes(a.channelId)) {
     textToSpeech(
       `${
