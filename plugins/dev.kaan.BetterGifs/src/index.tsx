@@ -45,7 +45,6 @@ export function start() {
         id="copy-source"
         label="Copy Source"
         action={() => {
-          console.log(data, pp)
           const Base = (data.target as HTMLBaseElement);
           const StickerID = Base.dataset.id;
           let isEmoji = Base.className.includes('emoji');
