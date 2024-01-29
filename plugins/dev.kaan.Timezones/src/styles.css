@@ -7,3 +7,17 @@
   font-size: 16px !important;
   margin-bottom: 4px;
 }
+[class^="banner"] > .timezones-icon {
+  opacity: 0% !important;
+  border-radius: 50px;
+  background-color: rgba(10, 10, 10, 0.375);
+  height: 24px;
+  width: 24px;
+  justify-content: center;
+  align-items: center;
+  display: flex;
+  transition: all 0.2s ease-in-out;
+}
+[class^="banner"]:hover > .timezones-icon {
+  opacity: 100% !important;
+}
