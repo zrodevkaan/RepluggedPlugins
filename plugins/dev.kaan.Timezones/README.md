@@ -1,3 +1,3 @@
-# BetterGifs
+# Timezones
 
-- Allows you to copy link url and sources before sending it!
+- Allows you to set timezones locally for each user

@@ -12,24 +12,12 @@ const colorBrands: any = webpack.getByProps("colorBrand");
 const ModalList: any = webpack.getByProps("ConfirmModal");
 const injector: Injector = new Injector();
 const ProfilePopout: any = webpack.getBySource(".GifAutoPlay.getSetting()", { raw: true })?.exports;
-const DarkOverlay: any = ({ children }) => (
-  <div
-    style={{
-      position: "absolute",
-      bottom: "10px",
-      right: "10px",
-      backgroundColor: "rgba(31, 31, 31, 0.8)",
-      padding: "10px",
-      borderRadius: "5px",
-      width: "100px",
-      height: "5px",
-      display: "flex",
-      alignItems: "center",
-      justifyContent: "center",
-    }}>
-    {children}
-  </div>
-);
+
+interface Data {
+  user: object;
+}
+
+const DarkOverlay: any = ({ children }) => <div className={"timezone-overlay"}>{children}</div>;
 
 async function openTimezoneModal(user: any) {
   const userSettings = (await owo.get(user.id)) || {};
@@ -89,9 +77,9 @@ function clearUserTimezone(user: any) {
 }
 
 export function start() {
-  injector.after(ProfilePopout, "default", (a: any, b, c) => {
-    const Children: any = util.findInReactTree(b as {}, (x) => Boolean(x?.className)).children;
-    const User = a?.[0].user;
+  injector.after(ProfilePopout, "default", (a, b, c) => {
+    const Children: any = util.findInReactTree(b, (x) => Boolean(x?.className)).children;
+    const User = a?.[0]["user"];
 
     const userSettings = owo.get(User.id) || {};
     let selectedTimezone = userSettings.timezone || "";
@@ -100,7 +88,7 @@ export function start() {
 
     const currentTime = getCurrentTimeInTimezone(selectedTimezone);
 
-    Children.push(
+    Children.unshift(
       <DarkOverlay>
         <ModalList.Text style={{ fontSize: "inherit", color: "#fff" }}>
           {currentTime}
