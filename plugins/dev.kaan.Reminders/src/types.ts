@@ -1,5 +1,5 @@
-import { types as DefaultTypes, common } from "replugged";
-export { types as DefaultTypes } from "replugged";
+import { types as DefaultTypes } from "replugged";
+import { React } from "replugged/common";
 declare global {
   interface Window {
     HomeButtonContextMenuApi: HomeButtonContextMenuApi;
