@@ -1,0 +1,21 @@
+{
+  "id": "dev.kaan.Timezones",
+  "name": "Timezones",
+  "description": "Timezones",
+  "author": {
+    "name": "kaan",
+    "discordID": "",
+    "github": "zrodevkaan"
+  },
+  "version": "1.0.3",
+  "updater": {
+    "type": "store",
+    "id": "dev.kaan.Timezones"
+  },
+  "license": "MIT",
+  "type": "replugged-plugin",
+  "renderer": "src/index.tsx",
+  "image": [
+    "https://i.imgur.com/v4kCzlb.png"
+  ]
+}
