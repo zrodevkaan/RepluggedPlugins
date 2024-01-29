@@ -1,7 +1,7 @@
 {
-  "id": "dev.kaan.BetterGifs",
-  "name": "BetterGifs",
-  "description": "BetterGifs",
+  "id": "dev.kaan.StoreBasedLib",
+  "name": "StoreBasedLib",
+  "description": "StoreBasedLib",
   "author": {
     "name": "kaan",
     "discordID": "",
@@ -10,7 +10,7 @@
   "version": "1.0.2",
   "updater": {
     "type": "store",
-    "id": "dev.kaan.BetterGifs"
+    "id": "dev.kaan.StoreBasedLib"
   },
   "license": "MIT",
   "type": "replugged-plugin",

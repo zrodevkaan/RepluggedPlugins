@@ -1,0 +1,9 @@
+.timezone-search {
+  background-color: var(--input-background);
+  border-radius: 4px;
+  border-color: transparent;
+  color: var(--text-normal);
+  font-weight: 500;
+  font-size: 16px!important;
+  margin-bottom: 4px;
+}

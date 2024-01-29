@@ -1,21 +1,19 @@
 {
-  "id": "dev.kaan.Timezones",
-  "name": "Timezones",
-  "description": "Timezones",
+  "id": "dev.kaan.NoEditMessage",
+  "name": "NoEditMessage",
+  "description": "NoEditMessage",
   "author": {
     "name": "kaan",
     "discordID": "",
     "github": "zrodevkaan"
   },
-  "version": "1.0.3",
+  "version": "1.0.2",
   "updater": {
     "type": "store",
-    "id": "dev.kaan.Timezones"
+    "id": "dev.kaan.NoEditMessage"
   },
   "license": "MIT",
   "type": "replugged-plugin",
   "renderer": "src/index.tsx",
-  "image": [
-    "https://i.imgur.com/v4kCzlb.png"
-  ]
+  "image": ["https://i.imgur.com/v4kCzlb.png"]
 }

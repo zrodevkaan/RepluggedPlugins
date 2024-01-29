@@ -3,7 +3,7 @@ import { Injector, util, webpack } from "replugged";
 import { contextMenu } from "replugged/common";
 import { ContextMenu } from "replugged/components";
 import { ContextMenuTypes } from "replugged/types";
-import {Base} from "replugged/dist/renderer/coremods/badges/badge";
+import { Base } from "replugged/dist/renderer/coremods/badges/badge";
 
 const injector = new Injector();
 const { GIFPickerSearchItem } = webpack.getByProps("GIFPickerSearchItem") as any;
@@ -45,9 +45,9 @@ export function start() {
         id="copy-source"
         label="Copy Source"
         action={() => {
-          const Base = (data.target as HTMLBaseElement);
+          const Base = data.target as HTMLBaseElement;
           const StickerID = Base.dataset.id;
-          let isEmoji = Base.className.includes('emoji');
+          let isEmoji = Base.className.includes("emoji");
           copyModule.copy(replaceStickerURL(StickerID, isEmoji));
         }}
       />
