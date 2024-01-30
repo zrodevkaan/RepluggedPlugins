@@ -15,6 +15,7 @@
   "license": "MIT",
   "type": "replugged-plugin",
   "renderer": "src/index.tsx",
+  "source": "https://github.com/zrodevkaan/RepluggedPlugins/tree/main/plugins/dev.kaan.Timezones",
   "image": [
     "https://i.imgur.com/66pKDq9.png"
   ]
