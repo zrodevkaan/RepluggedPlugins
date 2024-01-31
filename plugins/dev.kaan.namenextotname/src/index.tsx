@@ -33,7 +33,7 @@ export function start() {
   inject.after(UsernameDecoration, "default", ([props]: [props: any], res) => {
     const usernameIndex = res?.props?.children?.findIndex(
       (c) => c?.props?.onRequestClose?.toString()?.toLowerCase()?.includes("usernameprofile"),
-    ) ;
+    );
     const user = props?.message?.author;
     const updatedColorCauseUpdated = owo.get("roleColor", false) ? props?.author?.colorString : "";
     if (user) {
