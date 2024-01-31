@@ -1,0 +1,21 @@
+{
+  "id": "dev.kaan.BetterMessages",
+  "name": "BetterMessages",
+  "description": "Allows you to use regex or specific letters that you want to replace every message you send!",
+  "author": {
+    "name": "kaan",
+    "discordID": "",
+    "github": "zrodevkaan"
+  },
+  "version": "1.0.3",
+  "updater": {
+    "type": "store",
+    "id": "dev.kaan.BetterMessages"
+  },
+  "license": "MIT",
+  "type": "replugged-plugin",
+  "renderer": "src/index.tsx",
+  "image": [
+    "https://i.imgur.com/v4kCzlb.png"
+  ]
+}
