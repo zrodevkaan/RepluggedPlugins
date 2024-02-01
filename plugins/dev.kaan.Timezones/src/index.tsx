@@ -154,7 +154,7 @@ const getAllTimezones = () =>
           .find((part) => part.type == "timeZoneName").value
       })`,
       value: timezone,
-    }
+    };
   });
 function getCurrentTimeInTimezone(timezone: string): string {
   return new Date().toLocaleTimeString("en-US", {
