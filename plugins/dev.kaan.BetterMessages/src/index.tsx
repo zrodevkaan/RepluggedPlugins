@@ -86,7 +86,7 @@ function parseRegexInput(regexInput) {
 export function Settings() {
   const initialRows = owo.get("rows") || [{ findValue: "", replaceValue: "" }];
   const [rows, setRows] = useState(initialRows);
-
+  console.log("rows", rows)
   const handleInputChange = (index, fieldValue, fieldKey) => {
     const updatedRows = rows.map((row, rowIndex) => {
       if (index === rowIndex) {
@@ -96,7 +96,7 @@ export function Settings() {
     });
 
     setRows(updatedRows);
-    saveRow(updatedRows);
+    saveRow();
   };
 
   const addRow = () => {
@@ -109,8 +109,9 @@ export function Settings() {
     owo.set("rows", defaultRows);
   };
 
-  const saveRow = (newRows) => {
-    owo.set("rows", newRows);
+  
+  const saveRow = () => {
+    owo.set("rows", rows);
   };
 
   const deleteRow = (index) => {
