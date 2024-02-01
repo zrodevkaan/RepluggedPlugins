@@ -6,10 +6,8 @@
   <component name="ChangeListManager">
     <list default="true" id="c3b3a492-7a2a-4b2d-ae39-316f0625d4d5" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/.idea.RepluggedPlugins.dir/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.RepluggedPlugins.dir/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/plugins/dev.kaan.Timezones/manifest.json" beforeDir="false" afterPath="$PROJECT_DIR$/plugins/dev.kaan.Timezones/manifest.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/plugins/dev.kaan.BetterMessages/src/index.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/plugins/dev.kaan.BetterMessages/src/index.tsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/plugins/dev.kaan.Timezones/src/index.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/plugins/dev.kaan.Timezones/src/index.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/plugins/dev.kaan.Timezones/src/styles.css" beforeDir="false" afterPath="$PROJECT_DIR$/plugins/dev.kaan.Timezones/src/styles.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/plugins/dev.kaan.namenextotname/src/index.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/plugins/dev.kaan.namenextotname/src/index.tsx" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -96,7 +94,7 @@
       <workItem from="1706508829430" duration="12859000" />
       <workItem from="1706655710943" duration="100000" />
       <workItem from="1706655827564" duration="1504000" />
-      <workItem from="1706678610666" duration="7696000" />
+      <workItem from="1706678610666" duration="13862000" />
     </task>
     <servers />
   </component>

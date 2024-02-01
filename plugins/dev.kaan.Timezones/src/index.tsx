@@ -145,15 +145,17 @@ export function start() {
 }
 
 const getAllTimezones = () =>
-  Intl.supportedValuesOf("timeZone").map((timezone) => ({
-    label: `${timezone} (${
-      new Intl.DateTimeFormat(undefined, { timeZone: timezone, timeZoneName: "short" })
-        .formatToParts(new Date())
-        .find((part) => part.type == "timeZoneName").value
-    })`,
-    value: timezone,
-  }));
-
+  Intl.supportedValuesOf("timeZone").map((timezone) => {
+    const time = getCurrentTimeInTimezone(timezone);
+    return {
+      label: `${timezone} ${time} (${
+        new Intl.DateTimeFormat(undefined, { timeZone: timezone, timeZoneName: "short" })
+          .formatToParts(new Date())
+          .find((part) => part.type == "timeZoneName").value
+      })`,
+      value: timezone,
+    }
+  });
 function getCurrentTimeInTimezone(timezone: string): string {
   return new Date().toLocaleTimeString("en-US", {
     timeZone: timezone,
