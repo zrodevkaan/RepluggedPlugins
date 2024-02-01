@@ -7,7 +7,7 @@
     "discordID": "",
     "github": "zrodevkaan"
   },
-  "version": "1.0.9",
+  "version": "1.0.10",
   "updater": {
     "type": "store",
     "id": "dev.kaan.Timezones"
@@ -16,5 +16,7 @@
   "type": "replugged-plugin",
   "renderer": "src/index.tsx",
   "source": "https://github.com/zrodevkaan/RepluggedPlugins/tree/main/plugins/dev.kaan.Timezones",
-  "image": ["https://i.imgur.com/66pKDq9.png"]
+  "image": [
+    "https://i.imgur.com/66pKDq9.png"
+  ]
 }
