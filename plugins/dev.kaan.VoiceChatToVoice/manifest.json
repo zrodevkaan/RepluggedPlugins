@@ -7,7 +7,7 @@
     "discordID": "",
     "github": "zrodevkaan"
   },
-  "version": "1.1.4",
+  "version": "1.1.5",
   "updater": {
     "type": "store",
     "id": "dev.kaan.voicechattovoice"
@@ -16,5 +16,7 @@
   "type": "replugged-plugin",
   "renderer": "src/index.tsx",
   "source": "https://github.com/zrodevkaan/RepluggedPlugins/tree/main/plugins/dev.kaan.VoiceChatToVoice",
-  "image": ["https://i.imgur.com/NJzAt49.png"]
+  "image": [
+    "https://i.imgur.com/NJzAt49.png"
+  ]
 }
