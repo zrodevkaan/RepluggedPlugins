@@ -50,7 +50,7 @@ export function start() {
         // regex is so silly.
         MessageContent = MessageContent.split(" ")
           .map((word) =>
-            word.startsWith("http")
+            word.startsWith("http") || word.startsWith("<")
               ? word
               : word.replace(regex, (match) =>
                   match === match.toLocaleUpperCase()
