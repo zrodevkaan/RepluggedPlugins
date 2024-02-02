@@ -1,5 +1,6 @@
 import { Injector, common, components, settings, util, webpack } from "replugged";
 import { ContextMenuTypes } from "replugged/types";
+import { Guild } from "discord-types/general";
 
 const {
   ContextMenu: { MenuItem },
@@ -13,10 +14,12 @@ const VoiceChannelStuff: { getVoiceChannelId: () => string } =
 const Flux: { subscribe: (owo, owo2) => void; unsubscribe: (owo, owo2) => void } =
   common.fluxDispatcher;
 const GuildStore: any = webpack.getByStoreName("SelectedGuildStore");
+const ActualGuildStore: any = webpack.getByStoreName("GuildStore");
 const ChannelStore: any = webpack.getByStoreName("ChannelStore");
 const UserStore: any = webpack.getByStoreName("UserStore");
 const VoiceStore: any = webpack.getByProps("getVoiceChannelId");
 const { SwitchItem } = components;
+const ChannelItem: any = webpack.getBySource("webGuildTextChannel");
 interface UserDataType {
   channel: { id: string };
 }
@@ -31,7 +34,7 @@ function textToSpeech(text) {
 function messageLoggerxD(a: any) {
   const { globalName, username } = a.message.author;
   const { channelId } = a;
-  const whitelistedChannels = owo.get('whitelistChannels') || [];
+  const whitelistedChannels = owo.get("whitelistChannels") || [];
   const shouldTTSSayUsername = owo.get("tts", false);
   const currentVoiceChannelId = VoiceStore.getVoiceChannelId();
   const speakerAttribution = shouldTTSSayUsername ? `${globalName || username} said` : "";
@@ -42,8 +45,7 @@ function messageLoggerxD(a: any) {
   if (messageGuildId !== ChannelStore.getChannel(currentVoiceChannelId).guild_id) return;
 
   const content = a.message.content;
-  if (whitelistedChannels.includes(channelId))
-  {
+  if (whitelistedChannels.includes(channelId)) {
     // this was made for my friend, dark who doesn't speak much but is very important to me.
     const messageWithoutLinks = content
       .split(" ")
@@ -51,7 +53,7 @@ function messageLoggerxD(a: any) {
       .filter(Boolean)
       .join(" ");
 
-    textToSpeech(`${speakerAttribution} ${messageWithoutLinks}`); 
+    textToSpeech(`${speakerAttribution} ${messageWithoutLinks}`);
   }
 }
 export function start() {
@@ -121,17 +123,37 @@ export function stop() {
   inject.uninjectAll();
 }
 
+const ChannelComponent = ({ channelId }) => (
+  <div key={channelId}>
+    {channelId}
+    <ChannelItem
+      class={"content__23cab"}
+      className={"content__23cab"}
+      style={{ margin: "5px 0" }}
+      channel={ChannelStore?.getChannel(channelId)}
+      guild={ActualGuildStore.getGuild(ChannelStore.getChannel(channelId)?.guild_id)}
+    />
+  </div>
+);
+
 export function Settings() {
+  const whitelistChannels = owo.get("whitelistChannels") || [];
+
   return (
     <div>
       <SwitchItem
         {...util.useSetting(owo, "tts", false)}
-        note={"Will make it so the voice says the username when a message is sent."}>
+        note="Will make it so the voice says the username when a message is sent.">
         TTS Username
       </SwitchItem>
-      <SwitchItem {...util.useSetting(owo, "debug", false)} note={"Enable or disable debug logs."}>
+      <SwitchItem {...util.useSetting(owo, "debug", false)} note="Enable or disable debug logs.">
         Debug Mode
       </SwitchItem>
+      <div className="content__23cab">
+        {whitelistChannels.map((channelId) => (
+          <ChannelComponent channelId={channelId} />
+        ))}
+      </div>
     </div>
   );
 }
