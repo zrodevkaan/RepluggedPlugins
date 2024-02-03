@@ -1,6 +1,8 @@
 import { Injector, common, components, settings, util, webpack } from "replugged";
 import { ContextMenuTypes } from "replugged/types";
 import { Guild } from "discord-types/general";
+import { Tooltip } from "replugged/components";
+import Poggers from "./poggers";
 
 const {
   ContextMenu: { MenuItem },
@@ -20,6 +22,8 @@ const UserStore: any = webpack.getByStoreName("UserStore");
 const VoiceStore: any = webpack.getByProps("getVoiceChannelId");
 const { SwitchItem } = components;
 const ChannelItem: any = webpack.getBySource("webGuildTextChannel");
+const ChannelItemIcon: any = webpack.getByProps("ChannelItemIcon");
+const IconsClasses: any = webpack.getByProps("iconItem");
 interface UserDataType {
   channel: { id: string };
 }
@@ -82,6 +86,27 @@ export function start() {
     "user-context" as ContextMenuTypes,
     createMenuItem("user-context" as ContextMenuTypes),
   );
+
+  inject.after(ChannelItemIcon, "default", (a: any, b, c) => {
+    const currentWhitelist: string[] = owo.get("whitelistChannels") || [];
+    const children: any = util.findInReactTree(
+      b,
+      (m: any) => m?.props?.onClick?.toString().includes("stopPropagation") && m.type === "div",
+    );
+
+    if (children?.props?.children && currentWhitelist.includes(a?.[0]?.channel?.id))
+      children.props.children.push(
+        <Tooltip
+          text="OwO. This channel is whitelisted under the 'VoiceChatToChat' plugin :) "
+          className={`${IconsClasses.iconItem}`}
+          style={{
+            display: "block",
+          }}>
+          <Poggers className={`${IconsClasses.actionIcon}`} />
+        </Tooltip>,
+      );
+  });
+
   // looks nicer ngl.....
 
   Flux.subscribe("MESSAGE_CREATE", messageLoggerxD);
