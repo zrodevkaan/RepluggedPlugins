@@ -127,7 +127,6 @@ export function start() {
   injector.utils.addMenuItem("user-context" as ContextMenuTypes, (a, b) => {
     return (
       <>
-        <ModalList.MenuSeparator />
         <MenuItem
           id="set-timezone"
           label="Set Timezone"

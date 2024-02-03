@@ -8,6 +8,8 @@ import { Base } from "replugged/dist/renderer/coremods/badges/badge";
 const injector = new Injector();
 const { GIFPickerSearchItem } = webpack.getByProps("GIFPickerSearchItem") as any;
 const copyModule: any = webpack.getByProps("copy");
+const MessageEngine: any = webpack.getByProps("sendMessage");
+const SelectedChannelStore: any = webpack.getByStoreName("SelectedChannelStore");
 
 export function start() {
   injector.after(GIFPickerSearchItem.prototype, "render", (a, b) => {
@@ -31,6 +33,26 @@ export function start() {
                 id: "copy-url-owo",
                 action: () => {
                   copyModule.copy(Href.url);
+                },
+              }}
+            />
+            <ContextMenu.MenuItem
+              {...{
+                label: "Send URL",
+                id: "send-url-owo",
+                action: () => {
+                  const SendMessageData = [
+                    SelectedChannelStore.getCurrentlySelectedChannelId(),
+                    {
+                      content: Href.url || Href.src,
+                      tts: false,
+                      invalidEmojis: [],
+                      validNonShortcutEmojis: [],
+                    },
+                    undefined,
+                    {},
+                  ];
+                  MessageEngine.sendMessage(...SendMessageData);
                 },
               }}
             />
