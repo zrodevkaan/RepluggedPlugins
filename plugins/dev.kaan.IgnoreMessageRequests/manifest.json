@@ -1,0 +1,20 @@
+{
+  "id": "dev.kaan.IgnoreMessageRequests",
+  "name": "IgnoreMessageRequests",
+  "description": "IgnoreMessageRequests",
+  "author": {
+    "name": "kaan",
+    "discordID": "",
+    "github": "zrodevkaan"
+  },
+  "version": "1.0.10",
+  "updater": {
+    "type": "store",
+    "id": "dev.kaan.IgnoreMessageRequests"
+  },
+  "license": "MIT",
+  "type": "replugged-plugin",
+  "renderer": "src/index.tsx",
+  "source": "https://github.com/zrodevkaan/RepluggedPlugins/tree/main/plugins/dev.kaan.IgnoreMessageRequests",
+  "image": ["https://i.imgur.com/66pKDq9.png"]
+}
