@@ -167,8 +167,6 @@ const ChannelComponent = ({ channelId }) => (
   <div key={channelId}>
     {channelId}
     <ChannelItem
-      class={"content__23cab"}
-      className={"content__23cab"}
       style={{ margin: "5px 0" }}
       channel={ChannelStore?.getChannel(channelId)}
       guild={ActualGuildStore.getGuild(ChannelStore.getChannel(channelId)?.guild_id)}
@@ -198,7 +196,7 @@ export function Settings() {
         value={owo.get("selectedVoiceURI", availableVoices[0]?.voiceURI)}>
         Select Voice
       </Select>
-      <div className="content__23cab">
+      <div>
         {whitelistChannels.map((channelId) => (
           <ChannelComponent channelId={channelId} />
         ))}
