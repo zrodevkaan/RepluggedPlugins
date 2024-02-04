@@ -1,7 +1,7 @@
 import { Injector, common, components, settings, util, webpack } from "replugged";
 import { ContextMenuTypes } from "replugged/types";
 import { Guild } from "discord-types/general";
-import { Tooltip } from "replugged/components";
+import { Select, Slider, SliderItem, Tooltip } from "replugged/components";
 import Poggers from "./poggers";
 
 const {
@@ -20,7 +20,7 @@ const ActualGuildStore: any = webpack.getByStoreName("GuildStore");
 const ChannelStore: any = webpack.getByStoreName("ChannelStore");
 const UserStore: any = webpack.getByStoreName("UserStore");
 const VoiceStore: any = webpack.getByProps("getVoiceChannelId");
-const { SwitchItem } = components;
+const { SwitchItem, Switch } = components;
 const ChannelItem: any = webpack.getBySource("webGuildTextChannel");
 const ChannelItemIcon: any = webpack.getByProps("ChannelItemIcon");
 const IconsClasses: any = webpack.getByProps("iconItem");
@@ -28,10 +28,25 @@ interface UserDataType {
   channel: { id: string };
 }
 
+let availableVoices = window.speechSynthesis.getVoices();
+
 function textToSpeech(text) {
   const msg = new SpeechSynthesisUtterance();
   msg.text = text;
-  msg.lang = "en-GB";
+  msg.pitch = owo.get("pitch", 1);
+
+  const selectedVoiceURI = owo.get("selectedVoiceURI", availableVoices[0]?.voiceURI);
+  const voice = availableVoices.find((v) => v.voiceURI === selectedVoiceURI);
+
+  if (voice) {
+    msg.voice = voice;
+    msg.lang = voice.lang;
+  } else {
+    console.warn(
+      `Voice with URI ${selectedVoiceURI} not found, default voice and language will be used.`,
+    );
+  }
+
   synth.speak(msg);
 }
 
@@ -174,6 +189,15 @@ export function Settings() {
       <SwitchItem {...util.useSetting(owo, "debug", false)} note="Enable or disable debug logs.">
         Debug Mode
       </SwitchItem>
+      <SliderItem {...util.useSetting(owo, "pitch", 1)} note="Pitch of the speech. (Range: 0 - 2)">
+        Pitch
+      </SliderItem>
+      <Select
+        {...util.useSetting(owo, "selectedVoiceURI", availableVoices[0]?.voiceURI)}
+        options={availableVoices.map((voice) => ({ label: voice.name, value: voice.voiceURI }))}
+        value={owo.get("selectedVoiceURI", availableVoices[0]?.voiceURI)}>
+        Select Voice
+      </Select>
       <div className="content__23cab">
         {whitelistChannels.map((channelId) => (
           <ChannelComponent channelId={channelId} />
