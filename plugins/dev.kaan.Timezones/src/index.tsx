@@ -2,7 +2,9 @@
 import { components, Injector, settings, util, webpack } from "replugged";
 import { ContextMenuTypes } from "replugged/types";
 import { modal, React } from "replugged/common";
-import "./styles.css"; // thanks for the css my beloved :3
+import "./styles.css";
+import { Modal } from "replugged/components";
+import Menu from "replugged/dist/renderer/modules/components/ContextMenu"; // thanks for the css my beloved :3
 
 const {
   ContextMenu: { MenuItem },
@@ -127,16 +129,18 @@ export function start() {
   injector.utils.addMenuItem("user-context" as ContextMenuTypes, (a, b) => {
     return (
       <>
-        <MenuItem
-          id="set-timezone"
-          label="Set Timezone"
-          action={() => openTimezoneModal(a?.user)}
-        />
-        <MenuItem
-          id="clear-timezone"
-          label="Clear Timezone"
-          action={() => clearUserTimezone(a?.user)}
-        />
+        <MenuItem label="Timezones" id="bulls">
+          <MenuItem
+            id="set-timezone"
+            label="Set Timezone"
+            action={() => openTimezoneModal(a?.user)}
+          />
+          <MenuItem
+            id="clear-timezone"
+            label="Clear Timezone"
+            action={() => clearUserTimezone(a?.user)}
+          />
+        </MenuItem>
         <ModalList.MenuSeparator />
       </>
     );

@@ -112,16 +112,18 @@ class CakeDay {
 
     inject.utils.addMenuItem("user-context" as ContextMenuTypes, (data) => (
       <>
-        <MenuItem
-          id="add-birthday"
-          label="Set Birthday"
-          action={() => this.birthdayModal(data.user as UserData)}
-        />
-        <MenuItem
-          id="remove-birthday"
-          label="Clear Birthday"
-          action={() => this.clearBirthday(data.user as UserData)}
-        />
+        <MenuItem label="Birthday" id={"add-birthday-owo-stuff-submenu"}>
+          <MenuItem
+            id="add-birthday"
+            label="Set Birthday"
+            action={() => this.birthdayModal(data.user as UserData)}
+          />
+          <MenuItem
+            id="remove-birthday"
+            label="Clear Birthday"
+            action={() => this.clearBirthday(data.user as UserData)}
+          />
+        </MenuItem>
       </>
     ));
   }

@@ -85,11 +85,18 @@ export function start() {
     const label = isWhitelisted ? "Unwhitelist Channel" : "Whitelist Channel";
 
     return (
-      <MenuItem
-        id={label.toLowerCase().replace(" ", "-")}
-        label={label}
-        action={() => action(data as unknown as UserDataType)}
-      />
+      <>
+        <MenuItem id={"femboys"} label={"VoiceChatToVoice"}>
+          <MenuItem
+            id={label.toLowerCase().replace(" ", "-")}
+            label={label}
+            action={() => action(data as unknown as UserDataType)}
+          />
+          {isWhitelisted && (
+            <MenuItem id={"stop-voice"} label={"Stop Voice"} action={() => synth.cancel()} />
+          )}
+        </MenuItem>
+      </>
     );
   };
 
