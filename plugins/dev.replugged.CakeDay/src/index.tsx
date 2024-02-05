@@ -37,7 +37,7 @@ const logger = Logger.plugin("CakeDay");
 const ModalList: any = webpack.getByProps("ConfirmModal"); // CAN YOU STOP NOW. THANKS <3
 const FriendRow: any = webpack.getBySource("isActiveRow:!1");
 const PresenceStore: any = webpack.getByStoreName("PresenceStore");
-const UsernamePatch: any = webpack.getBySource("i.nameAndDecorators",{raw:true})?.exports
+const UsernamePatch: any = webpack.getBySource("i.nameAndDecorators", { raw: true })?.exports;
 
 let CakeDayInstance = null;
 let birthdaySet = ""; // Global variable
@@ -112,19 +112,14 @@ class CakeDay {
     });
 
     inject.after(UsernamePatch, "default", (OwO: object, props: { props }) => {
-      const User = util.findInReactTree(props, x=> Boolean(x?.user))?.user
-      const Children = util.findInReactTree(props, x=>x?.className?.includes('name'));
+      const User = util.findInReactTree(props, (x) => Boolean(x?.user))?.user;
+      const Children = util.findInReactTree(props, (x) => x?.className?.includes("name"));
       if (this.checkBirthday(User)) {
         Children?.children?.push(
           <ModalList.Tooltip text="It's my birthday!">
-            {(data: any) => (
-              <button
-                {...data}
-                className="discord-cake-day-message-cake"
-              />
-            )}
+            {(data: any) => <button {...data} className="discord-cake-day-message-cake" />}
           </ModalList.Tooltip>,
-        ) 
+        );
       }
     });
 
