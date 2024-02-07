@@ -15,7 +15,7 @@
   "license": "MIT",
   "type": "replugged-plugin",
   "renderer": "src/index.tsx",
-  "source": "https://github.com/zrodevkaan/RepluggedPlugins/tree/main/plugins/dev.kaan.CakeDay",
+  "source": "https://github.com/zrodevkaan/RepluggedPlugins/tree/main/plugins/dev.replugged.CakeDay",
   "image": [
     "https://i.imgur.com/FNS1c59.png",
     "https://i.imgur.com/0uKGN5s.png"
