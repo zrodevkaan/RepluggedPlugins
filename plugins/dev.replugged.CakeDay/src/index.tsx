@@ -10,6 +10,7 @@ const {
     Kind: { FAILURE, SUCCESS },
     toast,
   },
+  users
 } = common;
 
 interface WebpackProps {
@@ -37,7 +38,9 @@ const logger = Logger.plugin("CakeDay");
 const ModalList: any = webpack.getByProps("ConfirmModal"); // CAN YOU STOP NOW. THANKS <3
 const FriendRow: any = webpack.getBySource("isActiveRow:!1");
 const PresenceStore: any = webpack.getByStoreName("PresenceStore");
-const UsernamePatch: any = webpack.getBySource("i.nameAndDecorators", { raw: true })?.exports;
+const UsernamePatch: any = webpack.getBySource(/([a-j]+)\.nameAndDecorators/g,{raw:true})?.exports
+// the other module `UsernamePatch` was some random default react component. 
+// this is one way I could fix it /shrug
 
 let CakeDayInstance = null;
 let birthdaySet = ""; // Global variable
@@ -198,7 +201,7 @@ export function Settings() {
   const userRows = [];
   for (const userId in savedBirthdays) {
     if (savedBirthdays.hasOwnProperty(userId)) {
-      const user = (webpack.getByStoreName("UserStore") as unknown as UserStore).getUser(
+      const user = users.getUser(
         userId,
       ) as UserType;
       const birthday = savedBirthdays[userId];
