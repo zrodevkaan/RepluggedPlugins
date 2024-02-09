@@ -198,7 +198,11 @@ export function Settings() {
       <SliderItem {...util.useSetting(owo, "pitch", 1)} note="Pitch of the speech. (Range: 0 - 2)">
         Pitch
       </SliderItem>
-      <SliderItem minValue={0} maxValue={2} {...util.useSetting(owo, "volume", 1)} note="The volume of the voice.">
+      <SliderItem
+        minValue={0}
+        maxValue={2}
+        {...util.useSetting(owo, "volume", 1)}
+        note="The volume of the voice.">
         Volume
       </SliderItem>
       <Select
