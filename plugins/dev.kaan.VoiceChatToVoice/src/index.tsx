@@ -34,6 +34,7 @@ function textToSpeech(text) {
   const msg = new SpeechSynthesisUtterance();
   msg.text = text;
   msg.pitch = owo.get("pitch", 1);
+  msg.volume = owo.get("volume", 1);
 
   const selectedVoiceURI = owo.get("selectedVoiceURI", availableVoices[0]?.voiceURI);
   const voice = availableVoices.find((v) => v.voiceURI === selectedVoiceURI);
@@ -196,6 +197,9 @@ export function Settings() {
       </SwitchItem>
       <SliderItem {...util.useSetting(owo, "pitch", 1)} note="Pitch of the speech. (Range: 0 - 2)">
         Pitch
+      </SliderItem>
+      <SliderItem minValue={0} maxValue={2} {...util.useSetting(owo, "volume", 1)} note="The volume of the voice.">
+        Volume
       </SliderItem>
       <Select
         {...util.useSetting(owo, "selectedVoiceURI", availableVoices[0]?.voiceURI)}
