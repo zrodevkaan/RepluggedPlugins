@@ -1,0 +1,15 @@
+.owo-card {
+  margin: 6px;
+  padding: 12px;
+  background: var(--background-secondary);
+  border-radius: 8px;
+}
+.owo-bigtext {
+  font-weight: bold;
+}
+.owo-divider {
+  margin: 20px 0;
+}
+.owo-smalltext {
+  font-size: 14px;
+}
