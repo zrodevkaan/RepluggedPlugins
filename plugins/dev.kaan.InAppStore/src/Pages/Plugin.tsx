@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { Classes, ComponentsPack, HeaderTypes } from "../util";
-import {Flex} from "replugged/components";
+import { Flex } from "replugged/components";
+import { toast } from "replugged/common";
 function JustWorkPlease() {
   const [plugins, setPlugins] = useState([]);
 
@@ -16,7 +17,7 @@ function JustWorkPlease() {
             name: plugin.name,
             source: plugin.source,
             author: plugin.author.name,
-            version: plugin.version
+            version: plugin.version,
           };
         });
         setPlugins(pluginArr);
@@ -25,24 +26,39 @@ function JustWorkPlease() {
 
   return (
     <div className={Classes.title}>
-      <ComponentsPack.Text className={"replugged-updater-items"} style={{ color: "white", fontSize: '1.3rem' }}>
+      <ComponentsPack.Text
+        className={"replugged-updater-items"}
+        style={{ color: "white", fontSize: "1.3rem" }}>
         Plugin Store
       </ComponentsPack.Text>
       {plugins.map((plugin) => (
-        <div className={"replugged-updater-items"} style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
+        <div
+          className={"replugged-updater-items"}
+          style={{ display: "flex", justifyContent: "space-between", alignItems: "center" }}>
           <div>
-            <ComponentsPack.Text style={{ align: 'left', fontSize: '1.2rem', color: "white" }}>{plugin.name}</ComponentsPack.Text>
-            <ComponentsPack.Text style={{ align: 'left', fontSize: '1.0rem', color: "white" }}>{plugin.author}</ComponentsPack.Text>
-            <ComponentsPack.Text style={{ align: 'left', fontSize: '1.2rem', color: "white" }}>{plugin.version}</ComponentsPack.Text>
+            <ComponentsPack.Text style={{ align: "left", fontSize: "1.2rem", color: "white" }}>
+              {plugin.name}
+            </ComponentsPack.Text>
+            <ComponentsPack.Text style={{ align: "left", fontSize: "1.0rem", color: "white" }}>
+              {plugin.author}
+            </ComponentsPack.Text>
+            <ComponentsPack.Text style={{ align: "left", fontSize: "1.2rem", color: "white" }}>
+              {plugin.version}
+            </ComponentsPack.Text>
           </div>
 
           <ComponentsPack.Button
-            style={{ fontSize: '1rem', textAlign: 'center' }}
-            onClick={ () => {
-              const FullPathID = `${plugin.id}.asar`
-              RepluggedNative.installer.install("replugged-plugin",FullPathID,`https://replugged.dev/api/v1/store/${plugin.id}.asar`,plugin.version)
-            }}
-          >
+            style={{ fontSize: "1rem", textAlign: "center" }}
+            onClick={() => {
+              const FullPathID = `${plugin.id}.asar`;
+              RepluggedNative.installer.install(
+                "replugged-plugin",
+                FullPathID,
+                `https://replugged.dev/api/v1/store/${plugin.id}.asar`,
+                plugin.version,
+              );
+              toast.toast(`${plugin.name} installed!`, toast.Kind.SUCCESS);
+            }}>
             Install
           </ComponentsPack.Button>
         </div>

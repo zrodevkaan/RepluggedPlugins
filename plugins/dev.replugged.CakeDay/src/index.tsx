@@ -38,8 +38,10 @@ const logger = Logger.plugin("CakeDay");
 const ModalList: any = webpack.getByProps("ConfirmModal"); // CAN YOU STOP NOW. THANKS <3
 const FriendRow: any = webpack.getBySource("isActiveRow:!1");
 const PresenceStore: any = webpack.getByStoreName("PresenceStore");
-const UsernamePatch: any = webpack.getBySource('.nameAndDecorators', { all: true, raw: true }).filter(({  exports }) => typeof exports?.default === 'function')[0]?.exports
-// i deff was not given this due to evie's generosity 
+const UsernamePatch: any = webpack
+  .getBySource(".nameAndDecorators", { all: true, raw: true })
+  .filter(({ exports }) => typeof exports?.default === "function")[0]?.exports;
+// i deff was not given this due to evie's generosity
 
 let CakeDayInstance = null;
 let birthdaySet = ""; // Global variable

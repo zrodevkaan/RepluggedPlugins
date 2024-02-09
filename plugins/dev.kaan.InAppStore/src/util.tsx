@@ -1,8 +1,10 @@
-import {Injector, Logger, webpack} from "replugged";
+import { Injector, Logger, webpack } from "replugged";
 
 export const injector = new Injector();
 export const logger = Logger.plugin("InAppStore");
 export const ComponentsPack: any = webpack.getByProps("TabBar");
+export const Classes: any = webpack.getByProps("title");
+export const HeaderTypes: any = webpack.getBySource("heading-sm-normal");
 type KeyValue = [string, any];
 
 export function turnObjectIntoArray(object: Record<string, any>): KeyValue[] | null {
