@@ -1,4 +1,4 @@
-import { owo } from "../comps/Settings";
+import {owo} from "../comps/Settings";
 
 const SoundDeclare =
   "https://github.com/zrodevkaan/RepluggedPlugins/raw/main/plugins/dev.kaan.Reminders/src/sounds/";
@@ -12,8 +12,7 @@ export function playSound(reminderName: string): Promise<void> {
 }
 
 export function playCustomSound(path: string): Promise<void> {
-  const pp = new Audio(`${path}`).play();
-  return pp;
+  return new Audio(`${path}`).play();
 }
 
 export function getSound(): string {
