@@ -8,18 +8,17 @@ const { ReactDOM } = common;
 const DIV_ID = "owo-i-like-dragging";
 
 export function start() {
-  let draggableDiv = document.getElementById(DIV_ID);
-  if (!draggableDiv) {
-    draggableDiv = document.createElement("div");
-    draggableDiv.id = DIV_ID;
-    const rootElement = document.getElementById("app-mount");
-    if (rootElement) {
-      rootElement.appendChild(draggableDiv);
-    }
+  let DraggableHolder = document.getElementById(DIV_ID);
+
+  if (!DraggableHolder) {
+    DraggableHolder = document.createElement("div");
+    DraggableHolder.id = DIV_ID;
+
+    const AppMount = document.getElementById("app-mount");
+    AppMount && AppMount.appendChild(DraggableHolder);
   }
-  if (draggableDiv) {
-    ReactDOM.render(<DraggableComponent />, draggableDiv);
-  }
+
+  ReactDOM.render(<DraggableComponent />, DraggableHolder);
 }
 
 export function stop(): void {

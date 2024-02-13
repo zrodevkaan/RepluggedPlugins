@@ -4,6 +4,11 @@ export const injector = new Injector();
 export const logger = Logger.plugin("Clock");
 
 type KeyValue = [string, any];
+export function joinWithSpace(...strings: string[]): string {
+  return strings.join(" ");
+}
+
+export const classNameFactory = (...classes) => classes.filter(Boolean).join(' ');
 
 export function turnObjectIntoArray(object: Record<string, any>): KeyValue[] | null {
   if (!object || typeof object !== "object" || Array.isArray(object)) {
