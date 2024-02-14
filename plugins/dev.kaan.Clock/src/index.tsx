@@ -4,7 +4,10 @@ import { injector, logger } from "./util";
 import DraggableComponent from "./Draggable";
 
 const { ReactDOM } = common;
-
+const WhatsThis: { default: { type } } = webpack.getByProps("FakeActivityCharacter");
+const { PLACEHOLDER_QR_CODE_URL }: { PLACEHOLDER_QR_CODE_URL: string } = webpack.getByProps(
+  "FAMILY_CENTER_REFETCH_COOLDOWN",
+);
 const DIV_ID = "owo-i-like-dragging";
 
 export function start() {
@@ -19,6 +22,15 @@ export function start() {
   }
 
   ReactDOM.render(<DraggableComponent />, DraggableHolder);
+
+  // what could this be ???
+  injector.after(WhatsThis.default, "type", (a, b, c) => {
+    const Button = util.findInTree(b, (x) => x?.className?.includes("button"));
+    Button.children = "Click me :)";
+    Button.onClick = () => {
+      open(PLACEHOLDER_QR_CODE_URL);
+    };
+  });
 }
 
 export function stop(): void {

@@ -86,7 +86,7 @@ const DraggableComponent: React.FC = () => {
         lineHeight: "1.1",
         backgroundColor: "var(--background-primary)",
         whiteSpace: "pre-line",
-        boxShadow: "0px 20px 40px rgba(0, 0, 0, 1)"
+        boxShadow: "0px 20px 40px rgba(0, 0, 0, 1)",
       }}>
       {`${time}\n${date}`}
     </div>
