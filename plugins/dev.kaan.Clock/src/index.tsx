@@ -2,9 +2,10 @@
 import { util, webpack, common } from "replugged";
 import { injector, logger } from "./util";
 import DraggableComponent from "./Draggable";
+import React from "react";
 
 const { ReactDOM } = common;
-const WhatsThis: { default: { type } } = webpack.getByProps("FakeActivityCharacter");
+const WhatsThis: { default: { type } } = await webpack.waitForProps("FakeActivityCharacter")
 const { PLACEHOLDER_QR_CODE_URL }: { PLACEHOLDER_QR_CODE_URL: string } = webpack.getByProps(
   "FAMILY_CENTER_REFETCH_COOLDOWN",
 );
@@ -12,12 +13,12 @@ const DIV_ID = "owo-i-like-dragging";
 
 export function start() {
   let DraggableHolder = document.getElementById(DIV_ID);
+  const AppMount = document.getElementById("app-mount");
 
   if (!DraggableHolder) {
     DraggableHolder = document.createElement("div");
     DraggableHolder.id = DIV_ID;
-
-    const AppMount = document.getElementById("app-mount");
+    
     AppMount && AppMount.appendChild(DraggableHolder);
   }
 
@@ -28,7 +29,7 @@ export function start() {
     const Button = util.findInTree(b, (x) => x?.className?.includes("button"));
     Button.children = "Click me :)";
     Button.onClick = () => {
-      open(PLACEHOLDER_QR_CODE_URL);
+      open(PLACEHOLDER_QR_CODE_URL)
     };
   });
 }
