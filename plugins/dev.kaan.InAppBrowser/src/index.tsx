@@ -1,17 +1,23 @@
 /* eslint-disable no-extend-native */
 import React, { useRef, useState } from "react";
 import { Injector, util, webpack } from "replugged";
-import { contextMenu, ReactDOM } from "replugged/common";
-import { ContextMenu } from "replugged/components";
-import { ContextMenuTypes } from "replugged/types";
-import { Base } from "replugged/dist/renderer/coremods/badges/badge";
-import './styles.css';
+import { ReactDOM } from "replugged/common";
+import "./styles.css";
 
 const Modals: any = webpack.getByProps("TextInput");
 const injector = new Injector();
 
 function EmbeddingInput() {
   const [link, setLink] = useState("");
+  const [tabs, setTabs] = useState([
+    {
+      link: "",
+      isVisible: true,
+      isMinimized: false,
+      position: { x: 500, y: 300 },
+      iframeDims: { width: 500, height: 500 },
+    },
+  ]);
   const [dragging, setDragging] = useState(false);
   const [resizing, setResizing] = useState(false);
   const [position, setPosition] = useState({ x: 500, y: 300 });
@@ -22,14 +28,51 @@ function EmbeddingInput() {
   const [initialGrip, setInitialGrip] = useState({ x: 0, y: 0 });
   const [isMinimized, setIsMinimized] = useState(false);
   const [isVisible, setIsVisible] = useState(true);
+  const [activeTab, setActiveTab] = useState(1);
 
-  const handleInput = (e) => {
-    setLink(e);
+  const handleInput = (e, index) => {
+    if (e.keyCode === 13) {
+      // enter key !!!
+      e.preventDefault();
+      setLink(e.target.value);
+      setIsVisible(true);
+      setTabs((prevTabs) => {
+        const newTabs = [...prevTabs];
+        newTabs[index] = { ...newTabs[index], link: e.target.value, isVisible: true };
+        return newTabs;
+      });
+    }
+  };
+
+  const handleCloseTab = (index) => {
+    setTabs((prevTabs) => {
+      const newTabs = [...prevTabs];
+      newTabs.splice(index, 1);
+      setActiveTab(Math.min(activeTab, newTabs.length - 1));
+      return newTabs;
+    });
+  };
+
+  const handleAddTab = () => {
+    setTabs((prevTabs) => [
+      ...prevTabs,
+      {
+        link: "",
+        isVisible: true,
+        isMinimized: false,
+        position: { x: 500, y: 300 },
+        iframeDims: { width: 500, height: 500 },
+      },
+    ]);
   };
 
   const startDrag = (e) => {
     setDragging(true);
     setOffset({ x: e.clientX - position.x, y: e.clientY - position.y });
+  };
+
+  const handleTabClick = (index) => {
+    setActiveTab(index);
   };
 
   const doDrag = (e) => {
@@ -64,91 +107,129 @@ function EmbeddingInput() {
   };
 
   const handleMinimize = () => {
-    setIsMinimized(!isMinimized);
+    setTabs((prevTabs) => {
+      const newTabs = [...prevTabs];
+      newTabs[activeTab] = {
+        ...newTabs[activeTab],
+        isMinimized: !newTabs[activeTab].isMinimized,
+      };
+      return newTabs;
+    });
   };
 
   return (
-    isVisible && (
-      <div className={"inappbrowser-textbar"}>
-        <Modals.TextInput
+    <div className={"inappbrowser-textbar"}>
+      <Modals.TextInput
+        style={{
+          position: "absolute",
+          top: "90px",
+          width: 200,
+          height: 30,
+          left: "50%",
+          transform: "translateX(-50%)",
+        }}
+        onKeyDown={(e) => handleInput(e, activeTab)}
+      />
+      {link && isVisible && (
+        <div
+          className={"inappbrowser-draggable"}
+          ref={draggableDiv}
+          onMouseDown={startDrag}
+          onMouseMove={doDrag}
+          onMouseUp={stopDrag}
+          onMouseLeave={stopDrag}
           style={{
             position: "absolute",
-            top: "90px",
-            width: 200,
-            height: 30,
-            left: "50%",
-            transform: "translateX(-50%)",
-          }}
-          onChange={handleInput}
-          value={link}
-        />
-        {link && (
-          <div
-            className={"inappbrowser-draggable"}
-            ref={draggableDiv}
-            onMouseDown={startDrag}
-            onMouseMove={doDrag}
-            onMouseUp={stopDrag}
-            onMouseLeave={stopDrag}
-            style={{
-              position: "absolute",
-              top: position.y + "px",
-              left: position.x + "px",
-              padding: "15px",
-              width: iframeDims.width + "px",
-              height: iframeDims.height + "px",
-              backgroundColor: "transparent",
-            }}>
-            <div 
-              className={"inappbrowser-toolbar"}
-              style={{
-                width: "100%",
-                height: "35px",
-                backgroundColor: "#ccc",
-                display: "flex",
-                justifyContent: "space-between",
-                padding: "5px",
-              }}>
-              <button onClick={handleMinimize}> {isMinimized ? "Maximize" : "Minimize"} </button>
-              <button onClick={handleDelete}> Delete</button>
-            </div>
-
+            top: position.y + "px",
+            left: position.x + "px",
+            padding: "15px",
+            width: iframeDims.width + "px",
+            height: iframeDims.height + "px",
+            backgroundColor: "transparent",
+          }}>
+          {tabs.map((tab, index) => (
             <div
-              className={"inappbrowser-resizer"}
-              ref={resizableDiv}
+              key={index}
               style={{
-                position: "relative",
-                width: "calc(100% - 30px)",
-                height: "calc(100% - 30px)",
-                boxSizing: "border-box",
-                display: isMinimized ? "none" : "block",
+                display: index === activeTab ? "block" : "none",
+                position: "absolute",
+                top: "35px",
+                left: "0px",
+                width: "100%",
+                height: `calc(100% - 35px)`,
               }}>
-              <iframe
-                src={link}
-                style={{ position: "absolute", top: "0px", width: "100%", height: "100%" }}
+              <div
+                className={"inappbrowser-toolbar"}
+                style={{
+                  width: "100%",
+                  height: "35px",
+                  backgroundColor: "#ccc",
+                  display: "flex",
+                  justifyContent: "space-between",
+                  padding: "5px",
+                }}>
+                <div>
+                  {tabs.map((tab, tabIndex) => {
+                    const tabName = tab.link ? new URL(tab.link).hostname : "No Link";
+                    return (
+                      <div key={tabIndex} style={{ display: "flex", alignItems: "center" }}>
+                        <button onClick={() => handleTabClick(tabIndex)}>
+                          {tabIndex === activeTab ? `Active Tab: ${tabName}` : `${tabName}`}
+                        </button>
+                        <button onClick={() => handleCloseTab(tabIndex)}>Close</button>
+                      </div>
+                    );
+                  })}
+                  <button onClick={handleAddTab}>+</button>
+                </div>
+                <button onClick={handleMinimize}>
+                  {tab.isMinimized ? "Maximize" : "Minimize"}
+                </button>
+                <button onClick={handleDelete}>Delete</button>
+              </div>
+
+              <div
+                className={"inappbrowser-resizer"}
+                ref={resizableDiv}
+                style={{
+                  position: "relative",
+                  width: "100%",
+                  height: "100%",
+                  boxSizing: "border-box",
+                  display: tab.isMinimized ? "none" : "block",
+                }}>
+                <iframe
+                  src={tab.link}
+                  style={{
+                    position: "absolute",
+                    top: "0px",
+                    width: "100%",
+                    height: "100%",
+                  }}
+                />
+              </div>
+
+              <div
+                className={"inappbrowser-otherStuiff"}
+                onMouseDown={startResize}
+                onMouseMove={doResize}
+                onMouseUp={stopResize}
+                onMouseLeave={stopResize}
+                style={{
+                  position: "absolute",
+                  right: "0px",
+                  bottom: "0px",
+                  width: "20px",
+                  height: "20px",
+                  backgroundColor: "red",
+                  cursor: "nwse-resize",
+                }}
               />
             </div>
-
-            <div 
-              className={"inappbrowser-otherStuiff"}
-              onMouseDown={startResize}
-              onMouseMove={doResize}
-              onMouseUp={stopResize}
-              onMouseLeave={stopResize}
-              style={{
-                position: "absolute",
-                right: "0px",
-                bottom: "0px",
-                width: "20px",
-                height: "20px",
-                backgroundColor: "red",
-                cursor: "nwse-resize",
-              }}
-            />
-          </div>
-        )}
-      </div>
-    )
+          ))}
+        </div>
+      )}
+    </div>
   );
 }
 

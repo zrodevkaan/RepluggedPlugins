@@ -1,29 +1,31 @@
-
-.inappbrowser-textbar .inputDefault__80165, .inappbrowser-textbar > div{
+.inappbrowser-textbar .inputDefault__80165,
+.inappbrowser-textbar > div {
   z-index: 9999;
 }
 .inappbrowser-draggable {
-  background-color: var(--background-tertiary)!important;
+  background-color: var(--background-tertiary) !important;
   display: flex;
   flex-direction: column;
 }
 .inappbrowser-toolbar {
-  background-color: var(--background-tertiary)!important;
+  background-color: var(--background-tertiary) !important;
   box-sizing: border-box;
-  padding: 12px!important;
-  height: unset!important;
+  padding: 12px !important;
+  height: unset !important;
 }
 .inappbrowser-toolbar button {
   color: var(--white-500);
   background-color: var(--brand-experiment);
 }
 .inappbrowser-otherStuiff {
-  background-color: var(--brand-experiment)!important;
+  background-color: var(--brand-experiment) !important;
   border: 3px outset var(--brand-experiment);
 }
 .inappbrowser-draggable:has(.inappbrowser-resizer[style*="display: none"]) {
-  background-color: transparent!important;
+  background-color: transparent !important;
+  height: max-content !important;
 }
-.inappbrowser-draggable:has(.inappbrowser-resizer[style*="display: none"]) .inappbrowser-otherStuiff {
-  display: none
-} 
+.inappbrowser-draggable:has(.inappbrowser-resizer[style*="display: none"])
+  .inappbrowser-otherStuiff {
+  display: none;
+}
