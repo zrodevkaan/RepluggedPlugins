@@ -22,7 +22,7 @@
   align-items: center;
   justify-content: center;
 }
-[class^="banner"] > .timezones-icon {
+[class*="banner"] > .timezones-icon {
   opacity: 0% !important;
   border-radius: 50px;
   background-color: rgba(10, 10, 10, 0.375);
@@ -33,6 +33,10 @@
   display: flex;
   transition: all 0.2s ease-in-out;
 }
-[class^="banner"]:hover > .timezones-icon {
+[class*="settingsBanner"] > .timezones-icon {
+  bottom: 18px !important;
+}
+
+[class*="banner"]:hover > .timezones-icon {
   opacity: 100% !important;
 }
