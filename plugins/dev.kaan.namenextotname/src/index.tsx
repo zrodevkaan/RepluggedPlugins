@@ -31,9 +31,6 @@ const DisplayName = React.memo(({ username, color }) => {
 // I like async, lint doesn't. I dont care :3
 export function start() {
   inject.after(UsernameDecoration, "default", ([props]: [props: any], res) => {
-    const usernameIndex = res?.props?.children?.findIndex(
-      (c) => c?.props?.onRequestClose?.toString()?.toLowerCase()?.includes("usernameprofile"),
-    );
     const user = props?.message?.author;
     const updatedColorCauseUpdated = owo.get("roleColor", false) ? props?.author?.colorString : "";
     if (user) {
@@ -45,7 +42,7 @@ export function start() {
         />
       );
 
-      res?.props?.children?.splice(usernameIndex + 10, 0, displayName); // really nothing should go pass 10/11
+      res?.props?.children?.splice(-1, 0, displayName); // really nothing should go pass 10/11
     }
   });
 }
