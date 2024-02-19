@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from "react";
 import { Classes, ComponentsPack, HeaderTypes } from "../util";
-import { Flex } from "replugged/components";
 import { toast } from "replugged/common";
 import { plugins, themes } from "replugged";
 function JustWorkPlease() {
