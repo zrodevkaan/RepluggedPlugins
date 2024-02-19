@@ -2,7 +2,7 @@ import { ComponentsPack, injector, logger } from "./util";
 import JustWorkPlease from "./Pages/Plugin";
 import JustWorkPleasButWithThemes from "./Pages/Themes";
 import { waitForModule, filters } from "replugged/webpack";
-import "../styles.css";
+import "./styles.css";
 async function patch() {
   const Settings: { default: () => {} } = await waitForModule(
     filters.bySource("getPredicateSections"),
