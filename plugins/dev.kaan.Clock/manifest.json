@@ -15,7 +15,5 @@
   "license": "MIT",
   "type": "replugged-plugin",
   "renderer": "src/index.tsx",
-  "image": [
-    "https://i.imgur.com/NllWjd6.png"
-  ]
+  "image": ["https://i.imgur.com/NllWjd6.png"]
 }

@@ -27,7 +27,6 @@ interface Data {
 const DarkOverlay: any = ({ children }) => <div className={"timezone-overlay"}>{children}</div>;
 
 async function openTimezoneModal(user: any) {
-
   const RenderThis = (props) => {
     const [timezone, setTimezone] = React.useState(owo.get(user.id, {})?.timezone);
     const [filteredTimezones, setFilteredTimezones] = React.useState(getAllTimezones());
@@ -68,12 +67,12 @@ export function start() {
 
     const selectedTimezone = owo.get(User.id, { timezone: "" })?.timezone || "";
 
-    const currentTime = selectedTimezone ? getCurrentTimeInTimezone(selectedTimezone) : "Set Timezone";
+    const currentTime = selectedTimezone
+      ? getCurrentTimeInTimezone(selectedTimezone)
+      : "Set Timezone";
 
     Children.unshift(
-
       owo.get("icon", true) ? (
-
         <Tooltip
           text={currentTime}
           className={`${classes.iconItem} timezones-icon`}
@@ -105,22 +104,20 @@ export function start() {
             </ModalList.Text>
           </Clickable>
         </DarkOverlay>
-      )
+      ),
     );
-
   });
-
-
 
   injector.utils.addMenuItem("user-context" as ContextMenuTypes, (a, b) => {
     const uwu = owo.get((a?.user as any).id, { timezone: "" });
-    return (<>
-      <MenuItem
-        id={`${uwu?.timezone ? "change" : "set"}-timezone`}
-        label={`${uwu?.timezone ? "Change" : "Set"} Timezone`}
-        action={() => openTimezoneModal(a?.user)}
-      />
-    </>
+    return (
+      <>
+        <MenuItem
+          id={`${uwu?.timezone ? "change" : "set"}-timezone`}
+          label={`${uwu?.timezone ? "Change" : "Set"} Timezone`}
+          action={() => openTimezoneModal(a?.user)}
+        />
+      </>
     );
   });
 }
@@ -129,10 +126,11 @@ const getAllTimezones = () =>
   Intl.supportedValuesOf("timeZone").map((timezone) => {
     const time = getCurrentTimeInTimezone(timezone);
     return {
-      label: `${timezone} ${time} (${new Intl.DateTimeFormat(undefined, { timeZone: timezone, timeZoneName: "short" })
-        .formatToParts(new Date())
-        .find((part) => part.type == "timeZoneName").value
-        })`,
+      label: `${timezone} ${time} (${
+        new Intl.DateTimeFormat(undefined, { timeZone: timezone, timeZoneName: "short" })
+          .formatToParts(new Date())
+          .find((part) => part.type == "timeZoneName").value
+      })`,
       value: timezone,
     };
   });

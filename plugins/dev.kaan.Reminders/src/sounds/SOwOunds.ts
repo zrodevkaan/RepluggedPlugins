@@ -1,4 +1,4 @@
-import {owo} from "../comps/Settings";
+import { owo } from "../comps/Settings";
 
 const SoundDeclare =
   "https://github.com/zrodevkaan/RepluggedPlugins/raw/main/plugins/dev.kaan.Reminders/src/sounds/";

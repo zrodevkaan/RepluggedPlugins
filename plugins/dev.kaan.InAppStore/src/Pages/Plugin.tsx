@@ -78,24 +78,24 @@ function JustWorkPlease() {
       {pluginsA.map((plugin) => (
         <div
           className={"owo-card"}
-          style={{display: "flex", justifyContent: "space-between", alignItems: "center"}}>
+          style={{ display: "flex", justifyContent: "space-between", alignItems: "center" }}>
           <div>
-            <ComponentsPack.Text className="owo-bigtext" style={{align: "left", color: "white"}}>
+            <ComponentsPack.Text className="owo-bigtext" style={{ align: "left", color: "white" }}>
               {plugin.name}
               <ComponentsPack.Text
                 className="owo-smalltext"
-                style={{align: "left", color: "white"}}>
+                style={{ align: "left", color: "white" }}>
                 v{plugin.version}
               </ComponentsPack.Text>
             </ComponentsPack.Text>
             <ComponentsPack.Text
               className="owo-smalltext"
-              style={{align: "left", color: "white"}}>
+              style={{ align: "left", color: "white" }}>
               {plugin.author}
             </ComponentsPack.Text>
             <ComponentsPack.Text
               className="owo-smalltext"
-              style={{align: "left", color: "white"}}>
+              style={{ align: "left", color: "white" }}>
               {plugin.desc}
             </ComponentsPack.Text>
             {plugin?.image && (
@@ -107,7 +107,7 @@ function JustWorkPlease() {
           </div>
 
           <ComponentsPack.Button
-            style={{fontSize: "1rem", textAlign: "center"}}
+            style={{ fontSize: "1rem", textAlign: "center" }}
             onClick={() => {
               const FullPathID = `${plugin.id}.asar`;
               RepluggedNative.installer.install(

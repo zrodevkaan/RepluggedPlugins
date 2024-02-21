@@ -14,7 +14,7 @@ export async function start() {
   if (!DraggableHolder) {
     DraggableHolder = document.createElement("div");
     DraggableHolder.id = DIV_ID;
-    
+
     AppMount && AppMount.appendChild(DraggableHolder);
   }
 

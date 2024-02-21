@@ -1,9 +1,10 @@
-import React, {FC, useState} from "react";
+import React, { FC, useState } from "react";
 import { common, Injector, settings, util, webpack } from "replugged";
 import { Button, SwitchItem, TextArea, TextInput } from "replugged/components";
 
 const { fluxDispatcher } = common;
-const Settings: { TabBar: { prototype: () => React.FC } } = webpack.getByProps("TabBar").TabBar.prototype
+const Settings: { TabBar: { prototype: () => React.FC } } =
+  webpack.getByProps("TabBar").TabBar.prototype;
 export const owo = await settings.init("dev.kaan.bettersettings");
 const injector = new Injector();
 
