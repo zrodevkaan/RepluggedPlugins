@@ -1,5 +1,4 @@
 import { Injector, Logger, common, components, settings, util, webpack } from "replugged";
-
 const {
   ContextMenu: { MenuItem },
 } = components;
@@ -45,6 +44,8 @@ const UsernamePatch: any = webpack
 
 let CakeDayInstance = null;
 let birthdaySet = ""; // Global variable
+
+export const dick = "";
 
 class CakeDay {
   savedBirthdays = SettingConfig.get("birthdays") || {};
@@ -198,7 +199,6 @@ export async function start() {
 
 export function Settings() {
   const { savedBirthdays } = CakeDayInstance;
-
   const userRows = [];
   for (const userId in savedBirthdays) {
     if (savedBirthdays.hasOwnProperty(userId)) {

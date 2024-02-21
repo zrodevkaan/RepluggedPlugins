@@ -1,16 +1,16 @@
 {
-  "id": "dev.kaan.BetterGifs",
-  "name": "BetterGifs",
-  "description": "BetterGifs",
+  "id": "dev.kaan.GamerMode",
+  "name": "GamerMode",
+  "description": "Allows you to use regex or specific letters that you want to replace every message you send!",
   "author": {
     "name": "kaan",
     "discordID": "",
     "github": "zrodevkaan"
   },
-  "version": "1.0.3",
+  "version": "1.0.8",
   "updater": {
     "type": "store",
-    "id": "dev.kaan.BetterGifs"
+    "id": "dev.kaan.GamerMode"
   },
   "license": "MIT",
   "type": "replugged-plugin",
