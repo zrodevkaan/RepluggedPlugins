@@ -1,0 +1,19 @@
+{
+  "id": "dev.kaan.ColoredText",
+  "name": "ColoredText",
+  "description": "Allows you to color text in ANSI :3",
+  "author": {
+    "name": "kaan",
+    "discordID": "",
+    "github": "zrodevkaan"
+  },
+  "version": "1.0.0",
+  "updater": {
+    "type": "store",
+    "id": "dev.kaan.Reminders"
+  },
+  "license": "MIT",
+  "type": "replugged-plugin",
+  "renderer": "src/index.tsx",
+  "image": ["https://i.imgur.com/v4kCzlb.png"]
+}

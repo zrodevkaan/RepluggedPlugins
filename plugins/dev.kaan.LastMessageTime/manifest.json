@@ -1,0 +1,20 @@
+{
+  "id": "dev.kaan.LastMessageTime",
+  "name": "LastMessageTime",
+  "description": "Shows you the last time someone has chatted.",
+  "author": {
+    "name": "kaan",
+    "discordID": "",
+    "github": "zrodevkaan"
+  },
+  "version": "1.0.0",
+  "updater": {
+    "type": "store",
+    "id": "dev.kaan.LastMessageTime"
+  },
+  "license": "MIT",
+  "type": "replugged-plugin",
+  "renderer": "src/index.tsx",
+  "plaintextPatches": "src/plaintextPatches.ts",
+  "image": ["https://google.com"]
+}

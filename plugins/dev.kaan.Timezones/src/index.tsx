@@ -16,7 +16,7 @@ const colorBrands: any = webpack.getByProps("colorBrand");
 const ModalList: any = webpack.getByProps("ConfirmModal");
 const classes: any = webpack.getByProps("iconItem");
 const injector: Injector = new Injector();
-const ProfilePopout: any = webpack.getBySource(".GifAutoPlay.getSetting()", { raw: true })?.exports;
+const ProfilePopout: any = webpack.getBySource(".default.Messages.EDIT_PROFILE",{raw:true})?.exports
 const UsernameDecoration = webpack.getByProps<{ default: any; UsernameDecorationTypes: {} }>(
   "UsernameDecorationTypes",
 );
@@ -65,7 +65,7 @@ export function start() {
     const Children: any = util.findInReactTree(b, (x) => Boolean(x?.className)).children;
     const User = a?.[0]["user"];
 
-    const selectedTimezone = owo.get(User.id, { timezone: "" })?.timezone || "";
+    const selectedTimezone = owo.get(User?.id, { timezone: "" })?.timezone || "";
 
     const currentTime = selectedTimezone
       ? getCurrentTimeInTimezone(selectedTimezone)
