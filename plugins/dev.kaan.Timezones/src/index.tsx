@@ -140,7 +140,10 @@ function getCurrentTimeInTimezone(timezone: string): string {
     hour12: true,
     hour: "numeric",
     minute: "numeric",
-  });
+    year: "numeric",
+    month: "long",
+    day: "numeric",
+  }).replace(/,(?=[^,]*$)/, "");
 }
 
 export function stop() {
