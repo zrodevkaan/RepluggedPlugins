@@ -15,5 +15,6 @@
   "license": "MIT",
   "type": "replugged-plugin",
   "renderer": "src/index.tsx",
-  "image": ["https://google.com"]
+  "source": "https://github.com/zrodevkaan/RepluggedPlugins/tree/main/plugins/dev.kaan.LastMessageDate",
+  "image": ["https://i.imgur.com/27WAQyN.png"]
 }
