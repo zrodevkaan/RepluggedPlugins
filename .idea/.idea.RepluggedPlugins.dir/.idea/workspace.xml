@@ -5,13 +5,17 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="c3b3a492-7a2a-4b2d-ae39-316f0625d4d5" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/plugins/dev.kaan/README.md" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/plugins/dev.kaan/manifest.json" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/plugins/dev.kaan/src/index.tsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/plugins/dev.kaan.QuickMessages/README.md" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/plugins/dev.kaan.QuickMessages/manifest.json" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/plugins/dev.kaan.QuickMessages/src/index.tsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/plugins/dev.kaan.WriteUppercase/README.md" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/plugins/dev.kaan.WriteUppercase/manifest.json" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/plugins/dev.kaan.WriteUppercase/src/index.tsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/.idea.RepluggedPlugins.dir/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.RepluggedPlugins.dir/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/plugins/dev.kaan.CallCounter/manifest.json" beforeDir="false" afterPath="$PROJECT_DIR$/plugins/dev.kaan.CallCounter/manifest.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/plugins/dev.kaan.Reminders/src/index.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/plugins/dev.kaan.Reminders/src/index.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/plugins/dev.kaan.Timezones/src/index.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/plugins/dev.kaan.Timezones/src/index.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/plugins/dev.kaan.LastMessageTime/manifest.json" beforeDir="false" afterPath="$PROJECT_DIR$/plugins/dev.kaan.LastMessageTime/manifest.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/plugins/dev.kaan.LastMessageTime/src/index.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/plugins/dev.kaan.LastMessageTime/src/index.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/plugins/dev.kaan.LastMessageTime/src/plaintextPatches.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/plugins/dev.kaan.ShowAllMessageButtons/src/plaintextPatches.ts" beforeDir="false" afterPath="$PROJECT_DIR$/plugins/dev.kaan.ShowAllMessageButtons/src/plaintextPatches.ts" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -22,6 +26,7 @@
     <option name="RECENT_TEMPLATES">
       <list>
         <option value="TypeScript JSX File" />
+        <option value="TypeScript File" />
       </list>
     </option>
   </component>
@@ -132,6 +137,9 @@
       <workItem from="1708922569863" duration="821000" />
       <workItem from="1709161426389" duration="512000" />
       <workItem from="1709248412080" duration="193000" />
+      <workItem from="1709509363581" duration="15587000" />
+      <workItem from="1709606226239" duration="11980000" />
+      <workItem from="1709686825447" duration="3530000" />
     </task>
     <servers />
   </component>

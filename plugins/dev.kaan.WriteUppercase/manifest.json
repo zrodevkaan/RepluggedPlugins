@@ -1,7 +1,7 @@
 {
-  "id": "dev.kaan.LastMessageTime",
-  "name": "LastMessageTime",
-  "description": "Shows you the last time someone has chatted.",
+  "id": "dev.kaan.WriteUppercase",
+  "name": "WriteUppercase",
+  "description": "Allows you to type in upper case like normal punctuation",
   "author": {
     "name": "kaan",
     "discordID": "",
@@ -10,7 +10,7 @@
   "version": "1.0.0",
   "updater": {
     "type": "store",
-    "id": "dev.kaan.LastMessageTime"
+    "id": "dev.kaan.WriteUppercase"
   },
   "license": "MIT",
   "type": "replugged-plugin",
