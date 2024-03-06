@@ -14,20 +14,6 @@ const {
   users,
 } = common;
 
-interface WebpackProps {
-  colorBrand: string;
-}
-interface UserData {
-  username: string;
-  id: string;
-}
-
-interface UserStore {
-  getUser: (string: string) => {};
-}
-interface UserType {
-  id: string;
-}
 
 const inject = new Injector();
 const ModalList: any = webpack.getByProps("ConfirmModal"); // CAN YOU STOP NOW. THANKS <3
@@ -60,7 +46,7 @@ export function start() {
   );
 
   inject.utils.addMenuItem(
-    "message" as ContextMenuTypes,
+    ContextMenuTypes.Message,
     (data) => (
       <>
         <MenuItem
@@ -87,8 +73,6 @@ function OpenModal(data: { attachmentName: string; attachmentUrl: string; itemSa
   const Sent = hexToDate(DeconstructedURL[1]).getTime() / 1000;
   const ExpiringFormat = parse(`<t:${Expiring}>`)[0];
   const SentFormat = parse(`<t:${Sent}>`)[0];
-  console.log(data)
-  console.log(URL, DeconstructedURL);
 
   modal.openModal((props) => (
     <ModalList.ConfirmModal

@@ -1,8 +1,6 @@
-import { common, Injector, util, webpack, settings, components } from "replugged";
-import { ContextMenuTypes } from "replugged/types";
-import {createElement, Suspense, useState} from "react";
-import * as repl from "repl";
-import exp from "node:constants";
+import {components, Injector, settings, util, webpack} from "replugged";
+import {ContextMenuTypes} from "replugged/types";
+import {useState} from "react";
 
 const injector = new Injector();
 const owo = await settings.init('dev.kaan.QuickMessages');
@@ -12,18 +10,9 @@ const {
   ContextMenu: { MenuItem },
 } = components;
 
-interface QuickMessagesState {
-  quickMessages: string[];
-}
-
-interface Type {
-  GET: 1,
-  SET: 2
-}
-
-enum Types {
-  GET = 1,
-  SET = 2
+interface Inserts
+{
+  insertText: (message: string) => void
 }
 
 function getMessages() {
@@ -31,26 +20,24 @@ function getMessages() {
 }
 
 export function start() {
-  injector.utils.addMenuItem("textarea-context" as ContextMenuTypes,  (data, objectSomething: any) => {
+  injector.utils.addMenuItem(ContextMenuTypes.TextareaContext,  (data, objectSomething: any) => {
     const messages = getMessages();
     return (
       <>
         <MenuItem
-          id="add-birthday-copy-paste-LEL"
+          id="add-quick-message"
           label="Add Quick Message"
           action={() => {
             const selectedText: HTMLElement = document.querySelector(`.${textArea}`);
             addQuickMessage(selectedText.innerText);
           }}
         />
-        <MenuItem id={'nuh-uh-two'} label="Quick Messages">
+        <MenuItem id={'quick-message'} label="Quick Messages">
           {messages.map((message: string) => (
             <MenuItem
               label={message}
               action={() => {
-                // @ts-ignore
-                // im so SICK of typescript saying "oh well do it thi-" NOO. STOP IT.
-                const Instance: {insertText: (message: string) => void} = util.findInTree(objectSomething, x=>Boolean(x?.editor)).editor
+                const Instance: Inserts = util.findInTree(objectSomething, x=>Boolean(x?.editor)).editor
                 Instance.insertText(message)
               }}
               id={`quick-message-${message}`}/>
@@ -60,11 +47,11 @@ export function start() {
     );
     
   });
-  injector.utils.addMenuItem("message" as ContextMenuTypes,  (data: {message: { content: string }}, objectSomething: any) => {
+  injector.utils.addMenuItem(ContextMenuTypes.Message, (data: {message: { content: string }}, objectSomething: any) => {
     return (
       <>
         <MenuItem
-          id="add-birthday-copy-paste-LEL"
+          id="copy-as-quick-message"
           label="Copy as Quick Message"
           action={() => {
             addQuickMessage(data.message.content)
@@ -99,15 +86,16 @@ export function Settings()
       newMessages.splice(index, 1);
       setMessages(newMessages);
       owo.set('messages', newMessages);
-      console.log(newMessages);
     }
 
     return (
       <div>
         {messages.map((message, index) =>
           <div key={index}>
-            <p style={{ color: "white" }}>{message}</p>
-            <TrashIcon onClick={() => deleteMessage(index)}>Delete</TrashIcon>
+            <p style={{ color: "white" }}>
+              {message}
+              <TrashIcon style={{top: '-10px'}} onClick={() => deleteMessage(index)}>Delete</TrashIcon>
+            </p>
           </div>
         )}
       </div>

@@ -1,6 +1,3 @@
-# CakeDay
+# LinkExpire
 
-- Allowing us to set birthdays – because we're basically the human equivalent of goldfish when it comes to remembering
-  special dates.
-
-# Not FINISHED
+- Allows you right click on any discord hosted image. press more information and get when the link expires and when it was sent.
