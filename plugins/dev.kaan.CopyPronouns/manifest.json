@@ -7,7 +7,7 @@
     "discordID": "",
     "github": "zrodevkaan"
   },
-  "version": "1.0.3",
+  "version": "1.0.4",
   "updater": {
     "type": "store",
     "id": "dev.kaan.CopyPronouns"
@@ -16,5 +16,7 @@
   "type": "replugged-plugin",
   "renderer": "src/index.tsx",
   "source": "https://github.com/zrodevkaan/RepluggedPlugins/tree/main/plugins/dev.kaan.CopyPronouns",
-  "image": ["https://i.imgur.com/7PyatTL.png"]
+  "image": [
+    "https://i.imgur.com/7PyatTL.png"
+  ]
 }
