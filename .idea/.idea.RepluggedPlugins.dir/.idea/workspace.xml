@@ -5,10 +5,25 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="c3b3a492-7a2a-4b2d-ae39-316f0625d4d5" name="Changes" comment="">
+      <change afterPath="$PROJECT_DIR$/plugins/dev.kaan.BetterGuildTooltips/README.md" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/plugins/dev.kaan.BetterGuildTooltips/manifest.json" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/plugins/dev.kaan.BetterGuildTooltips/src/index.tsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/plugins/dev.kaan.BetterStreamerMode/README.md" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/plugins/dev.kaan.BetterStreamerMode/manifest.json" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/plugins/dev.kaan.BetterStreamerMode/src/index.tsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/plugins/dev.kaan.CopyPronouns/README.md" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/plugins/dev.kaan.CopyPronouns/manifest.json" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/plugins/dev.kaan.CopyPronouns/src/index.tsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/plugins/dev.kaan.FakeProfileThemes/README.md" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/plugins/dev.kaan.FakeProfileThemes/manifest.json" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/plugins/dev.kaan.FakeProfileThemes/src/index.tsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/plugins/dev.kaan.FakeProfileThemes/src/plaintextPatches.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/plugins/dev.kaan.Stereo/README.md" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/plugins/dev.kaan.Stereo/manifest.json" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/plugins/dev.kaan.Stereo/src/index.tsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/.idea.RepluggedPlugins.dir/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.RepluggedPlugins.dir/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/plugins/dev.kaan.LinkExpire/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/plugins/dev.kaan.LinkExpire/README.md" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/plugins/dev.kaan.LinkExpire/src/index.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/plugins/dev.kaan.LinkExpire/src/index.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/plugins/dev.kaan.QuickMessages/src/index.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/plugins/dev.kaan.QuickMessages/src/index.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/plugins/dev.kaan.IgnoreMessageRequests/src/index.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/plugins/dev.kaan.IgnoreMessageRequests/src/index.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/plugins/dev.kaan.WriteUppercase/src/index.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/plugins/dev.kaan.WriteUppercase/src/index.tsx" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -132,7 +147,18 @@
       <workItem from="1709248412080" duration="193000" />
       <workItem from="1709509363581" duration="15587000" />
       <workItem from="1709606226239" duration="11980000" />
-      <workItem from="1709686825447" duration="9410000" />
+      <workItem from="1709686825447" duration="14595000" />
+      <workItem from="1709865961716" duration="1338000" />
+      <workItem from="1709878176738" duration="639000" />
+      <workItem from="1710092209909" duration="1321000" />
+      <workItem from="1710229972719" duration="1280000" />
+      <workItem from="1710321475945" duration="3747000" />
+      <workItem from="1710384790533" duration="136000" />
+      <workItem from="1710386216482" duration="3964000" />
+      <workItem from="1710404028974" duration="1591000" />
+      <workItem from="1710441046413" duration="2466000" />
+      <workItem from="1710519618047" duration="628000" />
+      <workItem from="1710551721653" duration="9726000" />
     </task>
     <servers />
   </component>

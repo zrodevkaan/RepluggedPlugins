@@ -1,0 +1,21 @@
+{
+  "id": "dev.kaan.FakeProfileThemes",
+  "name": "FakeProfileThemes",
+  "description": "Allow yourself to have free theme colors to yourself and others with this plugin on your profile without nitro ;3",
+  "author": {
+    "name": "kaan",
+    "discordID": "",
+    "github": "zrodevkaan"
+  },
+  "version": "1.0.3",
+  "updater": {
+    "type": "store",
+    "id": "dev.kaan.FakeProfileThemes"
+  },
+  "license": "MIT",
+  "type": "replugged-plugin",
+  "renderer": "src/index.tsx",
+  "source": "https://github.com/zrodevkaan/RepluggedPlugins/tree/main/plugins/dev.kaan.FakeProfileThemes",
+  "plaintextPatches": "src/plaintextPatches.ts",
+  "image": ["https://i.imgur.com/j1P6BEy.png"]
+}

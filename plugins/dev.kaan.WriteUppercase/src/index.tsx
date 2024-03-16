@@ -8,26 +8,19 @@ const owo = await settings.init('dev.kaan.QuickMessages');
 interface QuickMessagesState {
   quickMessages: string[];
 }
-
-interface Type
-{
-  GET: 1,
-  SET: 2
+const { toRichValue } = webpack.getByProps("toRichValue");
+function CapitalizeOwO(inputString) {
+  return inputString.replace(/(?:^|\.\s+|:)([a-z])/g, (match) => match.toUpperCase());
 }
-
-enum Types
-{
-  GET = 1,
-  SET = 2
-}
-
-function returnData(type: Type, key: string, fallback: Boolean = false)
-{
-  return type == Types.GET ? owo.get(key,fallback) : owo.set
-}
-
 export function start() {
-
+  injector.before(
+    webpack.getBySource("isSubmitButtonEnabled:", { all: true })[0].type,
+    "render",
+    (args, res) => {
+      args[0].richValue = toRichValue(CapitalizeOwO(args[0].textValue));
+      return res;
+    }
+  );
 }
 
 export function stop(): void {
