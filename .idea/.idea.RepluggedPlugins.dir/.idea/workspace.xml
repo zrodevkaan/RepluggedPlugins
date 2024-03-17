@@ -5,8 +5,11 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="c3b3a492-7a2a-4b2d-ae39-316f0625d4d5" name="Changes" comment="">
+      <change afterPath="$PROJECT_DIR$/plugins/dev.kaan.ShowPermissions/README.md" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/plugins/dev.kaan.ShowPermissions/manifest.json" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/plugins/dev.kaan.ShowPermissions/src/index.tsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/.idea.RepluggedPlugins.dir/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.RepluggedPlugins.dir/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/plugins/dev.replugged.CakeDay/src/index.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/plugins/dev.replugged.CakeDay/src/index.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/plugins/dev.kaan.Recovery/src/index.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/plugins/dev.kaan.Recovery/src/index.tsx" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -18,6 +21,7 @@
       <list>
         <option value="TypeScript JSX File" />
         <option value="TypeScript File" />
+        <option value="CSS File" />
       </list>
     </option>
   </component>
@@ -59,6 +63,7 @@
     &quot;git-widget-placeholder&quot;: &quot;main&quot;,
     &quot;ignore.virus.scanning.warn.message&quot;: &quot;true&quot;,
     &quot;last.edited.regexp&quot;: &quot;&quot;,
+    &quot;list.type.of.created.stylesheet&quot;: &quot;CSS&quot;,
     &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
     &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
     &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
@@ -142,6 +147,8 @@
       <workItem from="1710441046413" duration="2466000" />
       <workItem from="1710519618047" duration="628000" />
       <workItem from="1710551721653" duration="13497000" />
+      <workItem from="1710637635198" duration="9521000" />
+      <workItem from="1710661924396" duration="752000" />
     </task>
     <servers />
   </component>

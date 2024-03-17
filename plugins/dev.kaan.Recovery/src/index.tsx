@@ -12,7 +12,6 @@ const { FormSwitch }: any = webpack.getByProps("FormSwitch")
 
 export function start() {
   injector.after(ErrorScreen.prototype, "render", (a: any, b, c: {state: {error: {message: String,stack: String}}, setState: ({}) => void}) => {
-    console.log(a, b, c);
     const children = b?.props?.action?.props?.children;
     if (!children) return;
     if (!c.state.error) return;
@@ -27,7 +26,7 @@ export function start() {
           Recover Discord
         </Button>,
         <div
-          className={"recovery-parse"}
+          className={"recovery-parse"} // this breaks BetterCodeBlocks.. sorry
         >
           {parse(`\`\`\`${c.state?.error.stack}\`\`\``)}
         </div>
