@@ -12,6 +12,10 @@ const { FormSwitch }: any = webpack.getByProps("FormSwitch")
 
 export function start() {
   injector.after(ErrorScreen.prototype, "render", (a: any, b, c: {state: {error: {message: String,stack: String}}, setState: ({}) => void}) => {
+    if (owo.get("automaticRecover"))
+    {
+      c.setState({info: null, error: null});
+    }
     const children = b?.props?.action?.props?.children;
     if (!children) return;
     if (!c.state.error) return;

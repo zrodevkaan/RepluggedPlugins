@@ -5,11 +5,7 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="c3b3a492-7a2a-4b2d-ae39-316f0625d4d5" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/plugins/dev.kaan.ShowPermissions/README.md" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/plugins/dev.kaan.ShowPermissions/manifest.json" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/plugins/dev.kaan.ShowPermissions/src/index.tsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/.idea.RepluggedPlugins.dir/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.RepluggedPlugins.dir/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/plugins/dev.kaan.Recovery/src/index.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/plugins/dev.kaan.Recovery/src/index.tsx" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -148,7 +144,7 @@
       <workItem from="1710519618047" duration="628000" />
       <workItem from="1710551721653" duration="13497000" />
       <workItem from="1710637635198" duration="9521000" />
-      <workItem from="1710661924396" duration="752000" />
+      <workItem from="1710661924396" duration="1164000" />
     </task>
     <servers />
   </component>
