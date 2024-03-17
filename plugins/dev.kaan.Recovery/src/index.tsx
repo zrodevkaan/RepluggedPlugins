@@ -11,7 +11,6 @@ const { parse }: any = webpack.getByProps(["defaultRules", "parse"]);
 const { FormSwitch }: any = webpack.getByProps("FormSwitch")
 
 export function start() {
-  console.log(ErrorScreen)
   injector.after(ErrorScreen.prototype, "render", (a: any, b, c: {state: {error: {message: String}}, setState: ({}) => void}) => {
     console.log(a, b, c);
     const children = b?.props?.action?.props?.children;
