@@ -11,7 +11,7 @@ const { parse }: any = webpack.getByProps(["defaultRules", "parse"]);
 const { FormSwitch }: any = webpack.getByProps("FormSwitch")
 
 export function start() {
-  injector.after(ErrorScreen.prototype, "render", (a: any, b, c: {state: {error: {message: String}}, setState: ({}) => void}) => {
+  injector.after(ErrorScreen.prototype, "render", (a: any, b, c: {state: {error: {message: String,stack: String}}, setState: ({}) => void}) => {
     console.log(a, b, c);
     const children = b?.props?.action?.props?.children;
     if (!children) return;
@@ -21,7 +21,7 @@ export function start() {
         <Button
           className={"recovery-button " + sizeLarge}
           onClick={() => {
-            c.setState({ info: null, error: null });
+            c.setState({info: null, error: null});
           }}
         >
           Recover Discord
@@ -29,7 +29,7 @@ export function start() {
         <div
           className={"recovery-parse"}
         >
-          {parse(`\`\`\`${c.state?.error.message}\`\`\``)}
+          {parse(`\`\`\`${c.state?.error.stack}\`\`\``)}
         </div>
       ]
     );
@@ -39,6 +39,7 @@ export function start() {
 export function stop(): void {
   injector.uninjectAll();
 }
+
 export function Settings() {
 
   return (
