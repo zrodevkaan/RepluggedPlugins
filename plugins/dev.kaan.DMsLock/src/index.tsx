@@ -1,6 +1,5 @@
-import { common, components, Injector, settings, util, webpack } from "replugged";
-import { ContextMenuTypes } from "replugged/types";
-import { Encry } from "./Encry";
+import {common, components, Injector, settings, webpack} from "replugged";
+import {ContextMenuTypes} from "replugged/types";
 
 const injector = new Injector();
 const owo = await settings.init("dev.kaan.dmslock");
@@ -56,26 +55,33 @@ export function start() {
     }
   });
 
-  injector.utils.addMenuItem("user-context" as ContextMenuTypes, (data: any) => (
-    <>
-      <MenuItem label="DMsLock" id={"DMsLock-owo-stuff-submenu"}>
-        <MenuItem
-          id="add-lock"
-          label="Set Lock"
-          action={() => {
-            passwordLockDMModal(data.user);
-          }}
-        />
-        <MenuItem
-          id="remove-Lock"
-          label="Clear Lock"
-          action={() => {
-            clearPasswordLock(data.user.id);
-          }}
-        />
-      </MenuItem>
-    </>
-  ));
+  injector.utils.addMenuItem("user-context" as ContextMenuTypes, (data: any) => {
+    const hasPassword = doesHavePassword(data.user.id);
+
+    return (
+      <>
+        <MenuItem label="DMsLock" id={"DMsLock-owo-stuff-submenu"}>
+          {!hasPassword && (
+            <MenuItem
+              id="add-lock"
+              label="Set Lock"
+              action={() => {
+                passwordLockDMModal(data.user);
+              }}
+            />
+          )}
+          <MenuItem
+            id="remove-Lock"
+            label="Clear Lock"
+            action={() => {
+              clearPasswordLock(data.user.id);
+            }}
+          />
+        </MenuItem>
+      </>
+    );
+  });
+
 }
 
 async function passwordUnlockDMModal(user: { username: string; id: string }, callback: (password: string) => void) {
@@ -100,6 +106,11 @@ async function passwordUnlockDMModal(user: { username: string; id: string }, cal
       />
     </ModalList.ConfirmModal>
   ));
+}
+
+function doesHavePassword(userId: string): boolean {
+  const passwords = owo.get("passwords") || [];
+  return passwords.find((item: { userId: string }) => item.userId === userId);
 }
 
 function checkPassword(userId: string, password: string): boolean {
