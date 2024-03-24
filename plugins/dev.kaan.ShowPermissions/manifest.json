@@ -1,0 +1,20 @@
+{
+  "id": "dev.kaan.ShowPermissions",
+  "name": "ShowPermissions",
+  "description": "ShowPermissions",
+  "author": {
+    "name": "kaan",
+    "discordID": "",
+    "github": "zrodevkaan"
+  },
+  "version": "1.0.0",
+  "updater": {
+    "type": "store",
+    "id": "dev.kaan.ShowPermissions"
+  },
+  "license": "MIT",
+  "type": "replugged-plugin",
+  "renderer": "src/index.tsx",
+  "source": "https://github.com/zrodevkaan/RepluggedPlugins/tree/main/plugins/dev.kaan.ShowPermissions",
+  "image": ["https://i.imgur.com/8cZq88W.png"]
+}
