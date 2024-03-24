@@ -4,7 +4,15 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="c3b3a492-7a2a-4b2d-ae39-316f0625d4d5" name="Changes" comment="" />
+    <list default="true" id="c3b3a492-7a2a-4b2d-ae39-316f0625d4d5" name="Changes" comment="">
+      <change afterPath="$PROJECT_DIR$/plugins/dev.kaan.DMsLock/README.md" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/plugins/dev.kaan.DMsLock/manifest.json" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/plugins/dev.kaan.DMsLock/src/Encry.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/plugins/dev.kaan.DMsLock/src/index.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/.idea.RepluggedPlugins.dir/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.RepluggedPlugins.dir/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/plugins/dev.kaan.Recovery/src/index.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/plugins/dev.kaan.Recovery/src/index.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/plugins/dev.kaan.StoreBasedLib/src/index.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/plugins/dev.kaan.StoreBasedLib/src/index.tsx" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -14,8 +22,8 @@
     <option name="RECENT_TEMPLATES">
       <list>
         <option value="TypeScript JSX File" />
-        <option value="TypeScript File" />
         <option value="CSS File" />
+        <option value="TypeScript File" />
       </list>
     </option>
   </component>
@@ -34,6 +42,7 @@
     <setting file="file://$PROJECT_DIR$/dist/dev.kaan.voicechattovoice/renderer.js.map" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/dist/plaintextPatches.js.map" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/dist/renderer.js.map" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/plugins/dev.kaan.DMsLock/src/Encry.cs" root0="SKIP_HIGHLIGHTING" />
   </component>
   <component name="MacroExpansionManager">
     <option name="directoryName" value="n3iu92sm" />
@@ -143,7 +152,12 @@
       <workItem from="1710551721653" duration="13497000" />
       <workItem from="1710637635198" duration="9521000" />
       <workItem from="1710661924396" duration="1164000" />
-      <workItem from="1710709746217" duration="740000" />
+      <workItem from="1710709746217" duration="1291000" />
+      <workItem from="1710798174111" duration="1525000" />
+      <workItem from="1710904014492" duration="2251000" />
+      <workItem from="1710909493177" duration="1843000" />
+      <workItem from="1711150129050" duration="5244000" />
+      <workItem from="1711225657950" duration="8762000" />
     </task>
     <servers />
   </component>

@@ -1,0 +1,22 @@
+{
+  "id": "dev.kaan.DMsLock",
+  "name": "DMsLock",
+  "description": "Allows you to lock a DM behind a password",
+  "author": {
+    "name": "kaan",
+    "discordID": "",
+    "github": "zrodevkaan"
+  },
+  "version": "1.0.2",
+  "updater": {
+    "type": "store",
+    "id": "dev.kaan.DMsLock"
+  },
+  "license": "MIT",
+  "type": "replugged-plugin",
+  "renderer": "src/index.tsx",
+  "source": "https://github.com/zrodevkaan/RepluggedPlugins/tree/main/plugins/dev.kaan.DMsLock",
+  "image": [
+    "https://i.imgur.com/7PyatTL.png"
+  ]
+}
