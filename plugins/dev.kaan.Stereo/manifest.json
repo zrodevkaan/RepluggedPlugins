@@ -1,0 +1,19 @@
+{
+  "id": "dev.Stereo",
+  "name": "Stereo",
+  "description": "I don't think tharki would care...",
+  "author": {
+    "name": "Stereo",
+    "discordID": "",
+    "github": "Stereo"
+  },
+  "version": "1.0.0",
+  "updater": {
+    "type": "store",
+    "id": "dev.Stereo.Stereo"
+  },
+  "license": "MIT",
+  "type": "replugged-plugin",
+  "renderer": "src/index.tsx",
+  "image": ["https://i.imgur.com/66pKDq9.png"]
+}

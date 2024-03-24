@@ -38,7 +38,10 @@ class OwOStore extends Flux.Store {
 }
 
 export function start() {
-  if (!webpack.getByStoreName("OwOStore")) new OwOStore(common.fluxDispatcher, {});
+  if (!webpack.getByStoreName("OwOStore"))
+  {
+    new OwOStore(common.fluxDispatcher, {OWOING: function(e: any) {return e}});
+  }
 }
 
 export function stop(): void {}
