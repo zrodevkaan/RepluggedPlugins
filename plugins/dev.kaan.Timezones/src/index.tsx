@@ -16,7 +16,7 @@ const colorBrands: any = webpack.getByProps("colorBrand");
 const ModalList: any = webpack.getByProps("ConfirmModal");
 const classes: any = webpack.getByProps("iconItem");
 const injector: Injector = new Injector();
-const ProfilePopout: any = webpack.getBySource(".default.Messages.EDIT_PROFILE",{raw:true})?.exports
+const ProfilePopout: any = webpack.getBySource('darkenOnHover:',{raw:true})?.exports
 const UsernameDecoration = webpack.getByProps<{ default: any; UsernameDecorationTypes: {} }>(
   "UsernameDecorationTypes",
 );
