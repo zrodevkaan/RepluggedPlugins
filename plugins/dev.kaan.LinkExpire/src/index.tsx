@@ -17,7 +17,7 @@ const {
 
 const inject = new Injector();
 const ModalList: any = webpack.getByProps("ConfirmModal"); // CAN YOU STOP NOW. THANKS <3
-const { parse }: any = webpack.getByProps("defaultRules");
+const { parse }: any = webpack.getByProps(["defaultRules","parse"]);
 
 function hexToDate(hexTimestamp) {
   const decimalTimestamp = parseInt(hexTimestamp, 16);
@@ -66,14 +66,14 @@ function extractFilenameFromUrl(url) {
   return splitUrl[splitUrl.length - 1].split("?")[0];
 }
 
-function OpenModal(data: { attachmentName: string; attachmentUrl: string; itemSafeSrc: string }) {
-  const URL = data.attachmentUrl ?? data.itemSafeSrc;
+function OpenModal(data: { attachmentName: string; attachmentUrl: string; itemSafeSrc: string, itemHref: string }) {
+  console.log(data)
+  const URL = data.attachmentUrl ?? data.itemSafeSrc ?? data.itemHref;
   const DeconstructedURL = extractParts(URL);
   const Expiring = hexToDate(DeconstructedURL[0]).getTime() / 1000;
   const Sent = hexToDate(DeconstructedURL[1]).getTime() / 1000;
   const ExpiringFormat = parse(`<t:${Expiring}>`)[0];
   const SentFormat = parse(`<t:${Sent}>`)[0];
-
   modal.openModal((props) => (
     <ModalList.ConfirmModal
       {...props}
