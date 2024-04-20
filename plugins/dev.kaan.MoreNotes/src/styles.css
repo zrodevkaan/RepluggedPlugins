@@ -1,5 +1,4 @@
-[class*="moreNotes_uwu"]
-{
+[class*="moreNotes_uwu"] {
   background-color: transparent;
   border: none;
   box-sizing: border-box;
@@ -9,7 +8,15 @@
   padding: 4px;
   resize: vertical;
   width: 100%;
+  transition: filter 0.1s ease;
+  filter: blur(30px);
 }
+
+[class*="moreNotes_uwu"]:hover,
+[class*="moreNotes_uwu"]:focus {
+  filter: blur(0px);
+}
+
 [class*="moreNotesHeader"]
 {
   padding-bottom: 9px;
