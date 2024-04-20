@@ -61,12 +61,10 @@ async function openTimezoneModal(user: any) {
 }
 
 export function start() {
-  console.log('start/?')
   injector.after(ProfilePopout, "default", (a, b, c) => {
     const Children: any = util.findInReactTree(b, (x) => Boolean(x?.className)).children;
     const User = a?.[0]["user"];
     const selectedTimezone = owo.get(User?.id, { timezone: "" })?.timezone || "";
-    console.log(Children)
     const currentTime = selectedTimezone
       ? getCurrentTimeInTimezone(selectedTimezone)
       : "Set Timezone";
