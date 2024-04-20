@@ -13,9 +13,9 @@ const {
 const owo = await settings.init("dev.kaan.timezones");
 const colorBrands: any = webpack.getByProps("colorBrand");
 const ModalList: any = webpack.getByProps("ConfirmModal");
-const classes: any = webpack.getByProps("iconItem");
+const classes: any = webpack.waitForProps<{ iconItem: string }>("iconItem");
 const injector: Injector = new Injector();
-const ProfilePopout: any = webpack.getBySource('darkenOnHover:',{raw:true})?.exports
+const ProfilePopout: any = webpack.getBySource('darkenOnHover:', { raw: true })?.exports
 const UsernameDecoration = webpack.getByProps<{ default: any; UsernameDecorationTypes: {} }>(
   "UsernameDecorationTypes",
 );
@@ -61,12 +61,12 @@ async function openTimezoneModal(user: any) {
 }
 
 export function start() {
+  console.log('start/?')
   injector.after(ProfilePopout, "default", (a, b, c) => {
     const Children: any = util.findInReactTree(b, (x) => Boolean(x?.className)).children;
     const User = a?.[0]["user"];
-
     const selectedTimezone = owo.get(User?.id, { timezone: "" })?.timezone || "";
-
+    console.log(Children)
     const currentTime = selectedTimezone
       ? getCurrentTimeInTimezone(selectedTimezone)
       : "Set Timezone";
@@ -172,11 +172,10 @@ const getAllTimezones = () =>
   Intl.supportedValuesOf("timeZone").map((timezone) => {
     const time = getCurrentTimeInTimezone(timezone);
     return {
-      label: `${timezone} ${time} (${
-        new Intl.DateTimeFormat(undefined, { timeZone: timezone, timeZoneName: "short" })
-          .formatToParts(new Date())
-          .find((part) => part.type == "timeZoneName").value
-      })`,
+      label: `${timezone} ${time} (${new Intl.DateTimeFormat(undefined, { timeZone: timezone, timeZoneName: "short" })
+        .formatToParts(new Date())
+        .find((part) => part.type == "timeZoneName").value
+        })`,
       value: timezone,
     };
   });
