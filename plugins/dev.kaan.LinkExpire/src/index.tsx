@@ -67,7 +67,6 @@ function extractFilenameFromUrl(url) {
 }
 
 function OpenModal(data: { attachmentName: string; attachmentUrl: string; itemSafeSrc: string, itemHref: string }) {
-  console.log(data)
   const URL = data.attachmentUrl ?? data.itemSafeSrc ?? data.itemHref;
   const DeconstructedURL = extractParts(URL);
   const Expiring = hexToDate(DeconstructedURL[0]).getTime() / 1000;
