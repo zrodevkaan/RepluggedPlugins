@@ -20,3 +20,85 @@
 {
   resize: 'both'
 }
+
+/*     Plugin/Theme Store css      */
+[class$="owo-smalltext"] { /* Plugin descriptions */
+  color: var(--header-secondary) !important;
+  font-size: 14px;
+  line-height: 1.2857142857142858;
+  font-weight: 400;
+}
+[class$="owo-bigtext"] { /* Plugin/theme titles */
+  display: flex;
+  color: var(--header-primary) !important;
+  font-size: 16px;
+  line-height: 1.25;
+  font-weight: 700;
+  align-items: baseline;
+}
+[class$="owo-bigtext"] > [class$="owo-smalltext"] { /* Version numbers */
+  font-weight: bold;
+  margin-left: 3px;
+}
+[id="owo-grids"] { /* Two rows are better than one */
+  display: grid;
+  margin-right: 0px;
+  grid-template-columns: repeat(2,1fr);
+}
+[id="owo-select-plugins-tab"] > [class^="title"] > [class^="defaultColor"],
+[id="owo-select-themes-tab"] > [class^="title"] > [class^="defaultColor"] { /* Scales and fixes page title */
+  display: flex;
+  font-size: 20px;
+  line-height: 1.2;
+  font-weight: 600;
+  font-family: var(--font-display);
+  grid-row: 1;
+  grid-column: 1 / 3;
+}
+[id="owo-select-plugins-tab"] > [class^="title"] > [class^="divider"],
+[id="owo-select-themes-tab"] > [class^="title"] > [class^="divider"] { /* Centers page divider */
+  display: flex;
+  grid-row: 2;
+  grid-column: 1 / 3;
+}
+[id="owo-select-plugins-tab"] > [class^="title"] > div:last-child,
+[id="owo-select-themes-tab"] > [class^="title"] > div:last-child { /* Centers page buttons */
+  grid-column: 1 / 3;
+}
+/*[class="owo-card"] > div > img {
+  max-width: 294px !important;
+  grid-row: 1;
+  grid-column: 1 / 3;
+  margin-bottom: 12px;
+}*/
+[class="owo-card"] > div > img { /* Positions image on top and covers thumb area */
+  width: 294px !important;
+  height: 221px;
+  object-fit: cover;
+  grid-row: 1;
+  grid-column: 1 / 3;
+  margin-bottom: 12px;
+  top: 0px;
+}
+[class="owo-card"] > div { /* Plugin/theme card elements excluding button */
+  display: grid;
+  width: 100%
+}
+[class="owo-card"] > div > div:nth-child(2) { /* Fixes placement of creator name */
+  font-weight: bold;
+  grid-column: 1 / 3;
+}
+[class="owo-card"] > div > div:nth-child(3) { /* Description text, I couldn't figure */
+  width: 189px;                               /* out how to make it do the cool scroll */
+  height: 36px;                               /* when mouse over */
+  overflow: hidden;
+}
+[class="owo-card"] { /* Fixed card width and layout */
+  width: 318px;
+  flex-direction: column;
+  align-items: flex-end !important;
+  justify-content: flex-end !important;
+}
+[class="owo-card"] > button { /* Overlaps install button with info text */
+  position: absolute;
+}

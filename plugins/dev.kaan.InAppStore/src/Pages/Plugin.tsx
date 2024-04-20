@@ -11,15 +11,28 @@ function JustWorkPlease() {
   const cooldown = 1000;
   const [numPages, setNumPages] = useState(0);
   const [installedPlugins, setInstalledPlugins] = useState({});
+  const scroller = document.querySelector('[class*="contentRegionScroller"]');
+
+  const scrollSmooth = () => {
+    setTimeout(() => {
+      scroller.scrollTo({
+        top: 0,
+        behavior: 'smooth'
+      });
+    }, 500);
+  };
+
   const nextPage = () => {
     if (currentPage < 30 && !loading) {
       setCurrentPage(currentPage + 1);
+      scrollSmooth();
     }
   };
 
   const previousPage = () => {
     if (currentPage > 1 && !loading) {
       setCurrentPage(currentPage - 1);
+      scrollSmooth();
     }
   };
   useEffect(() => {
@@ -70,7 +83,7 @@ function JustWorkPlease() {
   }, [currentPage]);
 
   return (
-    <div>
+    <div id='owo-grids'>
       <ComponentsPack.Text className="heading-lg-semibold_a200cd" style={{ color: "white" }}>
         Plugin Store
       </ComponentsPack.Text>
@@ -98,12 +111,14 @@ function JustWorkPlease() {
               style={{ align: "left", color: "white" }}>
               {plugin.desc}
             </ComponentsPack.Text>
-            {plugin?.image && (
-              <img
-                style={{ maxWidth: 400, borderRadius: "10px" }}
-                src={plugin.image.includes(",") ? plugin.image.split(",")[0] : plugin.image}
-              />
-            )}
+            <img
+              style={{ maxWidth: 400, borderRadius: "10px" }}
+              src={plugin.image}
+              onError={(e) => {
+                e.target.onerror = null;
+                e.target.src = "https://replugged.dev/assets/replugged-b625c392.png";
+              }}
+            />
           </div>
 
           <ComponentsPack.Button
