@@ -1,0 +1,15 @@
+.buttons_dc1e0b {flex-direction: column; align-items: center}
+.buttons_dc1e0b .button_afdfd9 {
+  width: 400px;
+  margin: 5px;
+}
+.recovery-button
+{
+  background-color: var(--button-danger-background) !important;
+}
+.errorPage_da3c8d [class^="scrollbarGhostHairline"]
+{
+  white-space: break-spaces;
+  width: 80vw;
+  text-align: center;
+}

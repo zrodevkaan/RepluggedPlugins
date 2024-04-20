@@ -1,0 +1,22 @@
+[class*="moreNotes_uwu"]
+{
+  background-color: transparent;
+  border: none;
+  box-sizing: border-box;
+  color: var(--text-normal) !important;
+  font-size: 12px;
+  line-height: 14px;
+  padding: 4px;
+  resize: vertical;
+  width: 100%;
+}
+[class*="moreNotesHeader"]
+{
+  padding-bottom: 9px;
+  font-family: var(--font-display);
+  font-size: 12px;
+  line-height: 1.3333333333333333;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: .02em;
+}

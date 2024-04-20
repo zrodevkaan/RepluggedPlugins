@@ -16,7 +16,5 @@
   "type": "replugged-plugin",
   "renderer": "src/index.tsx",
   "source": "https://github.com/zrodevkaan/RepluggedPlugins/tree/main/plugins/dev.kaan.CallCounter",
-  "image": [
-    "https://i.imgur.com/8cZq88W.png"
-  ]
+  "image": ["https://i.imgur.com/8cZq88W.png"]
 }

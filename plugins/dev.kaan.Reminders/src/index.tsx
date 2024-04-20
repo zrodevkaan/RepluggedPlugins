@@ -5,7 +5,6 @@ import { logger } from "./comps/Icons";
 import { FormItem, SelectItem, SwitchItem, Text, TextInput } from "replugged/components";
 import { didUserEnableCustomAlertsOwO, getSound, playSound } from "./sounds/SOwOunds";
 import { formatFilename, owo } from "./comps/Settings";
-
 const inject = new Injector();
 const Colors: any = webpack.getByProps("colorBrand");
 const ModalList: any = webpack.getByProps("ConfirmModal");

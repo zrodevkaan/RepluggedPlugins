@@ -1,0 +1,21 @@
+{
+  "id": "dev.kaan.MoreNotes",
+  "name": "MoreNotes",
+  "description": "Allows you to set notes up to how long you want for each user",
+  "author": {
+    "name": "kaan",
+    "discordID": "",
+    "github": "zrodevkaan"
+  },
+  "version": "1.0.1",
+  "updater": {
+    "type": "store",
+    "id": "dev.kaan.MoreNotes"
+  },
+  "license": "MIT",
+  "type": "replugged-plugin",
+  "renderer": "src/index.tsx",
+  "image": [
+    "https://i.imgur.com/4ltlHlD.png"
+  ]
+}

@@ -1,0 +1,19 @@
+{
+  "id": "dev.kaan.WriteUppercase",
+  "name": "WriteUppercase",
+  "description": "Allows you to type in upper case like normal punctuation",
+  "author": {
+    "name": "kaan",
+    "discordID": "",
+    "github": "zrodevkaan"
+  },
+  "version": "1.0.0",
+  "updater": {
+    "type": "store",
+    "id": "dev.kaan.WriteUppercase"
+  },
+  "license": "MIT",
+  "type": "replugged-plugin",
+  "renderer": "src/index.tsx",
+  "image": ["https://google.com"]
+}

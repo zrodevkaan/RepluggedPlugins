@@ -1,0 +1,22 @@
+{
+  "id": "dev.kaan.CopyPronouns",
+  "name": "CopyPronouns",
+  "description": "With one click of your left click you can copy someones pronouns by clicking on the pronouns section",
+  "author": {
+    "name": "kaan",
+    "discordID": "",
+    "github": "zrodevkaan"
+  },
+  "version": "1.0.5",
+  "updater": {
+    "type": "store",
+    "id": "dev.kaan.CopyPronouns"
+  },
+  "license": "MIT",
+  "type": "replugged-plugin",
+  "renderer": "src/index.tsx",
+  "source": "https://github.com/zrodevkaan/RepluggedPlugins/tree/main/plugins/dev.kaan.CopyPronouns",
+  "image": [
+    "https://i.imgur.com/7PyatTL.png"
+  ]
+}

@@ -15,7 +15,7 @@ interface ReactTreeItem {
 
 export function start(): void {
   injector.after(MessageRequestsTab, "Interactive", (a, b: ReactTreeItem, c) => {
-    const pathName = util.findInReactTree(b as {}, (x) => x?.to?.pathname)?.to?.pathname;
+    const pathName = util.findInReactTree(b as {}, (x: {to: {pathname: string}}) => Boolean(x?.to?.pathname))?.to?.pathname;
 
     if (pathName?.includes("message")) {
       b.props.onContextMenu = (e) => {

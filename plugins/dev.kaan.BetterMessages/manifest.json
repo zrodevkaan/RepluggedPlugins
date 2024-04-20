@@ -1,19 +1,21 @@
 {
-  "id": "dev.kaan.BetterGifs",
-  "name": "BetterGifs",
-  "description": "BetterGifs",
+  "id": "dev.kaan.BetterMessages",
+  "name": "BetterMessages",
+  "description": "BetterMessages",
   "author": {
     "name": "kaan",
     "discordID": "",
     "github": "zrodevkaan"
   },
-  "version": "1.0.3",
+  "version": "1.0.4",
   "updater": {
     "type": "store",
-    "id": "dev.kaan.BetterGifs"
+    "id": "dev.kaan.BetterMessages"
   },
   "license": "MIT",
   "type": "replugged-plugin",
   "renderer": "src/index.tsx",
-  "image": ["https://i.imgur.com/v4kCzlb.png"]
+  "image": [
+    "https://i.imgur.com/v4kCzlb.png"
+  ]
 }

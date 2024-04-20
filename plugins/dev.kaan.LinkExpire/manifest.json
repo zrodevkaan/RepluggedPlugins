@@ -1,0 +1,22 @@
+{
+  "id": "dev.kaan.LinkExpire",
+  "name": "LinkExpire",
+  "description": "Allowing you to see when a image was sent and when it will expire.",
+  "author": {
+    "name": "kaan",
+    "discordID": "",
+    "github": "zrodevkaan"
+  },
+  "version": "1.0.3",
+  "updater": {
+    "type": "github",
+    "id": "zrodevkaan/RepluggedPlugins/tree/main/dev.kaan.LinkExpire"
+  },
+  "license": "MIT",
+  "type": "replugged-plugin",
+  "renderer": "src/index.tsx",
+  "source": "https://github.com/zrodevkaan/RepluggedPlugins/tree/main/dev.kaan.LinkExpire",
+  "image": [
+    "https://i.imgur.com/XAmANYw.png"
+  ]
+}

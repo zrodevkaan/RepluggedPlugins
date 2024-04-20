@@ -10,9 +10,9 @@
 }
 
 .timezone-overlay {
-  position: absolute;
-  bottom: 10px;
-  right: 10px;
+  position: relative;
+  bottom: -85px;
+  right: -210px;
   background-color: rgba(31, 31, 31, 0.8);
   padding: 10px;
   border-radius: 5px;
@@ -21,6 +21,7 @@
   display: flex;
   align-items: center;
   justify-content: center;
+  z-index: 99;
 }
 [class*="banner"] > .timezones-icon {
   opacity: 0% !important;

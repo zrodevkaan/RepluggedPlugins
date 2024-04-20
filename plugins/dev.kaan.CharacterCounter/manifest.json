@@ -1,0 +1,22 @@
+{
+  "id": "dev.kaan.CharacterCounter",
+  "name": "CharacterCounter",
+  "description": "Keeps an active text counter on the right of your chat bar ;3",
+  "author": {
+    "name": "kaan",
+    "discordID": "",
+    "github": "zrodevkaan"
+  },
+  "version": "1.0.0",
+  "updater": {
+    "type": "store",
+    "id": "dev.kaan.CharacterCounter"
+  },
+  "license": "MIT",
+  "type": "replugged-plugin",
+  "renderer": "src/index.tsx",
+  "source": "https://github.com/zrodevkaan/RepluggedPlugins/tree/main/plugins/dev.kaan.CharacterCounter",
+  "image": [
+    "https://imgur.com/undrZgm.png"
+  ]
+}

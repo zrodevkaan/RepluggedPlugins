@@ -1,0 +1,22 @@
+{
+  "id": "dev.kaan.QuickMessages",
+  "name": "QuickMessages",
+  "description": "Allows you to save phrases and use them later on.",
+  "author": {
+    "name": "kaan",
+    "discordID": "",
+    "github": "zrodevkaan"
+  },
+  "version": "1.0.3",
+  "updater": {
+    "type": "store",
+    "id": "dev.kaan.QuickMessages"
+  },
+  "license": "MIT",
+  "type": "replugged-plugin",
+  "renderer": "src/index.tsx",
+  "source": "https://github.com/zrodevkaan/RepluggedPlugins/tree/main/plugins/dev.kaan.QuickMessages",
+  "image": [
+    "https://i.imgur.com/Cp9Epf8.png"
+  ]
+}
