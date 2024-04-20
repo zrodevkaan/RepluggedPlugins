@@ -17,7 +17,7 @@ const {
 
 const inject = new Injector();
 const ModalList: any = webpack.getByProps("ConfirmModal"); // CAN YOU STOP NOW. THANKS <3
-const { parse }: any = webpack.getByProps(["defaultRules","parse"]);
+const { parse }: any = webpack.getByProps(["defaultRules", "parse"]);
 
 function hexToDate(hexTimestamp) {
   const decimalTimestamp = parseInt(hexTimestamp, 16);
@@ -80,7 +80,7 @@ function OpenModal(data: { attachmentName: string; attachmentUrl: string; itemSa
       header={`${data.attachmentName ?? extractFilenameFromUrl(URL)}`}
       confirmText="Confirm"
       cancelText="Cancel"
-      onConfirm={() => {}}
+      onConfirm={() => { }}
       style={{ width: `1213px`, maxHeight: 'none', maxWidth: 'none' }}
     >
       <ModalList.Text style={{ padding: '10px 0' }}>

@@ -70,7 +70,7 @@ function JustWorkPlease() {
   }, [currentPage]);
 
   return (
-    <div className={Classes.title}>
+    <div>
       <ComponentsPack.Text className="heading-lg-semibold_a200cd" style={{ color: "white" }}>
         Plugin Store
       </ComponentsPack.Text>

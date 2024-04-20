@@ -6,10 +6,17 @@
 }
 .owo-bigtext {
   font-weight: bold;
+  line-height: 1.25;
 }
 .owo-divider {
   margin: 20px 0;
 }
 .owo-smalltext {
   font-size: 14px;
+  line-height: 1.25;
+}
+
+.owo-image 
+{
+  resize: 'both'
 }
