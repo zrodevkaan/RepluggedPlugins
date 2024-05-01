@@ -1,0 +1,20 @@
+{
+  "id": "dev.kaan.Copier",
+  "name": "Copier",
+  "description": "Strenchers Copier BetterDiscord plugin but ported",
+  "author": {
+    "name": "kaan",
+    "discordID": "",
+    "github": "zrodevkaan"
+  },
+  "version": "1.0.3",
+  "updater": {
+    "type": "store",
+    "id": "dev.kaan.Copier"
+  },
+  "license": "MIT",
+  "type": "replugged-plugin",
+  "renderer": "src/index.tsx",
+  "source": "https://github.com/zrodevkaan/RepluggedPlugins/tree/main/plugins/dev.kaan.Copier",
+  "image": ["https://i.imgur.com/8cZq88W.png"]
+}
