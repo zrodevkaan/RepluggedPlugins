@@ -131,7 +131,7 @@ export function start() {
     <MenuItem id={"copier-menu"} label="Copier">
       {Object.keys(data.guild).map(key => (
         <MenuItem disabled={data.guild[key] === undefined || data.guild[key] === null} key={`copier-copy-${key}`} id={`copier-copy-${key}`} label={`Copy ${toPascalCase(key)}`} action={() => {
-          copy(data.guild[key])
+          copy(data.guild[key].toString() || '')
         }}/>
       ))}
     </MenuItem>
@@ -141,7 +141,7 @@ export function start() {
     <MenuItem id={"copier-menu"} label="Copier">
       {Object.keys(data.user).map(key => (
         <MenuItem disabled={data.user[key] === undefined || data.user[key] === null} key={`copier-copy-${key}`} id={`copier-copy-${key}`} label={`Copy ${toPascalCase(key)}`} action={() => {
-          copy(data.user[key])
+          copy(data.user[key].toString() || '')
         }}/>
       ))}
     </MenuItem>
