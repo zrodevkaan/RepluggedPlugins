@@ -126,23 +126,103 @@ export function start() {
       </MenuItem>
     );
   });
-  
+
   injector.utils.addMenuItem(ContextMenuTypes.GuildContext, (data: { guild: any }) => (
     <MenuItem id={"copier-menu"} label="Copier">
-      {Object.keys(data.guild).map(key => (
-        <MenuItem disabled={data.guild[key] === undefined || data.guild[key] === null} key={`copier-copy-${key}`} id={`copier-copy-${key}`} label={`Copy ${toPascalCase(key)}`} action={() => {
-          copy(data.guild[key].toString() || '')
-        }}/>
+      {Object.keys(data.guild || {}).map((key) => (
+        Array.isArray(data.guild?.[key]) ? (
+          <MenuItem disabled={!data.guild?.[key]} key={`copier-submenu-${key}`} id={`copier-submenu-${key}`} label={`Copy ${toPascalCase(key).replace("_", " ")}`}>
+            {(data.guild?.[key] || []).map((item, subIndex) => (
+              <MenuItem key={`copier-submenu-item-${key}-${subIndex}`} id={`copier-submenu-item-${key}-${subIndex}`} label={`Copy ${item?.name || 'Unnamed Item'}`} disabled={item === null}>
+                {Object.keys(item || {}).map((itemKey, itemIndex) => (
+                  <MenuItem disabled={item?.[itemKey] === undefined || item?.[itemKey] === null} key={`copier-copy-${key}-${subIndex}-${itemIndex}`} id={`copier-copy-${key}-${subIndex}-${itemIndex}`} label={`${toPascalCase(itemKey).replace("_", " ")}: ${item?.[itemKey]}`} action={() => {
+                    copy(item?.[itemKey]?.toString() || '');
+                  }} />
+                ))}
+              </MenuItem>
+            ))}
+          </MenuItem>
+        ) : typeof data.guild?.[key] === 'object' ? (
+          <MenuItem disabled={!data.guild?.[key]} key={`copier-submenu-${key}`} id={`copier-submenu-${key}`} label={`Copy ${toPascalCase(key).replace("_", " ")}`}>
+            {Object.entries(data.guild?.[key] || {}).map(([objKey, objValue], subIndex) => (
+              Array.isArray(objValue) ? (
+                <MenuItem disabled={objValue === null} key={`copier-submenu-item-${key}-${subIndex}`} id={`copier-submenu-item-${key}-${subIndex}`} label={`${toPascalCase(objKey).replace("_", " ")}`}>
+                  {objValue.map((item, itemIndex) => (
+                    <MenuItem disabled={item === null} key={`copier-copy-${key}-${subIndex}-${itemIndex}`} id={`copier-copy-${key}-${subIndex}-${itemIndex}`} label={`${item}`} action={() => {
+                      copy(item?.toString() || '');
+                    }} />
+                  ))}
+                </MenuItem>
+              ) : typeof objValue === 'object' ? (
+                <MenuItem disabled={objValue === null} key={`copier-submenu-item-${key}-${subIndex}`} id={`copier-submenu-item-${key}-${subIndex}`} label={`${toPascalCase(objKey).replace("_", " ")}`}>
+                  {Object.entries(objValue || {}).map(([innerObjKey, innerObjValue], innerIndex) => (
+                    <MenuItem disabled={innerObjValue === null} key={`copier-copy-${key}-${subIndex}-${innerIndex}`} id={`copier-copy-${key}-${subIndex}-${innerIndex}`} label={`${toPascalCase(innerObjKey).replace("_", " ")}: ${innerObjValue}`} action={() => {
+                      copy(innerObjValue?.toString() || '');
+                    }} />
+                  ))}
+                </MenuItem>
+              ) : (
+                <MenuItem disabled={objValue === null} key={`copier-submenu-item-${key}-${subIndex}`} id={`copier-submenu-item-${key}-${subIndex}`} label={`${toPascalCase(objKey).replace("_", " ")}: ${objValue}`} action={() => {
+                  copy(objValue?.toString() || '');
+                }} />
+              )
+            ))}
+          </MenuItem>
+        ) : (
+          <MenuItem disabled={data.guild?.[key] === undefined || data.guild?.[key] === null} key={`copier-copy-${key}`} id={`copier-copy-${key}`} label={`Copy ${toPascalCase(key).replace("_", " ")}`} action={() => {
+            copy(data.guild?.[key]?.toString() || '');
+          }} />
+        )
       ))}
     </MenuItem>
   ));
-
+  
   injector.utils.addMenuItem(ContextMenuTypes.UserContext, (data: { user: any }) => (
     <MenuItem id={"copier-menu"} label="Copier">
-      {Object.keys(data.user).map(key => (
-        <MenuItem disabled={data.user[key] === undefined || data.user[key] === null} key={`copier-copy-${key}`} id={`copier-copy-${key}`} label={`Copy ${toPascalCase(key)}`} action={() => {
-          copy(data.user[key].toString() || '')
-        }}/>
+      {Object.keys(data.user || {}).map((key) => (
+        Array.isArray(data.user?.[key]) ? (
+          <MenuItem disabled={!data.user?.[key]} key={`copier-submenu-${key}`} id={`copier-submenu-${key}`} label={`Copy ${toPascalCase(key).replace("_", " ")}`}>
+            {(data.user?.[key] || []).map((item, subIndex) => (
+              <MenuItem key={`copier-submenu-item-${key}-${subIndex}`} id={`copier-submenu-item-${key}-${subIndex}`} label={`Copy ${item?.name || 'Unnamed Item'}`} disabled={item === null}>
+                {Object.keys(item || {}).map((itemKey, itemIndex) => (
+                  <MenuItem disabled={item?.[itemKey] === undefined || item?.[itemKey] === null} key={`copier-copy-${key}-${subIndex}-${itemIndex}`} id={`copier-copy-${key}-${subIndex}-${itemIndex}`} label={`${toPascalCase(itemKey).replace("_", " ")}: ${item?.[itemKey]}`} action={() => {
+                    copy(item?.[itemKey]?.toString() || '');
+                  }} />
+                ))}
+              </MenuItem>
+            ))}
+          </MenuItem>
+        ) : typeof data.user?.[key] === 'object' ? (
+          <MenuItem disabled={!data.user?.[key]} key={`copier-submenu-${key}`} id={`copier-submenu-${key}`} label={`Copy ${toPascalCase(key).replace("_", " ")}`}>
+            {Object.entries(data.user?.[key] || {}).map(([objKey, objValue], subIndex) => (
+              Array.isArray(objValue) ? (
+                <MenuItem disabled={objValue === null} key={`copier-submenu-item-${key}-${subIndex}`} id={`copier-submenu-item-${key}-${subIndex}`} label={`${toPascalCase(objKey).replace("_", " ")}`}>
+                  {objValue.map((item, itemIndex) => (
+                    <MenuItem disabled={item === null} key={`copier-copy-${key}-${subIndex}-${itemIndex}`} id={`copier-copy-${key}-${subIndex}-${itemIndex}`} label={`${item}`} action={() => {
+                      copy(item?.toString() || '');
+                    }} />
+                  ))}
+                </MenuItem>
+              ) : typeof objValue === 'object' ? (
+                <MenuItem disabled={objValue === null} key={`copier-submenu-item-${key}-${subIndex}`} id={`copier-submenu-item-${key}-${subIndex}`} label={`${toPascalCase(objKey).replace("_", " ")}`}>
+                  {Object.entries(objValue || {}).map(([innerObjKey, innerObjValue], innerIndex) => (
+                    <MenuItem disabled={innerObjValue === null} key={`copier-copy-${key}-${subIndex}-${innerIndex}`} id={`copier-copy-${key}-${subIndex}-${innerIndex}`} label={`${toPascalCase(innerObjKey).replace("_", " ")}: ${innerObjValue}`} action={() => {
+                      copy(innerObjValue?.toString() || '');
+                    }} />
+                  ))}
+                </MenuItem>
+              ) : (
+                <MenuItem disabled={objValue === null} key={`copier-submenu-item-${key}-${subIndex}`} id={`copier-submenu-item-${key}-${subIndex}`} label={`${toPascalCase(objKey).replace("_", " ")}: ${objValue}`} action={() => {
+                  copy(objValue?.toString() || '');
+                }} />
+              )
+            ))}
+          </MenuItem>
+        ) : (
+          <MenuItem disabled={data.user?.[key] === undefined || data.user?.[key] === null} key={`copier-copy-${key}`} id={`copier-copy-${key}`} label={`Copy ${toPascalCase(key).replace("_", " ")}`} action={() => {
+            copy(data.user?.[key]?.toString() || '');
+          }} />
+        )
       ))}
     </MenuItem>
   ));
@@ -204,6 +284,75 @@ export function start() {
           copy(data.channel[key].toString() || '')
         }}/>
       ))}
+    </MenuItem>
+  ));
+
+  injector.utils.addMenuItem(ContextMenuTypes.Message, (data: { message: any }) => (
+    <MenuItem id={"copier-menu"} label="Copier">
+      {Object.keys(data.message || {}).map((key) => (
+        Array.isArray(data.message?.[key]) ? (
+          <MenuItem disabled={!data.message?.[key]} key={`copier-submenu-${key}`} id={`copier-submenu-${key}`} label={`Copy ${toPascalCase(key).replace("_", " ")}`}>
+            {(data.message?.[key] || []).map((item, subIndex) => (
+              <MenuItem key={`copier-submenu-item-${key}-${subIndex}`} id={`copier-submenu-item-${key}-${subIndex}`} label={`Copy ${item?.name || 'Unnamed Item'}`} disabled={item === null}>
+                {Object.keys(item || {}).map((itemKey, itemIndex) => (
+                  <MenuItem disabled={item?.[itemKey] === undefined || item?.[itemKey] === null} key={`copier-copy-${key}-${subIndex}-${itemIndex}`} id={`copier-copy-${key}-${subIndex}-${itemIndex}`} label={`${toPascalCase(itemKey).replace("_", " ")}: ${item?.[itemKey]}`} action={() => {
+                    copy(item?.[itemKey]?.toString() || '');
+                  }} />
+                ))}
+              </MenuItem>
+            ))}
+          </MenuItem>
+        ) : typeof data.message?.[key] === 'object' ? (
+          <MenuItem disabled={!data.message?.[key]} key={`copier-submenu-${key}`} id={`copier-submenu-${key}`} label={`Copy ${toPascalCase(key).replace("_", " ")}`}>
+            {Object.entries(data.message?.[key] || {}).map(([objKey, objValue], subIndex) => (
+              Array.isArray(objValue) ? (
+                <MenuItem disabled={objValue === null} key={`copier-submenu-item-${key}-${subIndex}`} id={`copier-submenu-item-${key}-${subIndex}`} label={`${toPascalCase(objKey).replace("_", " ")}`}>
+                  {objValue.map((item, itemIndex) => (
+                    <MenuItem disabled={item === null} key={`copier-copy-${key}-${subIndex}-${itemIndex}`} id={`copier-copy-${key}-${subIndex}-${itemIndex}`} label={`${item}`} action={() => {
+                      copy(item?.toString() || '');
+                    }} />
+                  ))}
+                </MenuItem>
+              ) : typeof objValue === 'object' ? (
+                <MenuItem disabled={objValue === null} key={`copier-submenu-item-${key}-${subIndex}`} id={`copier-submenu-item-${key}-${subIndex}`} label={`${toPascalCase(objKey).replace("_", " ")}`}>
+                  {Object.entries(objValue || {}).map(([innerObjKey, innerObjValue], innerIndex) => (
+                    <MenuItem disabled={innerObjValue === null} key={`copier-copy-${key}-${subIndex}-${innerIndex}`} id={`copier-copy-${key}-${subIndex}-${innerIndex}`} label={`${toPascalCase(innerObjKey).replace("_", " ")}: ${innerObjValue}`} action={() => {
+                      copy(innerObjValue?.toString() || '');
+                    }} />
+                  ))}
+                </MenuItem>
+              ) : (
+                <MenuItem disabled={objValue === null} key={`copier-submenu-item-${key}-${subIndex}`} id={`copier-submenu-item-${key}-${subIndex}`} label={`${toPascalCase(objKey).replace("_", " ")}: ${objValue}`} action={() => {
+                  copy(objValue?.toString() || '');
+                }} />
+              )
+            ))}
+          </MenuItem>
+        ) : (
+          <MenuItem disabled={data.message?.[key] === undefined || data.message?.[key] === null} key={`copier-copy-${key}`} id={`copier-copy-${key}`} label={`Copy ${toPascalCase(key).replace("_", " ")}`} action={() => {
+            copy(data.message?.[key]?.toString() || '');
+          }} />
+        )
+      ))}
+    </MenuItem>
+  ));
+  
+  injector.utils.addMenuItem('attachment-link-context' as ContextMenuTypes, (data: { attachmentUrl: any, attachmentName: string }) => (
+    <MenuItem id={"copier-menu"} label="Copier">
+      <MenuItem
+        id="stern-is-awesome-copier-attachmentName"
+        label="Copy Attachment Name"
+        action={() => {
+          copy(data.attachmentName);
+        }}
+      />
+      <MenuItem
+        id="stern-is-awesome-copier-attachmentUrl"
+        label="Copy Attachment URL"
+        action={() => {
+          copy(data.attachmentUrl);
+        }}
+      />
     </MenuItem>
   ));
 }
