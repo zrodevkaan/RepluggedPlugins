@@ -21,7 +21,7 @@ function createOpenInPopoutMenuItem(data) {
       action={() => {
         openWindow({
           title: data?.guild?.name ?? data?.channel?.name ?? "Private Message",
-          id: data.channel.id ?? data.channel.id,
+          id: data.channel.id,
           render({ window }) {
             React.useInsertionEffect(() => {
               const style = window.document.createElement("style");
@@ -46,7 +46,7 @@ function createOpenInPopoutMenuItem(data) {
 const ContextMenuList = [
   ContextMenuTypes.UserContext,
   ContextMenuTypes.ChannelContext,
-  ContextMenuTypes.GdmContext
+  ContextMenuTypes.GdmContext,
 ];
 
 export function start() {
