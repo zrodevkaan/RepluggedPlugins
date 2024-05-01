@@ -1,10 +1,10 @@
-import {components, Injector, settings, webpack} from "replugged";
-import {modal, React, toast} from "replugged/common";
-import {AnyFunction, ContextMenuTypes} from "replugged/types";
-import {getByStoreName} from "replugged/webpack";
+import { components, Injector, settings, webpack } from "replugged";
+import { modal, React, toast } from "replugged/common";
+import { AnyFunction, ContextMenuTypes } from "replugged/types";
+import { filters, getByStoreName } from "replugged/webpack";
 import { Modal } from "replugged/components";
-import {ChannelStore} from "discord-types/stores";
-import {ReactElement} from "react";
+import { ChannelStore } from "discord-types/stores";
+import { ReactElement } from "react";
 export interface SettingsType {
   roleColor?: boolean;
 }
@@ -16,8 +16,8 @@ const ChannelContext = React.createContext(null);
 const {
   ContextMenu: { MenuItem },
 } = components;
-const {getDMFromUserId}: ChannelStore = webpack.getByProps("getDMFromUserId")
-const {getChannel}: ChannelStore = webpack.getByStoreName("ChannelStore")
+const { getDMFromUserId }: ChannelStore = webpack.getByProps("getDMFromUserId")
+const { getChannel }: ChannelStore = webpack.getByStoreName("ChannelStore")
 type ChatBoxType = () => ReactElement;
 
 interface AdditionalProps {
@@ -26,19 +26,17 @@ interface AdditionalProps {
 }
 
 // Define the new type of ChatBox with the modified props
-const ChatBox: { type: () => ReactElement<AdditionalProps> } = webpack.getModule(
-  (m) => m?.exports?.default?.type?.toString().indexOf('communicationDisabledUntil') > -1
-);;
-const {ChatInputTypes}: any = webpack.getByProps("ChatInputTypes") ?? {};
+const ChatBox: { type: () => ReactElement<AdditionalProps> } = await webpack.waitForModule(filters.bySource('tutorialId:"writing-messages"'))
+const { ChatInputTypes }: any = webpack.getByProps("ChatInputTypes") ?? {};
 export function start() {
-  inject.utils.addMenuItem(ContextMenuTypes.UserContext, (something,elsee) => {
+  inject.utils.addMenuItem(ContextMenuTypes.UserContext, (something, elsee) => {
     return (
-        <MenuItem label="open dms" id={"DMsLock-owo-stuff-submenu"}
-                action={() => {
-                  OpenModal(something);
-                }}>
-        </MenuItem>
-  );
+      <MenuItem label="open dms" id={"DMsLock-owo-stuff-submenu"}
+        action={() => {
+          OpenModal(something);
+        }}>
+      </MenuItem>
+    );
   })
 }
 
@@ -53,9 +51,8 @@ export function Settings() {
  */
 function OpenModal(data: any) {
   const dmUserChannel = getDMFromUserId(data?.user?.id);
-  webpack.getModule(x=>x && typeof x?.exports?.default?.fetchMessages === 'function').fetchMessages({channelId: dmUserChannel})
-  if (dmUserChannel)
-  {
+  webpack.getModule(x => x && typeof x?.exports?.default?.fetchMessages === 'function').fetchMessages({ channelId: dmUserChannel })
+  if (dmUserChannel) {
     modal.openModal((props) => (
       <Modal.ModalRoot size="large" {...props}>
         <Modal.ModalContent style={{
@@ -77,9 +74,8 @@ function OpenModal(data: any) {
       </Modal.ModalRoot>
     ));
   }
-  else 
-  {
-    toast.toast(`Couldn't open ${data?.user?.username}'s channel. Try opening a channel manually!`, toast.Kind.FAILURE)
+  else {
+    toast.toast(`Couldn't open ${data?.user?.username}'s channel. Try opening the channel manually!`, toast.Kind.FAILURE)
   }
 }
 

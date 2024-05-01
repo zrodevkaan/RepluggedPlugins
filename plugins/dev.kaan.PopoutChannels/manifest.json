@@ -1,0 +1,20 @@
+{
+  "id": "dev.kaan.PopoutChannels",
+  "name": "PopoutChannels",
+  "description": "PopoutChannels",
+  "author": {
+    "name": "kaan",
+    "discordID": "",
+    "github": "zrodevkaan"
+  },
+  "version": "1.0.0",
+  "updater": {
+    "type": "store",
+    "id": "dev.kaan.PopoutChannels"
+  },
+  "license": "MIT",
+  "type": "replugged-plugin",
+  "renderer": "src/index.tsx",
+  "source": "https://github.com/zrodevkaan/RepluggedPlugins/tree/main/plugins/dev.kaan.PopoutChannels",
+  "image": ["https://i.imgur.com/uu8K4Be.png"]
+}

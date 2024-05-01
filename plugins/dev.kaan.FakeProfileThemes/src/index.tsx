@@ -1,7 +1,7 @@
 import { Injector, common, settings, webpack, util } from "replugged";
 import React from "react";
-import {Store} from "replugged/dist/renderer/modules/common/flux";
-import {Button} from "replugged/components";
+import { Store } from "replugged/dist/renderer/modules/common/flux";
+import { Button } from "replugged/components";
 const { fluxDispatcher } = common;
 
 const injector = new Injector();
@@ -30,11 +30,11 @@ export function encode(primary: number, accent: number): string {
 }
 
 export function start() {
-  injector.after(UserProfileStore,"getUserProfile", (a,b ,c) => {
+  injector.after(UserProfileStore, "getUserProfile", (a, b, c) => {
     const decoded = decode(b?.bio ?? "");
     // ?? stopped the crashing. idky
     const colors = decoded.match(COLOR_REGEX);
-    
+
     if (!colors) return;
 
     colors.shift();
@@ -45,9 +45,8 @@ export function start() {
   })
 }
 
-export function owo({ primary, accent })
-{
-  return <Button onClick={ () => {DiscordNative.clipboard.copy(encode(primary, accent))} }> Copy 3y3 </Button>
+export function copyButton({ primary, accent }) {
+  return <Button onClick={() => { DiscordNative.clipboard.copy(encode(primary, accent)) }}> Copy 3y3 </Button>
 }
 
 export function stop(): void {

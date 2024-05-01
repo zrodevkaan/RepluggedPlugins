@@ -19,10 +19,6 @@ interface UserData {
   username: string;
   id: string;
 }
-
-interface UserStore {
-  getUser: (string: string) => {};
-}
 interface UserType {
   id: string;
 }
@@ -147,7 +143,8 @@ class CakeDay {
     ));
   }
 
-  clearBirthday(user: { username: string; id: string }) {
+  clearBirthday(user: { username: string; id: string }) 
+  {
     if (!(user.id in this.savedBirthdays)) {
       return;
     }

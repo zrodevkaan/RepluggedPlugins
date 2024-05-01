@@ -1,5 +1,6 @@
 import {common, components, Injector, settings, webpack} from "replugged";
 import {ContextMenuTypes} from "replugged/types";
+import {useRef} from "react";
 
 const injector = new Injector();
 const owo = await settings.init("dev.kaan.dmslock");
@@ -14,14 +15,9 @@ const {
 const {
   React,
   modal,
-  toast: {
-    Kind: { FAILURE, SUCCESS },
-    toast,
-  },
-  users,
 } = common;
 
-const { colorBrand } = webpack.getByProps("colorBrand");
+const { colorBrand }: {colorBrand: string} = webpack.getByProps("colorBrand");
 
 interface Information {
   data: Array<[channelId: string, guildId: string, messageId: string | null]>;
@@ -30,7 +26,8 @@ interface Information {
 const { encryptString, decryptString } = DiscordNative.safeStorage;
 
 export function start() {
-  injector.instead(ChannelStuff, "selectChannel", (a: any, b, c) => {
+  // eslint-disable-next-line consistent-return
+  injector.instead(ChannelStuff, "selectChannel", (a: any, b) => {
     const channelData: Information | any = a?.[0];
     const channelId = channelData.channelId;
 
@@ -87,24 +84,33 @@ export function start() {
 async function passwordUnlockDMModal(user: { username: string; id: string }, callback: (password: string) => void) {
   let password = "";
 
-  modal.openModal((props) => (
-    <ModalList.ConfirmModal
-      {...props}
-      header={`Enter Password to Unlock ${user.username}'s DMs`}
-      confirmButtonColor={colorBrand}
-      confirmText="Confirm"
-      cancelText="Cancel"
-      onConfirm={async () => {
-        callback(password);
-      }}
-    >
-      <ModalList.TextInput
-        placeholder="Enter password"
-        onChange={(thisPassword) => {
-          password = thisPassword;
+  function ConfirmModal(props) {
+    const refInput = useRef(props)
+    return (
+      <ModalList.ConfirmModal
+        {...props}
+        header={`Enter Password to Unlock ${user.username}'s DMs`}
+        confirmButtonColor={colorBrand}
+        confirmText="Confirm"
+        cancelText="Cancel"
+        onConfirm={async () => {
+          callback(password);
         }}
-      />
-    </ModalList.ConfirmModal>
+      >
+        <ModalList.TextInput
+          placeholder="Enter password"
+          autofocus
+          ref={() => {console.log(refInput)}}
+          onChange={(e) => {
+            password = e;
+          }}
+        />
+      </ModalList.ConfirmModal>
+    );
+  }
+
+  modal.openModal((props) => (
+    <ConfirmModal {...props} props={props} />
   ));
 }
 
