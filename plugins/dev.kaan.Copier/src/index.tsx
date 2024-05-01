@@ -196,6 +196,16 @@ export function start() {
       ))}
     </MenuItem>
   ));
+
+  injector.utils.addMenuItem(ContextMenuTypes.ThreadContext, (data: { channel: any }) => (
+    <MenuItem id={"copier-menu"} label="Copier">
+      {Object.keys(data.channel).map(key => (
+        <MenuItem disabled={data.channel[key] === undefined || data.channel[key] === null} key={`copier-copy-${key}`} id={`copier-copy-${key}`} label={`Copy ${toPascalCase(key)}`} action={() => {
+          copy(data.channel[key].toString() || '')
+        }}/>
+      ))}
+    </MenuItem>
+  ));
 }
 
 
