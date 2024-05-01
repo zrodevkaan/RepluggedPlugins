@@ -279,10 +279,50 @@ export function start() {
 
   injector.utils.addMenuItem(ContextMenuTypes.ThreadContext, (data: { channel: any }) => (
     <MenuItem id={"copier-menu"} label="Copier">
-      {Object.keys(data.channel).map(key => (
-        <MenuItem disabled={data.channel[key] === undefined || data.channel[key] === null} key={`copier-copy-${key}`} id={`copier-copy-${key}`} label={`Copy ${toPascalCase(key)}`} action={() => {
-          copy(data.channel[key].toString() || '')
-        }}/>
+      {Object.keys(data.channel || {}).map((key) => (
+        Array.isArray(data.channel?.[key]) ? (
+          <MenuItem disabled={!data.channel?.[key]} key={`copier-submenu-${key}`} id={`copier-submenu-${key}`} label={`Copy ${toPascalCase(key).replace("_", " ")}`}>
+            {(data.channel?.[key] || []).map((item, subIndex) => (
+              <MenuItem key={`copier-submenu-item-${key}-${subIndex}`} id={`copier-submenu-item-${key}-${subIndex}`} label={`Copy ${item?.name || 'Unnamed Item'}`} disabled={item === null}>
+                {Object.keys(item || {}).map((itemKey, itemIndex) => (
+                  <MenuItem disabled={item?.[itemKey] === undefined || item?.[itemKey] === null} key={`copier-copy-${key}-${subIndex}-${itemIndex}`} id={`copier-copy-${key}-${subIndex}-${itemIndex}`} label={`${toPascalCase(itemKey).replace("_", " ")}: ${item?.[itemKey]}`} action={() => {
+                    copy(item?.[itemKey]?.toString() || '');
+                  }} />
+                ))}
+              </MenuItem>
+            ))}
+          </MenuItem>
+        ) : typeof data.channel?.[key] === 'object' ? (
+          <MenuItem disabled={!data.channel?.[key]} key={`copier-submenu-${key}`} id={`copier-submenu-${key}`} label={`Copy ${toPascalCase(key).replace("_", " ")}`}>
+            {Object.entries(data.channel?.[key] || {}).map(([objKey, objValue], subIndex) => (
+              Array.isArray(objValue) ? (
+                <MenuItem disabled={objValue === null} key={`copier-submenu-item-${key}-${subIndex}`} id={`copier-submenu-item-${key}-${subIndex}`} label={`${toPascalCase(objKey).replace("_", " ")}`}>
+                  {objValue.map((item, itemIndex) => (
+                    <MenuItem disabled={item === null} key={`copier-copy-${key}-${subIndex}-${itemIndex}`} id={`copier-copy-${key}-${subIndex}-${itemIndex}`} label={`${item}`} action={() => {
+                      copy(item?.toString() || '');
+                    }} />
+                  ))}
+                </MenuItem>
+              ) : typeof objValue === 'object' ? (
+                <MenuItem disabled={objValue === null} key={`copier-submenu-item-${key}-${subIndex}`} id={`copier-submenu-item-${key}-${subIndex}`} label={`${toPascalCase(objKey).replace("_", " ")}`}>
+                  {Object.entries(objValue || {}).map(([innerObjKey, innerObjValue], innerIndex) => (
+                    <MenuItem disabled={innerObjValue === null} key={`copier-copy-${key}-${subIndex}-${innerIndex}`} id={`copier-copy-${key}-${subIndex}-${innerIndex}`} label={`${toPascalCase(innerObjKey).replace("_", " ")}: ${innerObjValue}`} action={() => {
+                      copy(innerObjValue?.toString() || '');
+                    }} />
+                  ))}
+                </MenuItem>
+              ) : (
+                <MenuItem disabled={objValue === null} key={`copier-submenu-item-${key}-${subIndex}`} id={`copier-submenu-item-${key}-${subIndex}`} label={`${toPascalCase(objKey).replace("_", " ")}: ${objValue}`} action={() => {
+                  copy(objValue?.toString() || '');
+                }} />
+              )
+            ))}
+          </MenuItem>
+        ) : (
+          <MenuItem disabled={data.channel?.[key] === undefined || data.channel?.[key] === null} key={`copier-copy-${key}`} id={`copier-copy-${key}`} label={`Copy ${toPascalCase(key).replace("_", " ")}`} action={() => {
+            copy(data.channel?.[key]?.toString() || '');
+          }} />
+        )
       ))}
     </MenuItem>
   ));
