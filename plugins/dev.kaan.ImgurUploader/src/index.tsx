@@ -1,88 +1,79 @@
 /* eslint-disable no-extend-native */
-import { Injector, util, webpack } from "replugged";
-import { contextMenu } from "replugged/common";
-import { ContextMenu } from "replugged/components";
-import { ContextMenuTypes } from "replugged/types";
-import { Base } from "replugged/dist/renderer/coremods/badges/badge";
-
+import exp from "node:constants";
+import { components, Injector, settings, webpack } from "replugged";
+import { TextInput } from "replugged/components";
+import {ContextMenuTypes} from "replugged/types";
+import React from "react";
+const {
+  ContextMenu: { MenuItem },
+} = components;
 const injector = new Injector();
-const { GIFPickerSearchItem } = webpack.getByProps("GIFPickerSearchItem") as any;
-const copyModule: any = webpack.getByProps("copy");
-const MessageEngine: any = webpack.getByProps("sendMessage");
-const SelectedChannelStore: any = webpack.getByStoreName("SelectedChannelStore");
+export const owo = await settings.init("dev.kaan.imguruploader");
+// @ts-ignore
+const FileManager: any = webpack.getModule(x => x?.exports?.default?.fileManager?.openFiles).fileManager
+const {InboxIcon}: any = webpack.getByProps("InboxIcon");
+// this is lazy but I want an icon
+
+const IconWithLabel = ({ icon, label }) => {
+  return (
+    <div style={{ display: 'flex', alignItems: 'center' }}>
+      {icon}
+      <span style={{ marginLeft: '0.5rem' }}>{label}</span>
+    </div>
+  );
+};
+
+const SomeComponent = () => {
+  return (
+    <div>
+      <IconWithLabel icon={<InboxIcon />} label="Upload Image" />
+    </div>
+  );
+};
 
 export function start() {
-  injector.after(GIFPickerSearchItem.prototype, "render", (a, b) => {
-    b.props.onContextMenu = (e) => {
-      const Href = util.findInReactTree(b, (x) => Boolean(x?.src));
-      contextMenu.open(e, (props) => (
-        <>
-          <ContextMenu.ContextMenu {...props} onClose={contextMenu.close} {...props}>
-            <ContextMenu.MenuItem
-              {...{
-                label: "Copy Source",
-                id: "copy-link-owo",
-                action: () => {
-                  copyModule.copy(Href.src);
-                },
-              }}
-            />
-            <ContextMenu.MenuItem
-              {...{
-                label: "Copy URL",
-                id: "copy-url-owo",
-                action: () => {
-                  copyModule.copy(Href.url);
-                },
-              }}
-            />
-            <ContextMenu.MenuItem
-              {...{
-                label: "Send URL",
-                id: "send-url-owo",
-                action: () => {
-                  const SendMessageData = [
-                    SelectedChannelStore.getCurrentlySelectedChannelId(),
-                    {
-                      content: Href.url || Href.src,
-                      tts: false,
-                      invalidEmojis: [],
-                      validNonShortcutEmojis: [],
-                    },
-                    undefined,
-                    {},
-                  ];
-                  MessageEngine.sendMessage(...SendMessageData);
-                },
-              }}
-            />
-          </ContextMenu.ContextMenu>
-        </>
-      ));
-    };
-  });
-  injector.utils.addMenuItem("expression-picker" as ContextMenuTypes, (data, pp) => (
-    <>
-      <ContextMenu.MenuItem
-        id="copy-source"
-        label="Copy Source"
-        action={() => {
-          const Base = data.target as HTMLBaseElement;
-          const StickerID = Base.dataset.id;
-          let isEmoji = Base.className.includes("emoji");
-          copyModule.copy(replaceStickerURL(StickerID, isEmoji));
-        }}
-      />
-    </>
-  ));
+  const imgurKey = owo.get('imgurKey', undefined);
+
+  const menuItem = imgurKey !== undefined && (
+    <MenuItem
+      id="upload-image"
+      label={SomeComponent as unknown as string}
+      action={() => {
+        FileManager.openFiles({ filters: "" })
+          .then(async (x) => {
+            const fileData = x?.[0];
+            if (!fileData) return;
+            const file = new File([fileData.data], fileData.filename, { type: 'application/octet-stream' });
+            const formData = new FormData()
+            formData.append("image", file)
+            await fetch("https://api.imgur.com/3/image/", {
+              method: "post",
+              headers: {
+                Authorization: `Client-ID ${imgurKey}`
+              },
+              body: formData
+            }).then(data => data.json()).then(data => {
+              console.log(data.data.link) // https://i.imgur.com/wlrHIfY.png - IMAGE FORMAT
+            })
+          });
+      }}
+    />
+  );
+
+  injector.utils.addMenuItem(ContextMenuTypes.ChannelAttach, (data) => menuItem);
 }
+
 
 export function stop(): void {
   injector.uninjectAll();
 }
 
-function replaceStickerURL(stickerID, isEmoji) {
-  const StickerURL = "https://media.discordapp.net/stickers/%d.png?size=1280&passthrough=false";
-  const BaseChange = StickerURL.replace("%d", stickerID);
-  return isEmoji ? BaseChange.replace("stickers", "emojis") : BaseChange; //isnt there some format method to do this ? I forgot it :3
+function InsetSettings() {
+  const [text, setText] = React.useState("");
+  return <TextInput value={owo.get('imgurKey', undefined)} placeholder={'Insert Imgur API Key.'} onChange={(s) => {setText(s); owo.set('imgurKey', s);}}/>
 }
+
+export function Settings() {
+  return <InsetSettings />;
+}
+
