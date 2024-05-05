@@ -12,6 +12,7 @@ export const owo = await settings.init("dev.kaan.imguruploader");
 // @ts-ignore
 const FileManager: any = webpack.getModule(x => x?.exports?.default?.fileManager?.openFiles).fileManager
 const {InboxIcon}: any = webpack.getByProps("InboxIcon");
+const {copy} = DiscordNative.clipboard
 // this is lazy but I want an icon
 
 const IconWithLabel = ({ icon, label }) => {
@@ -31,6 +32,29 @@ const SomeComponent = () => {
   );
 };
 
+function StartFileUpload()
+{
+  const imgurKey = owo.get('imgurKey', undefined);
+  FileManager.openFiles({ filters: "" })
+    .then(async (x) => {
+      const fileData = x?.[0];
+      if (!fileData) return;
+      const file = new File([fileData.data], fileData.filename, { type: 'application/octet-stream' });
+      const formData = new FormData()
+      formData.append("image", file)
+      await fetch("https://api.imgur.com/3/image/", {
+        method: "post",
+        headers: {
+          Authorization: `Client-ID ${imgurKey}`
+        },
+        body: formData
+      }).then(data => data.json()).then(data => {
+        // console.log(data.data.link) // https://i.imgur.com/wlrHIfY.png - IMAGE FORMAT
+        copy(data.data.link)
+      })
+    });
+}
+
 export function start() {
   const imgurKey = owo.get('imgurKey', undefined);
 
@@ -39,23 +63,7 @@ export function start() {
       id="upload-image"
       label={SomeComponent as unknown as string}
       action={() => {
-        FileManager.openFiles({ filters: "" })
-          .then(async (x) => {
-            const fileData = x?.[0];
-            if (!fileData) return;
-            const file = new File([fileData.data], fileData.filename, { type: 'application/octet-stream' });
-            const formData = new FormData()
-            formData.append("image", file)
-            await fetch("https://api.imgur.com/3/image/", {
-              method: "post",
-              headers: {
-                Authorization: `Client-ID ${imgurKey}`
-              },
-              body: formData
-            }).then(data => data.json()).then(data => {
-              console.log(data.data.link) // https://i.imgur.com/wlrHIfY.png - IMAGE FORMAT
-            })
-          });
+        StartFileUpload();
       }}
     />
   );

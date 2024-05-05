@@ -24,14 +24,14 @@ interface Data {
   user: object;
 }
 
-const DarkOverlay: any = ({ children }) => <div className={"timezone-overlay"}>{children}</div>;
+const DarkOverlay: React.FC = ({ children }) => <div className={"timezone-overlay"}>{children}</div>;
 
 async function openTimezoneModal(user: any) {
-  const RenderThis = (props) => {
-    const [timezone, setTimezone] = React.useState(owo.get(user.id, {})?.timezone);
+  const RenderThis: React.FC = (props) => {
+    const [timezone, setTimezone] = React.useState<string>(owo.get(user.id, {})?.timezone);
     const [filteredTimezones, setFilteredTimezones] = React.useState(getAllTimezones());
 
-    const handleSearch = (searchValue) => {
+    const handleSearch = (searchValue: string) => {
       const filtered = getAllTimezones().filter((tz) =>
         tz.label.toLowerCase().includes(searchValue.toLowerCase()),
       );
@@ -60,7 +60,7 @@ async function openTimezoneModal(user: any) {
   modal.openModal((props) => <RenderThis {...props} />);
 }
 
-export function start() {
+export function start(): void {
   injector.after(ProfilePopout, "default", (a, b, c) => {
     const Children: any = util.findInReactTree(b, (x) => Boolean(x?.className)).children;
     const User = a?.[0]["user"];
@@ -166,14 +166,14 @@ export function start() {
   });
 }
 
-const getAllTimezones = () =>
+const getAllTimezones = (): { label: string; value: string }[] =>
   Intl.supportedValuesOf("timeZone").map((timezone) => {
     const time = getCurrentTimeInTimezone(timezone);
     return {
       label: `${timezone} ${time} (${new Intl.DateTimeFormat(undefined, { timeZone: timezone, timeZoneName: "short" })
         .formatToParts(new Date())
         .find((part) => part.type == "timeZoneName").value
-        })`,
+      })`,
       value: timezone,
     };
   });
@@ -186,11 +186,11 @@ function getCurrentTimeInTimezone(timezone: string): string {
   });
 }
 
-export function stop() {
+export function stop(): void {
   injector.uninjectAll();
 }
 
-export function Settings() {
+export function Settings(): JSX.Element {
   return (
     <>
       <SwitchItem
