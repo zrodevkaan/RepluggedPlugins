@@ -23,9 +23,7 @@ interface TreeNode {
 const { React } = common;
 const inject = new Injector();
 
-const ProfileContext = await webpack.waitForModule<{ default: (something: string) => unknown }>(
-  webpack.filters.byProps("UserProfileContext"),
-);
+const ProfileContext = webpack.getBySource(".useUserProfileThemeContext)();", { raw: true })?.exports
 const UserProfileStore = webpack.getByStoreName(
   "UserProfileStore",
 ) as unknown as UserProfileStoreType;

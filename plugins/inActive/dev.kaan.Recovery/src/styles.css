@@ -1,5 +1,5 @@
-.buttons_dc1e0b {flex-direction: column; align-items: center}
-.buttons_dc1e0b .button_afdfd9 {
+.buttons__7ecff {flex-direction: column; align-items: center}
+.buttons__7ecff .button__493d9 {
   width: 400px;
   margin: 5px;
 }
@@ -7,7 +7,7 @@
 {
   background-color: var(--button-danger-background) !important;
 }
-.errorPage_da3c8d [class^="scrollbarGhostHairline"]
+.errorPage_a41002 [class^="scrollbarGhostHairline"]
 {
   white-space: break-spaces;
   width: 80vw;

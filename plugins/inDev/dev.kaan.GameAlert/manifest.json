@@ -1,0 +1,21 @@
+{
+  "id": "dev.kaan.GameAlert",
+  "name": "GameAlert",
+  "description": "Steam-like notifcations telling you what your friend is doing :3",
+  "author": {
+    "name": "kaan",
+    "discordID": "",
+    "github": "zrodevkaan"
+  },
+  "version": "1.0.0",
+  "updater": {
+    "type": "store",
+    "id": "dev.kaan.GameAlert"
+  },
+  "license": "MIT",
+  "type": "replugged-plugin",
+  "renderer": "src/index.tsx",
+  "image": [
+    "https://i.imgur.com/4ltlHlD.png"
+  ]
+}

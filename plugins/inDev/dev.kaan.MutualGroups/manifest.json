@@ -1,0 +1,20 @@
+{
+  "id": "dev.kaan.mutualGroups",
+  "name": "Mutual Groups",
+  "description": "I don't think tharki would care...",
+  "author": {
+    "name": "kaan",
+    "discordID": "",
+    "github": "zrodevkaan"
+  },
+  "version": "1.0.0",
+  "updater": {
+    "type": "store",
+    "id": "dev.kaan.mutualGroups"
+  },
+  "license": "MIT",
+  "type": "replugged-plugin",
+  "renderer": "src/index.tsx",
+  "plaintextPatches": "src/patches.ts",
+  "image": ["https://i.imgur.com/66pKDq9.png"]
+}

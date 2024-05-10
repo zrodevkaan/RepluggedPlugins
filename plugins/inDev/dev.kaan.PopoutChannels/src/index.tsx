@@ -5,7 +5,7 @@ import { openWindow } from "./VXWrapperCode";
 
 const inject = new Injector();
 
-const Channel = webpack.getBySource('"Missing channel in Channel.renderCall"');
+const Channel = await webpack.waitForModule(webpack.filters.bySource('"Missing channel in Channel.renderCall"'));
 const ChannelStore = webpack.getByStoreName('ChannelStore')
 const ReactRouter = webpack.getByProps([ "Route", "Switch", "BrowserRouter" ]);
 
@@ -19,6 +19,7 @@ function createOpenInPopoutMenuItem(data) {
       id="open-in-popout"
       label="Open In Popout"
       action={() => {
+        console.log(Channel,ReactRouter)
         openWindow({
           title: data?.guild?.name ?? data?.channel?.name ?? "Private Message",
           id: data.channel.id,
@@ -55,7 +56,6 @@ export function start() {
       createOpenInPopoutMenuItem(data)
     );
   });
-
 }
 
 export function stop() {

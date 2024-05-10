@@ -1,7 +1,7 @@
 {
-  "id": "dev.kaan.BetterTimeout",
-  "name": "BetterTimeout",
-  "description": "BetterTimeout",
+  "id": "uwu.kaan.Eval",
+  "name": "Eval",
+  "description": "Home",
   "author": {
     "name": "kaan",
     "discordID": "",
@@ -10,11 +10,11 @@
   "version": "1.0.0",
   "updater": {
     "type": "store",
-    "id": "dev.kaan.BetterTimeout"
+    "id": "uwu.kaan.Eval"
   },
   "license": "MIT",
   "type": "replugged-plugin",
   "renderer": "src/index.tsx",
-  "source": "https://github.com/zrodevkaan/RepluggedPlugins/tree/main/plugins/dev.kaan.BetterTimeout",
+  "source": "https://github.com/zrodevkaan/RepluggedPlugins/tree/main/plugins/uwu.kaan.Eval",
   "image": ["https://i.imgur.com/uu8K4Be.png"]
 }

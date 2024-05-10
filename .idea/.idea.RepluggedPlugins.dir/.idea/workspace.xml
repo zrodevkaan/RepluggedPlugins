@@ -8,12 +8,17 @@
       <change beforePath="$PROJECT_DIR$/.idea/.idea.RepluggedPlugins.dir/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.RepluggedPlugins.dir/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/plugins/dev.kaan.BetterTimeout/manifest.json" beforeDir="false" afterPath="$PROJECT_DIR$/plugins/dev.kaan.BetterTimeout/manifest.json" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/plugins/dev.kaan.BetterTimeout/src/index.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/plugins/dev.kaan.BetterTimeout/src/index.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/plugins/dev.kaan.ChannelDMs/src/index.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/plugins/dev.kaan.ChannelDMs/src/index.tsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/plugins/dev.kaan.DMsLock/src/index.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/plugins/dev.kaan.DMsLock/src/index.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/plugins/dev.kaan.FakeProfileThemes/src/index.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/plugins/dev.kaan.FakeProfileThemes/src/index.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/plugins/dev.kaan.FakeProfileThemes/src/plaintextPatches.ts" beforeDir="false" afterPath="$PROJECT_DIR$/plugins/dev.kaan.FakeProfileThemes/src/plaintextPatches.ts" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/plugins/dev.kaan.ImgurUploader/manifest.json" beforeDir="false" afterPath="$PROJECT_DIR$/plugins/dev.kaan.ImgurUploader/manifest.json" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/plugins/dev.kaan.ImgurUploader/src/index.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/plugins/dev.kaan.ImgurUploader/src/index.tsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/plugins/dev.kaan.Recovery/src/index.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/plugins/dev.kaan.Recovery/src/index.tsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/plugins/dev.kaan.Recovery/src/styles.css" beforeDir="false" afterPath="$PROJECT_DIR$/plugins/dev.kaan.Recovery/src/styles.css" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/plugins/dev.kaan.ShowAllMessageButtons/src/plaintextPatches.ts" beforeDir="false" afterPath="$PROJECT_DIR$/plugins/dev.kaan.ShowAllMessageButtons/src/plaintextPatches.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/plugins/dev.replugged.CakeDay/src/index.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/plugins/dev.replugged.CakeDay/src/index.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/plugins/dev.replugged.EasierConnections/src/index.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/plugins/dev.replugged.EasierConnections/src/index.tsx" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -62,35 +67,35 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent">{
-  &quot;keyToString&quot;: {
-    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
-    &quot;WebServerToolWindowFactoryState&quot;: &quot;false&quot;,
-    &quot;git-widget-placeholder&quot;: &quot;main&quot;,
-    &quot;ignore.virus.scanning.warn.message&quot;: &quot;true&quot;,
-    &quot;last.edited.regexp&quot;: &quot;&quot;,
-    &quot;list.type.of.created.stylesheet&quot;: &quot;CSS&quot;,
-    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
-    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
-    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
-    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
-    &quot;nodejs_package_manager_path&quot;: &quot;pnpm&quot;,
-    &quot;npm.build.executor&quot;: &quot;Run&quot;,
-    &quot;npm.watch.executor&quot;: &quot;Run&quot;,
-    &quot;prettier.import.notification.dismissed&quot;: &quot;true&quot;,
-    &quot;settings.editor.selected.configurable&quot;: &quot;editor.preferences.fonts.default&quot;,
-    &quot;ts.external.directory.path&quot;: &quot;E:\\GithubClones\\RepluggedPlugins\\node_modules\\typescript\\lib&quot;,
-    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "RunOnceActivity.OpenProjectViewOnStart": "true",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "WebServerToolWindowFactoryState": "false",
+    "git-widget-placeholder": "main",
+    "ignore.virus.scanning.warn.message": "true",
+    "last.edited.regexp": "",
+    "list.type.of.created.stylesheet": "CSS",
+    "node.js.detected.package.eslint": "true",
+    "node.js.detected.package.tslint": "true",
+    "node.js.selected.package.eslint": "(autodetect)",
+    "node.js.selected.package.tslint": "(autodetect)",
+    "nodejs_package_manager_path": "pnpm",
+    "npm.build.executor": "Run",
+    "npm.watch.executor": "Run",
+    "prettier.import.notification.dismissed": "true",
+    "settings.editor.selected.configurable": "preferences.pluginManager",
+    "ts.external.directory.path": "E:\\GithubClones\\RepluggedPlugins\\node_modules\\typescript\\lib",
+    "vue.rearranger.settings.migration": "true"
   },
-  &quot;keyToStringList&quot;: {
-    &quot;rider.external.source.directories&quot;: [
-      &quot;C:\\Users\\Back Off\\AppData\\Roaming\\JetBrains\\Rider2023.3\\resharper-host\\DecompilerCache&quot;,
-      &quot;C:\\Users\\Back Off\\AppData\\Roaming\\JetBrains\\Rider2023.3\\resharper-host\\SourcesCache&quot;,
-      &quot;C:\\Users\\Back Off\\AppData\\Local\\Symbols\\src&quot;
+  "keyToStringList": {
+    "rider.external.source.directories": [
+      "C:\\Users\\Back Off\\AppData\\Roaming\\JetBrains\\Rider2023.3\\resharper-host\\DecompilerCache",
+      "C:\\Users\\Back Off\\AppData\\Roaming\\JetBrains\\Rider2023.3\\resharper-host\\SourcesCache",
+      "C:\\Users\\Back Off\\AppData\\Local\\Symbols\\src"
     ]
   }
-}</component>
+}]]></component>
   <component name="RunManager" selected="npm.watch">
     <configuration name="build" type="js.build_tools.npm" temporary="true" nameIsGenerated="true">
       <package-json value="$PROJECT_DIR$/package.json" />
@@ -218,6 +223,8 @@
       <workItem from="1713026161020" duration="10555000" />
       <workItem from="1713042709763" duration="7000" />
       <workItem from="1713042884141" duration="127000" />
+      <workItem from="1714187495327" duration="468000" />
+      <workItem from="1714437338389" duration="105000" />
     </task>
     <servers />
   </component>

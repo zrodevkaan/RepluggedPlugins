@@ -9,6 +9,7 @@ const ErrorScreen: any = await webpack.waitForModule(webpack.filters.bySource(/d
 const { sizeLarge }: any = webpack.getByProps("sizeLarge");
 const { parse }: any = webpack.getByProps(["defaultRules", "parse"]);
 const { FormSwitch }: any = webpack.getByProps("FormSwitch")
+const URL_REGEX_FIND = /https:\/\/\S+/g
 
 export function start() {
   injector.after(ErrorScreen.prototype, "render", (a: any, b, c: {state: {error: {message: String,stack: String}}, setState: ({}) => void}) => {
@@ -19,6 +20,7 @@ export function start() {
     const children = b?.props?.action?.props?.children;
     if (!children) return;
     if (!c.state.error) return;
+    const Link = c.state?.error.stack.match(URL_REGEX_FIND);
     children?.push(
       [
         <Button

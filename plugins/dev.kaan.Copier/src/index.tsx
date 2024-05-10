@@ -33,76 +33,80 @@ const toPascalCase = (str) => {
   return str.charAt(0).toUpperCase() + str.slice(1);
 }
 
+const isValueEmpty = (value: any) => {
+  return (
+    value === null ||
+    (Array.isArray(value) && value.length === 0) ||
+    ((value instanceof Set || value instanceof Map) && value.size === 0) ||
+    (typeof value === 'object' && Object.keys(value).length === 0)
+  );
+};
+
 const copierObjects = (data: any, parentId: string): JSX.Element[] => {
   return Object.entries(data || {}).map(([key, value]) => {
     const itemId = `${parentId}-${key}`;
-    const isValueNull = value === null || (Array.isArray(value) && value.length === 0) || ((value instanceof Set || value instanceof Map) && value.size === 0) || (typeof value === 'object' && Object.keys(value).length === 0);
-    if (Array.isArray(value)) {
-      const isUsersArray = value.every((item: any) => typeof item === 'object' && item !== null && Object.keys(item).length > 0);
-      if (isUsersArray) {
-        const userItems = value.map((user: any, index: number) => (
-          <MenuItem key={`${itemId}-${index}`} id={`${itemId}-${index}`} label={`${user.username}`} disabled={isValueNull}>
-            {copierObjects(user, `${itemId}-${index}`)}
-          </MenuItem>
-        ));
-        return (
-          <MenuItem key={itemId} id={itemId} label={toPascalCase(key)} disabled={isValueNull}>
-            {userItems}
-          </MenuItem>
-        );
-      } else {
-        return (
-          <MenuItem key={itemId} id={itemId} label={toPascalCase(key)} disabled={isValueNull}>
-            {value.map((item: any, index: number) => {
-              if (Array.isArray(item) || (typeof item === 'object' && item !== null)) {
-                return copierObjects(item, itemId);
-              } else {
-                return (
-                  <MenuItem
-                    key={`${itemId}-${index}`}
-                    id={`${itemId}-${index}`}
-                    label={`${toPascalCase(key)} ${index}`}
-                    action={() => { copy(item?.toString() || ''); console.log(item); }}
-                    disabled={isValueNull}
-                  />
-                );
-              }
-            })}
-          </MenuItem>
-        );
-      }
-    } else if (value instanceof Set || value instanceof Map) {
-      return (
-        <MenuItem key={itemId} id={itemId} label={toPascalCase(key)} disabled={isValueNull}>
-          {[...value].map((item: any, index: number) => (
-            <MenuItem
-              key={`${itemId}-${index}`}
-              id={`${itemId}-${index}`}
-              label={`${toPascalCase(key)} ${index}`}
-              action={() => { copy(item?.toString() || ''); console.log(item); }}
-              disabled={isValueNull}
-            />
-          ))}
+    const isValueNull = isValueEmpty(value);
+    return renderMenuItem(key, value, itemId, parentId, isValueNull);
+  });
+};
+
+const renderMenuItem = (key: string, value: any, itemId: string, parentId: string, isValueNull: boolean): JSX.Element => {
+  const handleCopy = () => {
+    copy(value?.toString() || '');
+    console.log(value);
+  };
+
+  if (Array.isArray(value)) {
+    const isUsersArray = value.every((item: any) => typeof item === 'object' && item !== null && Object.keys(item).length > 0);
+    if (isUsersArray) {
+      const userItems = value.map((user: any, index: number) => (
+        <MenuItem key={`${itemId}-${index}`} id={`${itemId}-${index}`} label={`${user.username}`} disabled={isValueNull}>
+          {copierObjects(user, `${itemId}-${index}`)}
         </MenuItem>
-      );
-    } else if (typeof value === 'object' && value !== null) {
+      ));
       return (
         <MenuItem key={itemId} id={itemId} label={toPascalCase(key)} disabled={isValueNull}>
-          {copierObjects(value, itemId)}
+          {userItems}
         </MenuItem>
       );
     } else {
       return (
-        <MenuItem
-          key={itemId}
-          id={itemId}
-          label={`Copy ${toPascalCase(key)}`}
-          action={() => { copy(value?.toString() || ''); }}
-          disabled={isValueNull}
-        />
+        <MenuItem key={itemId} id={itemId} label={toPascalCase(key)} disabled={isValueNull}>
+          {value.map((item: any, index: number) => renderMenuItem(`${key} ${index}`, item, `${itemId}-${index}`, itemId, isValueNull))}
+        </MenuItem>
       );
     }
-  });
+  } else if (value instanceof Set || value instanceof Map) {
+    return (
+      <MenuItem key={itemId} id={itemId} label={toPascalCase(key)} disabled={isValueNull}>
+        {[...value].map((item: any, index: number) => (
+          <MenuItem
+            key={`${itemId}-${index}`}
+            id={`${itemId}-${index}`}
+            label={`${toPascalCase(key)} ${index}`}
+            action={handleCopy}
+            disabled={isValueNull}
+          />
+        ))}
+      </MenuItem>
+    );
+  } else if (typeof value === 'object' && value !== null) {
+    return (
+      <MenuItem key={itemId} id={itemId} label={toPascalCase(key)} disabled={isValueNull}>
+        {copierObjects(value, itemId)}
+      </MenuItem>
+    );
+  } else {
+    return (
+      <MenuItem
+        key={itemId}
+        id={itemId}
+        label={`Copy ${toPascalCase(key)}`}
+        action={handleCopy}
+        disabled={isValueNull}
+      />
+    );
+  }
 };
 
 export function start() {
@@ -234,6 +238,12 @@ export function start() {
     </MenuItem>
   ));
 
+  injector.utils.addMenuItem('channel-mention-context' as ContextMenuTypes, (data: { channel: any }) => (
+    <MenuItem id={"copier-menu"} label="Copier">
+      {copierObjects(data.channel, "copier-menu")}
+    </MenuItem>
+  ));
+
   injector.utils.addMenuItem('attachment-link-context' as ContextMenuTypes, (data: { attachmentUrl: any, attachmentName: string }) => (
     <MenuItem id={"copier-menu"} label="Copier">
       <MenuItem
@@ -253,7 +263,6 @@ export function start() {
     </MenuItem>
   ));
 }
-
 
 export function stop(): void {
   injector.uninjectAll();
