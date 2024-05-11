@@ -21,7 +21,7 @@ const DisplayName = React.memo(({ username, color }) => {
       copyValue={username.replace("@", "")}
       disableCopy={false}
       showCopyIcon={true}>
-      <Text.Normal color={color} className="identityTag-Username">
+      <Text.Normal style={{color}} className="identityTag-Username">
         {username}
       </Text.Normal>
     </CopiableField>

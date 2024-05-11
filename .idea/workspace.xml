@@ -5,49 +5,9 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="a22b4a14-d66f-47f2-ac0d-976d4b66721b" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/plugins/dev.kaan.AssignBadges/README.md" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/plugins/dev.kaan.AssignBadges/manifest.json" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/plugins/dev.kaan.AssignBadges/src/badges.ts" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/plugins/dev.kaan.AssignBadges/src/index.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/.idea.RepluggedPlugins.dir/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.RepluggedPlugins.dir/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/plugins/dev.kaan.BetterSettings/README.md" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/plugins/dev.kaan.BetterSettings/manifest.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/plugins/dev.kaan.BetterSettings/src/index.tsx" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/plugins/dev.kaan.BetterStreamerMode/README.md" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/plugins/dev.kaan.BetterStreamerMode/manifest.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/plugins/dev.kaan.BetterStreamerMode/src/index.tsx" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/plugins/dev.kaan.BetterTimeout/manifest.json" beforeDir="false" afterPath="$PROJECT_DIR$/plugins/dev.kaan.BetterTimeout/manifest.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/plugins/dev.kaan.BetterTimeout/src/index.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/plugins/dev.kaan.BetterTimeout/src/index.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/plugins/dev.kaan.Copier/src/index.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/plugins/dev.kaan.Copier/src/index.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/plugins/dev.kaan.GamerMode/README.md" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/plugins/dev.kaan.GamerMode/manifest.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/plugins/dev.kaan.GamerMode/src/index.tsx" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/plugins/dev.kaan.IgnoreMessageRequests/README.md" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/plugins/dev.kaan.IgnoreMessageRequests/manifest.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/plugins/dev.kaan.IgnoreMessageRequests/src/index.tsx" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/plugins/dev.kaan.PopoutChannels/README.md" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/plugins/dev.kaan.PopoutChannels/manifest.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/plugins/dev.kaan.PopoutChannels/src/VXWrapperCode.tsx" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/plugins/dev.kaan.PopoutChannels/src/index.tsx" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/plugins/dev.kaan.Recovery/README.md" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/plugins/dev.kaan.Recovery/manifest.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/plugins/dev.kaan.Recovery/src/index.tsx" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/plugins/dev.kaan.Recovery/src/styles.css" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/plugins/dev.kaan.ShowAllMessageButtons/src/plaintextPatches.ts" beforeDir="false" afterPath="$PROJECT_DIR$/plugins/dev.kaan.ShowAllMessageButtons/src/plaintextPatches.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/plugins/dev.kaan.ShowPermissions/README.md" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/plugins/dev.kaan.ShowPermissions/manifest.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/plugins/dev.kaan.ShowPermissions/src/index.tsx" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/plugins/dev.kaan.Stereo/README.md" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/plugins/dev.kaan.Stereo/manifest.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/plugins/dev.kaan.Stereo/src/index.tsx" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/plugins/dev.kaan.StoreBasedLib/README.md" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/plugins/dev.kaan.StoreBasedLib/manifest.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/plugins/dev.kaan.StoreBasedLib/src/index.tsx" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/plugins/dev.kaan.WhoInvitedThisGuy/README.md" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/plugins/dev.kaan.WhoInvitedThisGuy/manifest.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/plugins/dev.kaan.WhoInvitedThisGuy/src/index.tsx" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/plugins/dev.replugged.EasierConnections/src/index.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/plugins/dev.replugged.EasierConnections/src/index.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/tsconfig.json" beforeDir="false" afterPath="$PROJECT_DIR$/tsconfig.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/plugins/dev.kaan.namenextotname/src/index.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/plugins/dev.kaan.namenextotname/src/index.tsx" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -135,7 +95,8 @@
       <workItem from="1715292361225" duration="378000" />
       <workItem from="1715299104822" duration="14000" />
       <workItem from="1715299667760" duration="23000" />
-      <workItem from="1715299701995" duration="21000" />
+      <workItem from="1715299701995" duration="638000" />
+      <workItem from="1715306346431" duration="9280000" />
     </task>
     <servers />
   </component>

@@ -1,4 +1,4 @@
-import { components, Injector, webpack } from "replugged";
+import { components, Injector, settings, webpack } from "replugged";
 import { ContextMenuTypes } from "replugged/types";
 import { hexToHSL, hexToRGB } from "./helpers";
 
@@ -9,6 +9,10 @@ const {
 const injector = new Injector();
 const GuildStore = webpack.getByStoreName("GuildStore");
 const CurrentGuild = webpack.getByStoreName("SelectedGuildStore");
+const UserProfileStore = webpack.getByStoreName("UserProfileStore");
+const FetchUtils = webpack.getByProps("fetchProfile");
+
+export const config = await settings.init("dev.kaan.copier");
 
 /*
 These dont work lol. my converters suck.
@@ -42,25 +46,30 @@ const isValueEmpty = (value: any) => {
   );
 };
 
-const copierObjects = (data: any, parentId: string): JSX.Element[] => {
+const copierObjects = (data: any, parentId: string, maxItems: number = 10, depth: number = 0): JSX.Element[] => {
+  if (depth >= 100 || depth >= maxItems) {
+    console.warn('Recursion depth or maxItems limit exceeded.');
+    return [];
+  }
+
   return Object.entries(data || {}).map(([key, value]) => {
     const itemId = `${parentId}-${key}`;
     const isValueNull = isValueEmpty(value);
-    return renderMenuItem(key, value, itemId, parentId, isValueNull);
+    return renderMenuItem(key, value, itemId, parentId, isValueNull, maxItems, depth + 1);
   });
 };
 
-const renderMenuItem = (key: string, value: any, itemId: string, parentId: string, isValueNull: boolean): JSX.Element => {
+const renderMenuItem = (key: string, value: any, itemId: string, parentId: string, isValueNull: boolean, maxItems: number, depth: number): JSX.Element => {
   const handleCopy = () => {
     copy(value?.toString() || '');
     console.log(value);
   };
-
+  
   if (Array.isArray(value)) {
-    const isUsersArray = value.every((item: any) => typeof item === 'object' && item !== null && Object.keys(item).length > 0);
+    /*const isUsersArray = value.every((item: any) => typeof item === 'object' && item !== null && Object.keys(item).length > 0);
     if (isUsersArray) {
       const userItems = value.map((user: any, index: number) => (
-        <MenuItem key={`${itemId}-${index}`} id={`${itemId}-${index}`} label={`${user.username}`} disabled={isValueNull}>
+        <MenuItem key={`${itemId}-${index}`} id={`${itemId}-${index}`} label={`${user?.description ? user?.id : user?.username}`} disabled={isValueNull}>
           {copierObjects(user, `${itemId}-${index}`)}
         </MenuItem>
       ));
@@ -69,31 +78,20 @@ const renderMenuItem = (key: string, value: any, itemId: string, parentId: strin
           {userItems}
         </MenuItem>
       );
-    } else {
-      return (
-        <MenuItem key={itemId} id={itemId} label={toPascalCase(key)} disabled={isValueNull}>
-          {value.map((item: any, index: number) => renderMenuItem(`${key} ${index}`, item, `${itemId}-${index}`, itemId, isValueNull))}
-        </MenuItem>
-      );
-    }
-  } else if (value instanceof Set || value instanceof Map) {
+    }*/
     return (
       <MenuItem key={itemId} id={itemId} label={toPascalCase(key)} disabled={isValueNull}>
-        {[...value].map((item: any, index: number) => (
-          <MenuItem
-            key={`${itemId}-${index}`}
-            id={`${itemId}-${index}`}
-            label={`${toPascalCase(key)} ${index}`}
-            action={handleCopy}
-            disabled={isValueNull}
-          />
+        {value.map((item: any, index: number) => (
+          <MenuItem key={`${itemId}-${index}`} id={`${itemId}-${index}`} label={`${toPascalCase(key)} ${index}`} disabled={isValueNull}>
+            {renderMenuItem(`${key} ${index}`, item, `${itemId}-${index}`, itemId, isValueNull, maxItems, depth + 1)}
+          </MenuItem>
         ))}
       </MenuItem>
     );
   } else if (typeof value === 'object' && value !== null) {
     return (
       <MenuItem key={itemId} id={itemId} label={toPascalCase(key)} disabled={isValueNull}>
-        {copierObjects(value, itemId)}
+        {copierObjects(value, itemId, maxItems, depth + 1)}
       </MenuItem>
     );
   } else {
@@ -108,6 +106,14 @@ const renderMenuItem = (key: string, value: any, itemId: string, parentId: strin
     );
   }
 };
+
+const allEnums = [];
+for (const key in ContextMenuTypes) {
+  if (ContextMenuTypes.hasOwnProperty(key)) {
+    const type = ContextMenuTypes[key];
+    allEnums.push(type)
+  }
+}
 
 export function start() {
   injector.utils.addMenuItem(ContextMenuTypes.DevContext, (data: { id: string, role: any }) => {
@@ -201,50 +207,75 @@ export function start() {
       </MenuItem>
     );
   });
+  
+  // don't change your config for this weirdo
+  if (config.get('devOnly', false))
+  {
+    allEnums.forEach(contextType => {
+      injector.utils.addMenuItem(contextType, (data) => (
+        <MenuItem id={"copier-menu-react-developer"} label="Copier [DEV]">
+          {copierObjects(data, "copier-menu-react-developer")}
+        </MenuItem>
+      ));
+    }); 
+  }
 
   injector.utils.addMenuItem(ContextMenuTypes.GuildContext, (data: { guild: any }) => (
     <MenuItem id={"copier-menu"} label="Copier">
-      {copierObjects(data.guild, "copier-menu")}
-    </MenuItem>
-  ));
-  
-  injector.utils.addMenuItem(ContextMenuTypes.UserContext, (data: { user: any }) => (
-    <MenuItem id={"copier-menu"} label="Copier">
-      {copierObjects(data.user, "copier-menu")}
+      <MenuItem id={"copier-menu-channel"} label="Copier Guild">
+        {copierObjects(data.guild, "copier-menu")}
+      </MenuItem>
     </MenuItem>
   ));
 
-  injector.utils.addMenuItem(ContextMenuTypes.ChannelContext, (data: { channel: any }) => (
+  injector.utils.addMenuItem(ContextMenuTypes.UserContext, (data: { user: any, channel: any }) => (
     <MenuItem id={"copier-menu"} label="Copier">
-      {copierObjects(data.channel, "copier-menu")}
+      <MenuItem id={"copier-menu-user"} label="Copier User">
+        {copierObjects(data.user, "copier-menu")}
+      </MenuItem>
+      <MenuItem id={"copier-menu-channel"} label="Copier Channel">
+        {copierObjects(data.channel, "copier-menu")}
+      </MenuItem>
+      <MenuItem id={"copier-menu-fetchProfile"} label="Copier Profile">
+        {copierObjects(UserProfileStore.getUserProfile(data.user.id), "copier-menu-fetchProfile")}
+      </MenuItem>
+    </MenuItem>
+  ));
+
+  injector.utils.addMenuItem(ContextMenuTypes.ChannelContext, (data: { channel: any, guild: any }) => (
+    <MenuItem id={"copier-menu"} label="Copier">
+      <MenuItem id={"copier-menu-user"} label="Copier Guild">
+        {copierObjects(data.guild, "copier-menu")}
+      </MenuItem>
+      <MenuItem id={"copier-menu-channel"} label="Copier Channel">
+        {copierObjects(data.channel, "copier-menu")}
+      </MenuItem>
     </MenuItem>
   ));
 
   injector.utils.addMenuItem(ContextMenuTypes.ThreadContext, (data: { channel: any }) => (
     <MenuItem id={"copier-menu"} label="Copier">
-      {copierObjects(data.channel, "copier-menu")}
+      <MenuItem id={"copier-menu-channel"} label="Copier Channel">
+        {copierObjects(data.channel, "copier-menu")}
+      </MenuItem>
     </MenuItem>
   ));
 
   injector.utils.addMenuItem(ContextMenuTypes.GdmContext, (data: { channel: any }) => (
     <MenuItem id={"copier-menu"} label="Copier">
-      {copierObjects(data.channel, "copier-menu")}
+      <MenuItem id={"copier-menu-channel"} label="Copier Channel">
+        {copierObjects(data.channel, "copier-menu")}
+      </MenuItem>
     </MenuItem>
   ));
 
-  injector.utils.addMenuItem(ContextMenuTypes.Message, (data: { message: any }) => (
-    <MenuItem id={"copier-menu"} label="Copier">
-      {copierObjects(data.message, "copier-menu")}
-    </MenuItem>
-  ));
-
-  injector.utils.addMenuItem('channel-mention-context' as ContextMenuTypes, (data: { channel: any }) => (
+  /*injector.utils.addMenuItem('channel-mention-context' as ContextMenuTypes, (data: { channel: any }) => (
     <MenuItem id={"copier-menu"} label="Copier">
       {copierObjects(data.channel, "copier-menu")}
     </MenuItem>
-  ));
+  ));*/
 
-  injector.utils.addMenuItem('attachment-link-context' as ContextMenuTypes, (data: { attachmentUrl: any, attachmentName: string }) => (
+  /*injector.utils.addMenuItem('attachment-link-context' as ContextMenuTypes, (data: { attachmentUrl: any, attachmentName: string }) => (
     <MenuItem id={"copier-menu"} label="Copier">
       <MenuItem
         id="stern-is-awesome-copier-attachmentName"
@@ -261,7 +292,7 @@ export function start() {
         }}
       />
     </MenuItem>
-  ));
+  ));*/
 }
 
 export function stop(): void {
