@@ -28,7 +28,7 @@ export function start() {
       // div with my characterAmount. how dare it walk over it >:(
       props.children.push(
                   // What's the meaning of life? 
-        <div style={{ zIndex: '42', color: textColor, fontWeight: 'bold', fontSize: '13.5px', position: 'absolute', right: '0', textAlign: 'center' }}>
+        <div className={"olafSucks"} style={{ zIndex: '42', color: textColor, fontWeight: 'bold', fontSize: '13.5px', position: 'absolute', right: '0', textAlign: 'center' }}>
           {displayText}
         </div>
       );
