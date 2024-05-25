@@ -86,7 +86,6 @@ export function start() {
     const label = isWhitelisted ? "Unwhitelist Channel" : "Whitelist Channel";
 
     return (
-      <>
         <MenuItem id={"femboys"} label={"VoiceChatToVoice"}>
           <MenuItem
             id={label.toLowerCase().replace(" ", "-")}
@@ -97,7 +96,6 @@ export function start() {
             <MenuItem id={"stop-voice"} label={"Stop Voice"} action={() => synth.cancel()} />
           )}
         </MenuItem>
-      </>
     );
   };
 

@@ -6,6 +6,8 @@
   <component name="ChangeListManager">
     <list default="true" id="a22b4a14-d66f-47f2-ac0d-976d4b66721b" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/plugins/dev.kaan.CharacterCounter/src/index.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/plugins/dev.kaan.CharacterCounter/src/index.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/plugins/dev.kaan.VoiceChatToVoice/src/index.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/plugins/dev.kaan.VoiceChatToVoice/src/index.tsx" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -95,6 +97,10 @@
       <workItem from="1715299667760" duration="23000" />
       <workItem from="1715299701995" duration="638000" />
       <workItem from="1715306346431" duration="9704000" />
+      <workItem from="1715393378566" duration="582000" />
+      <workItem from="1716148215974" duration="726000" />
+      <workItem from="1716436811505" duration="1979000" />
+      <workItem from="1716595126214" duration="154000" />
     </task>
     <servers />
   </component>
